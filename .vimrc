@@ -56,14 +56,15 @@ set splitright
 "set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_ruby_checkers = ['rubocop']
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_scss_checkers = ['scss_lint']
 "let g:syntastic_debug = 3
-let g:Syntastic_loc_list_height = 4
+let g:syntastic_loc_list_height = 3
+map <Leader>s :SyntasticCheck<CR>
 
 "map <Leader>t :execute 'CtrlP'<CR>
 let g:ctrlp_map = '<c-p>'
