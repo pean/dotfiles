@@ -61,6 +61,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_ruby_checkers = ['rubocop']
 let g:syntastic_javascript_checkers = ['eslint']
+autocmd FileType javascript let b:syntastic_checkers = findfile('.eslintrc', '.;') !=# '' ? ['eslint'] : []
 let g:syntastic_scss_checkers = ['scss_lint']
 "let g:syntastic_debug = 3
 let g:syntastic_loc_list_height = 3
@@ -83,9 +84,11 @@ let NERDTreeShowHidden=1
 
 " fzf
 set rtp+=/usr/local/opt/fzf
-map <Leader>f :Files<CR>
+map <Leader>f :GFiles<CR>
 map <Leader>b :Buffers<CR>
-
+map <Leader>e :bp<CR>
+map <Leader>r :bl<CR>
+map <Leader>w :bd<CR>
 " Ripgrep
 map <Leader>g :Rg 
 
