@@ -6,11 +6,12 @@ Plug 'benjie/neomake-local-eslint.vim'
 Plug 'dracula/vim'
 Plug 'jremmen/vim-ripgrep'
 Plug 'junegunn/fzf.vim'
-Plug 'neomake/neomake'
+"Plug 'neomake/neomake'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
 Plug 'vim-airline/vim-airline' 
+Plug 'w0rp/ale'
 " List ends here. Plugins become visible to Vim after this call.
 
 call plug#end()
@@ -50,3 +51,10 @@ map <Leader>sl :lopen<CR>
 
 " GitGutter
 let g:gitgutter_sign_column_always = 1
+
+
+" ALE
+set nocompatible
+filetype off
+let &runtimepath.=',~/.vim/bundle/ale'
+filetype plugin on
