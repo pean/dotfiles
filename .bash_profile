@@ -37,7 +37,8 @@ parse_git_branch() {
 export PS1="\h:\W$ "
 
 
-
+alias vim="nvim"
+alias vi="nvim"
 
 
 export VISUAL=vim
@@ -87,3 +88,5 @@ source $BASH_IT/bash_it.sh
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
+export PATH="/usr/local/opt/icu4c/bin:$PATH"
+export PATH="/usr/local/opt/icu4c/sbin:$PATH"
