@@ -46,3 +46,9 @@
 [submodule ".bash_it"]
 	path = .bash_it
 	url = https://github.com/Bash-it/bash-it.git
+[submodule ".vim/bundle/syntastic-local-eslint.vim"]
+	path = .vim/bundle/syntastic-local-eslint.vim
+	url = https://github.com/mtscout6/syntastic-local-eslint.vim
+[submodule ".vim/bundle/neomake"]
+	path = .vim/bundle/neomake
+	url = git@github.com:neomake/neomake.git
