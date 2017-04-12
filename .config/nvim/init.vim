@@ -1,12 +1,14 @@
 " Plugins will be downloaded under the specified directory.
 call plug#begin('~/.vim/plugged')
 " Declare the list of plugins.
+"Plug 'neomake/neomake'
 Plug 'airblade/vim-gitgutter'
 Plug 'benjie/neomake-local-eslint.vim'
+Plug 'c0r73x/neotags.nvim'
 Plug 'dracula/vim'
 Plug 'jremmen/vim-ripgrep'
 Plug 'junegunn/fzf.vim'
-"Plug 'neomake/neomake'
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
@@ -17,6 +19,8 @@ Plug 'w0rp/ale'
 call plug#end()
 
 colorscheme dracula
+
+set hidden
 
 set number
 set cursorline
@@ -42,6 +46,9 @@ map <Leader>b :Buffers<CR>
 map <Leader>e :bp<CR>
 map <Leader>r :bl<CR>
 map <Leader>w :bd<CR>
+map <Leader>t :Tags<CR>
+map <Leader>r :BTags<CR>
+
 " Ripgrep
 map <Leader>g :Rg 
 
@@ -58,3 +65,6 @@ set nocompatible
 filetype off
 let &runtimepath.=',~/.vim/bundle/ale'
 filetype plugin on
+
+" gutentags
+let g:gutentags_ctags_exclude = ['tmp', 'node_modules']
