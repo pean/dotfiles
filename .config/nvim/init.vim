@@ -10,7 +10,9 @@ Plug 'jremmen/vim-ripgrep'
 Plug 'junegunn/fzf.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rails'
 Plug 'tpope/vim-sensible'
 Plug 'vim-airline/vim-airline' 
 Plug 'w0rp/ale'
@@ -24,20 +26,23 @@ set hidden
 
 set number
 set cursorline
+" set cursorcolumn
 set colorcolumn=100
 set clipboard=unnamed
 set shiftwidth=2
 set tabstop=2
+set expandtab
 set nowrap
 
-let mapleader = ","
+set splitbelow
+set splitright
 
+let mapleader = ","
 
 " NERDTree
 let NERDTreeShowHidden=1
 map <Leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
 map <Leader>df :execute 'NERDTreeFind '<CR>
-
 
 " fzf
 set rtp+=/usr/local/opt/fzf
@@ -55,10 +60,8 @@ map <Leader>g :Rg
 map <Leader>s :Neomake<CR>
 map <Leader>sl :lopen<CR>
 
-
 " GitGutter
 let g:gitgutter_sign_column_always = 1
-
 
 " ALE
 set nocompatible
