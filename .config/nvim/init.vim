@@ -1,10 +1,10 @@
 " Plugins will be downloaded under the specified directory.
 call plug#begin('~/.vim/plugged')
 " Declare the list of plugins.
-"Plug 'neomake/neomake'
 Plug 'airblade/vim-gitgutter'
 Plug 'benjie/neomake-local-eslint.vim'
 Plug 'c0r73x/neotags.nvim'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'dracula/vim'
 Plug 'jremmen/vim-ripgrep'
 Plug 'junegunn/fzf.vim'
@@ -13,9 +13,10 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
-Plug 'tpope/vim-sensible'
 Plug 'vim-airline/vim-airline' 
 Plug 'w0rp/ale'
+Plug 'thoughtbot/vim-rspec'
+Plug 'jgdavey/tslime.vim'
 " List ends here. Plugins become visible to Vim after this call.
 
 call plug#end()
@@ -71,3 +72,19 @@ filetype plugin on
 
 " gutentags
 let g:gutentags_ctags_exclude = ['tmp', 'node_modules']
+
+" tmux nav
+nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
+
+" RSpec.vim mappings
+map <Leader>st :call RunCurrentSpecFile()<CR>
+map <Leader>ss :call RunNearestSpec()<CR>
+map <Leader>sl :call RunLastSpec()<CR>
+
+
+" tslime
+let g:rspec_command = 'call Send_to_Tmux("bundle exec rspec {spec}\n")'
+let g:tslime_always_current_session = 1
+let g:tslime_always_current_window = 1
+
+

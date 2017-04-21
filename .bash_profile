@@ -45,6 +45,8 @@ export VISUAL=vim
 export EDITOR="$VISUAL"
 
 
+source ~/.bin/tmuxinator.bash
+alias tmux="TERM=screen-256color tmux"
 
 
 
