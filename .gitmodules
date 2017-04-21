@@ -1,54 +1,54 @@
 [submodule ".vim/bundle/dracula-theme"]
-	path = .vim/bundle/dracula-theme
+	path = vim/bundle/dracula-theme
 	url = git@github.com:dracula/vim.git
 [submodule ".vim/bundle/syntastic"]
-	path = .vim/bundle/syntastic
+	path = vim/bundle/syntastic
 	url = https://github.com/vim-syntastic/syntastic.git
 [submodule ".vim/bundle/vim-rspec"]
 	path = .vim/bundle/vim-rspec
 	url = git@github.com:skwp/vim-rspec.git
 [submodule ".vim/bundle/vim-rails"]
-	path = .vim/bundle/vim-rails
+	path = vim/bundle/vim-rails
 	url = git://github.com/tpope/vim-rails.git
 [submodule ".vim/bundle/vim-bundler"]
-	path = .vim/bundle/vim-bundler
+	path = vim/bundle/vim-bundler
 	url = git://github.com/tpope/vim-bundler.git
 [submodule ".vim/bundle/ctrlp.vim"]
 	path = .vim/bundle/ctrlp.vim
 	url = git@github.com:ctrlpvim/ctrlp.vim.git
 [submodule ".vim/bundle/nerdtree"]
-	path = .vim/bundle/nerdtree
+	path = vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
 [submodule ".vim/bundle/powerline"]
-	path = .vim/bundle/powerline
+	path = vim/bundle/powerline
 	url = git@github.com:powerline/powerline.git
 [submodule ".vim/bundle/vim-rake"]
-	path = .vim/bundle/vim-rake
+	path = vim/bundle/vim-rake
 	url = git://github.com/tpope/vim-rake.git
 [submodule ".vim/bundle/vim-projectionist"]
 	path = .vim/bundle/vim-projectionist
 	url = git://github.com/tpope/vim-projectionist.git
 [submodule ".vim/bundle/fzf.vim"]
-	path = .vim/bundle/fzf.vim
+	path = vim/bundle/fzf.vim
 	url = git@github.com:junegunn/fzf.vim.git
 [submodule ".vim/bundle/vim-ripgrep"]
-	path = .vim/bundle/vim-ripgrep
+	path = vim/bundle/vim-ripgrep
 	url = git@github.com:jremmen/vim-ripgrep.git
 [submodule ".vim/bundle/vim-better-whitespace"]
-	path = .vim/bundle/vim-better-whitespace
+	path = vim/bundle/vim-better-whitespace
 	url = git://github.com/ntpeters/vim-better-whitespace.git
 [submodule ".vim/bundle/smartgf.vim"]
-	path = .vim/bundle/smartgf.vim
+	path = vim/bundle/smartgf.vim
 	url = https://github.com/gorkunov/smartgf.vim.git
 [submodule ".vim/bundle/vim-fugitive"]
-	path = .vim/bundle/vim-fugitive
+	path = vim/bundle/vim-fugitive
 	url = git@github.com:tpope/vim-fugitive.git
 [submodule ".bash_it"]
 	path = .bash_it
 	url = https://github.com/Bash-it/bash-it.git
 [submodule ".vim/bundle/syntastic-local-eslint.vim"]
-	path = .vim/bundle/syntastic-local-eslint.vim
+	path = vim/bundle/syntastic-local-eslint.vim
 	url = https://github.com/mtscout6/syntastic-local-eslint.vim
 [submodule ".vim/bundle/neomake"]
-	path = .vim/bundle/neomake
+	path = vim/bundle/neomake
 	url = git@github.com:neomake/neomake.git
