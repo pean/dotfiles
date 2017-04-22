@@ -1,1 +1,1 @@
-EXCLUDES="README.md add.sh scripts"
+EXCLUDES="README.md add.sh scripts tags"
