@@ -1,4 +1,8 @@
-# Install 
+# RCM Style Dotfiles
+
+Clone to ~/.dotfiles
+
+## Install these things
 
 - https://brew.sh/
 - https://github.com/thoughtbot/rcm
