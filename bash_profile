@@ -12,18 +12,20 @@ eval "$(rbenv init -)"
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-eval "$(/Users/peter/hemnet/src/hemnet-terminal-command/bin/hemnet init - bash)"
-export PATH=/opt/local/bin:/opt/local/sbin:/Users/peter/.rbenv/shims:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/peter/hemnet/src/hemnet-terminal-command/bin:$PATH
-export PATH=/Users/peter/Library/Python/2.7/bin:$PATH
+if [ -d "$HOME/hemnet/src/hemnet-terminal-command" ]; then
+  eval "$($HOME/hemnet/src/hemnet-terminal-command/bin/hemnet init - bash)"
+fi
+
+export PATH=/opt/local/bin:/opt/local/sbin:$HOME/.rbenv/shims:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/hemnet/src/hemnet-terminal-command/bin:$PATH
+export PATH=$HOME/Library/Python/2.7/bin:$PATH
 
 # PostgreSQL/PostGIS
 export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib/postgresql95:$DYLD_LIBRARY_PATH
 export PATH=/opt/local/lib/postgresql95/bin:$PATH
 
-
-source /opt/local/etc/bash_completion.d/git-completion.bash
-# GIT_PS1_SHOWDIRTYSTATE=true
-# export PS1='[\u@mbp \w$(__git_ps1)]\$ '
+if [ -e "/opt/local/etc/bash_completion.d/git-completion.bash" ]; then
+  source /opt/local/etc/bash_completion.d/git-completion.bash
+fi
 
 parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
@@ -33,7 +35,7 @@ parse_git_branch() {
 # PS1='\h:\W \u\$ '
 # export PS1="\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
 # export PS1="\u@\h:\W\[\033[32m\]$(parse_git_branch)\[\033[00m\]$ "
-# export PS1="\h:\W~\[\033[32m\]$(parse_git_branch)\[\033[00m\]$ "
+# export PS1="\h:\W$HOME\[\033[32m\]$(parse_git_branch)\[\033[00m\]$ "
 export PS1="\h:\W$ "
 
 
@@ -44,15 +46,16 @@ alias vi="nvim"
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
-
-source ~/.bin/tmuxinator.bash
-alias tmux="TERM=screen-256color tmux"
+if [ -e "$HOME/.bin/tmuxinator.bash" ]; then
+  source $HOME/.bin/tmuxinator.bash
+  alias tmux="TERM=screen-256color tmux"
+fi
 
 
 
 
 # Path to the bash it configuration
-export BASH_IT="/Users/peter/.bash_it"
+export BASH_IT="$HOME/.bash_it"
 
 # Lock and Load a custom theme file
 # location /.bash_it/themes/
@@ -79,7 +82,7 @@ export SCM_CHECK=true
 
 # Set vcprompt executable path for scm advance info in prompt (demula theme)
 # https://github.com/djl/vcprompt
-#export VCPROMPT_EXECUTABLE=~/.vcprompt/bin/vcprompt
+#export VCPROMPT_EXECUTABLE=$HOME/.vcprompt/bin/vcprompt
 
 # (Advanced): Uncomment this to make Bash-it reload itself automatically
 # after enabling or disabling aliases, plugins, and completions.
