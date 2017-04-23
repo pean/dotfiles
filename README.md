@@ -15,9 +15,5 @@ Clone to ~/.dotfiles
 - https://github.com/BurntSushi/ripgrep
 - https://github.com/tmuxinator/tmuxinator
 
-Install git bash completion somehow:<br/>
-https://github.com/git/git/blob/master/contrib/completion/git-completion.bash
-
-
 TODO: 
 - Pretty readme file
