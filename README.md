@@ -14,6 +14,7 @@ Clone to ~/.dotfiles
 - https://github.com/junegunn/fzf
 - https://github.com/BurntSushi/ripgrep
 - https://github.com/tmuxinator/tmuxinator
+- https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard (solves tmux+vim yank in Sierra)
 
 TODO: 
 - Pretty readme file
