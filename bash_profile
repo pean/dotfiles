@@ -1,14 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-# MacPorts Installer addition on 2016-09-22_at_09:30:16: adding an appropriate PATH variable for use with MacPorts.
-export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-# Finished adapting your PATH environment variable for use with MacPorts.
-
-eval "$(rbenv init -)"
-
-
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
@@ -16,39 +7,24 @@ if [ -d "$HOME/hemnet/src/hemnet-terminal-command" ]; then
   eval "$($HOME/hemnet/src/hemnet-terminal-command/bin/hemnet init - bash)"
 fi
 
-export PATH=/opt/local/bin:/opt/local/sbin:$HOME/.rbenv/shims:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/hemnet/src/hemnet-terminal-command/bin:$PATH
-export PATH=$HOME/Library/Python/2.7/bin:$PATH
-
-# PostgreSQL/PostGIS
-export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib/postgresql95:$DYLD_LIBRARY_PATH
-export PATH=/opt/local/lib/postgresql95/bin:$PATH
+export PATH=/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/hemnet/src/hemnet-terminal-command/bin:$PATH
+# export PATH=$HOME/Library/Python/2.7/bin:$PATH
 
 parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
 
-# Default
-# PS1='\h:\W \u\$ '
-# export PS1="\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
-# export PS1="\u@\h:\W\[\033[32m\]$(parse_git_branch)\[\033[00m\]$ "
-# export PS1="\h:\W$HOME\[\033[32m\]$(parse_git_branch)\[\033[00m\]$ "
-export PS1="\h:\W$ "
-
-
 alias vim="nvim"
 alias vi="nvim"
-
 
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
 if [ -e "$HOME/.bin/tmuxinator.bash" ]; then
   source $HOME/.bin/tmuxinator.bash
-  alias tmux="TERM=screen-256color tmux"
 fi
 
-
-
+alias tmux="TERM=screen-256color tmux"
 
 # Path to the bash it configuration
 export BASH_IT="$HOME/.bash_it"
