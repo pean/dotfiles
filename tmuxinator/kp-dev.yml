@@ -7,7 +7,8 @@ root: ~/hemnet/src/kundportalen
 # socket_name: foo
 
 # Runs before everything. Use it to start daemons etc.
-pre: sudo /opt/local/etc/LaunchDaemons/org.macports.postgresql95-server/postgresql95-server.wrapper start
+# pre: sudo /opt/local/etc/LaunchDaemons/org.macports.postgresql95-server/postgresql95-server.wrapper start
+pre: brew services run postgresql && brew services run redis
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 # pre_window: rbenv shell 2.0.0-p247
