@@ -23,10 +23,6 @@ export PATH=$HOME/Library/Python/2.7/bin:$PATH
 export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib/postgresql95:$DYLD_LIBRARY_PATH
 export PATH=/opt/local/lib/postgresql95/bin:$PATH
 
-if [ -e "/opt/local/etc/bash_completion.d/git-completion.bash" ]; then
-  source /opt/local/etc/bash_completion.d/git-completion.bash
-fi
-
 parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
