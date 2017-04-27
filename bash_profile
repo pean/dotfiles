@@ -17,7 +17,7 @@ parse_git_branch() {
 alias vim="nvim"
 alias vi="nvim"
 
-export VISUAL=vim
+export VISUAL=nvim
 export EDITOR="$VISUAL"
 
 if [ -e "$HOME/.bin/tmuxinator.bash" ]; then
