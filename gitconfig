@@ -26,6 +26,6 @@
   logp = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   logo = log --oneline
 [core]
-  editor=/usr/local/bin/nvim
+  editor=nvim
   excludesfile = ~/.gitignore
   attributesfile = ~/.gitattributes
