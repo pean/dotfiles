@@ -23,8 +23,9 @@
 	plus = add
 	knuff = push
   co = checkout
-  plg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  logp = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  logo = log --oneline
 [core]
-	editor = /usr/bin/vim
-        excludesfile = ~/.gitignore
-        attributesfile = ~/.gitattributes
+  editor=/usr/local/bin/nvim
+  excludesfile = ~/.gitignore
+  attributesfile = ~/.gitattributes
