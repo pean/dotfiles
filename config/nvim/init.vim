@@ -53,6 +53,7 @@ map <Leader>e :bp<CR>
 map <Leader>r :bl<CR>
 map <Leader>w :bd<CR>
 map <Leader>t :Tags<CR>
+nnoremap <Leader>tt :call fzf#vim#tags("<C-R><C-W>")<CR>
 map <Leader>r :BTags<CR>
 
 " Ripgrep
