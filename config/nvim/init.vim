@@ -38,6 +38,8 @@ set nowrap
 set splitbelow
 set splitright
 
+set whichwrap+=<,>,h,l,[,]
+
 let mapleader = ","
 
 " NERDTree
