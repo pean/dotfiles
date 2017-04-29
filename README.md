@@ -16,5 +16,11 @@ Clone to ~/.dotfiles
 - https://github.com/tmuxinator/tmuxinator
 - https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard (solves tmux+vim yank in Sierra)
 
+This fixes tmux install/conifg:
+
+`brew install reattach-to-user-namespace`
+
+https://superuser.com/a/454827/248155
+
 TODO: 
 - Pretty readme file
