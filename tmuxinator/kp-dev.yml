@@ -41,6 +41,6 @@ windows:
         - bundle exec rails c
         - git diff
         - git status
-        - vim .
+        - nvim .
   - server: shoreman
   - db: psql -U postgres kundportal_dev
