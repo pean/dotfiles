@@ -83,7 +83,7 @@ map <Leader>sl :call RunLastSpec()<CR>
 
 
 " tslime
-let g:rspec_command = 'call Send_to_Tmux("bundle exec rspec {spec}\n")'
+let g:rspec_command = 'call Send_to_Tmux("bin/rspec {spec}\n")'
 let g:tslime_always_current_session = 1
 let g:tslime_always_current_window = 1
 
