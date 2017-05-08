@@ -1,5 +1,5 @@
-name: kp-dev
-root: ~/hemnet/src/kundportalen
+name: broker_stats-dev
+root: ~/hemnet/src/broker-stats
 
 pre: brew services run postgresql && brew services run redis
 
@@ -11,5 +11,5 @@ windows:
         - git diff
         - git status
         - nvim .
-  - server: shoreman Procfile .env.local
-  - db: pgcli -U postgres kundportal_dev
+  - server: bundle exec rails server -p 3004
+  - db: psql -U hemnet broker-stats_development
