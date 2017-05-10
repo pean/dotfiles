@@ -29,3 +29,5 @@
   editor=nvim
   excludesfile = ~/.gitignore
   attributesfile = ~/.gitattributes
+[rebase]
+	autosquash = true
