@@ -74,7 +74,7 @@ filetype plugin on
 let g:gutentags_ctags_exclude = ['tmp', 'node_modules']
 
 " tmux nav
-nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
+" nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
 
 " RSpec.vim mappings
 map <Leader>sf :call RunCurrentSpecFile()<CR>
