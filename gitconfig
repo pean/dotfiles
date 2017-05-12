@@ -1,27 +1,7 @@
-# This is Git's per-user configuration file.
 [user]
-# Please adapt and uncomment the following lines:
 	name = Peter Andersson
-	email = peter.andersson@hemnet.se
 [alias]
-#	up = pull --rebase --autostash
 	s = status -uno
-	ryck = pull
-	knuffa = push
-	gren = branch
-	ymmpa = rebase
-	merge = sammanfoga
-	squash = mosa
-	stoppa-undan = stash
-	lapp = tag
-	plocka-russin = cherry-pick
-	fixa-till = amend
-	klandra = blame
-	apportera = fetch
-	remittera = commit
-	add = plus
-	plus = add
-	knuff = push
   co = checkout
   logp = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   logo = log --oneline
@@ -31,3 +11,15 @@
   attributesfile = ~/.gitattributes
 [rebase]
 	autosquash = true
+
+[includeIf "gitdir:~/wa/"]
+  path = .gitconfig-wa
+[includeIf "gitdir:~/.dotfiles/"]
+  path = .gitconfig-wa
+[includeIf "gitdir:~/snowfall/"]
+  path = .gitconfig-snowfall
+[includeIf "gitdir:~/hemnet/"]
+  path = .gitconfig-hemnet
+
+
+
