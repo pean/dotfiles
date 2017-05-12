@@ -4,7 +4,7 @@ set -x LANG en_US.UTF-8
 set -x VISUAL "nvim"
 set -x EDITOR $VISUAL
 
-if which rbenv
+if [ (which rbenv) ]
   set -x PATH $HOME/.rbenv/shims $PATH
   rbenv init - | source
 end
