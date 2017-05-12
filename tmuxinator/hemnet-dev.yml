@@ -1,7 +1,7 @@
 name: hemnet-dev
 root: ~/hemnet/src/hemnet-ng
 
-pre: hemnet stack start && make update && make services
+pre: open /Applications/Docker.app/ && docker network create hemnet-stack && hemnet stack start && make update && make services
 
 windows:
   - editor:
