@@ -1,8 +1,10 @@
 [user]
 	name = Peter Andersson
 [alias]
-	s = status -uno
+	s = status -uall -s
+  d = diff
   co = checkout
+  c = commit
   logp = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   logo = log --oneline
 [core]
