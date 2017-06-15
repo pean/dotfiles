@@ -2,7 +2,6 @@
 call plug#begin('~/.vim/plugged')
 " Declare the list of plugins.
 Plug 'airblade/vim-gitgutter'
-Plug 'benjie/neomake-local-eslint.vim'
 Plug 'c0r73x/neotags.nvim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dracula/vim'
