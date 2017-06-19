@@ -60,6 +60,7 @@ map <Leader>r :BTags<CR>
 
 " Ripgrep
 map <Leader>g :Rg 
+map <Leader>gw :Rg <C-R><C-W><CR>
 
 " GitGutter
 let g:gitgutter_sign_column_always = 1
