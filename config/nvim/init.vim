@@ -12,7 +12,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'scrooloose/nerdtree'
 Plug 'thoughtbot/vim-rspec'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-rhubarb.git'
 Plug 'vim-airline/vim-airline' 
@@ -63,9 +63,8 @@ map <Leader>g :Rg
 map <Leader>gw :Rg <C-R><C-W><CR>
 
 " GitGutter
-let g:gitgutter_sign_column_always = 1
+set signcolumn=yes"
 
-" ALE
 set nocompatible
 filetype off
 let &runtimepath.=',~/.vim/bundle/ale'
@@ -75,17 +74,26 @@ filetype plugin on
 let g:gutentags_ctags_exclude = ['tmp', 'node_modules']
 
 " tmux nav
-" nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
+" nnoremap <silent> <bs> :tmuxnavigateleft<cr>
 
-" RSpec.vim mappings
-map <Leader>sf :call RunCurrentSpecFile()<CR>
-map <Leader>ss :call RunNearestSpec()<CR>
-map <Leader>sl :call RunLastSpec()<CR>
+" rspec.vim mappings
+map <leader>sf :call runcurrentspecfile()<cr>
+map <leader>ss :call runnearestspec()<cr>
+map <leader>sl :call runlastspec()<cr>
 
 
 " tslime
-let g:rspec_command = 'call Send_to_Tmux("bin/rspec {spec}\n")'
+let g:rspec_command = 'call send_to_tmux("bin/rspec {spec}\n")'
 let g:tslime_always_current_session = 1
 let g:tslime_always_current_window = 1
 
+" powerline
+" set rtp+=/usr/local/lib/python3.6/site-packages/powerline/bindings/vim
+" set laststatus=2
+" set t_co=256
+" set guifont=source\ code\ pro\ for\ powerline
+" let g:powerline_symbols = 'fancy'
+" set fillchars+=stl:\ ,stlnc:\   
 
+" airline
+let g:airline#extensions#branchenabled = 1 " because it slows nvim down
