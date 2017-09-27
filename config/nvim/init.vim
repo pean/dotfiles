@@ -77,13 +77,13 @@ let g:gutentags_ctags_exclude = ['tmp', 'node_modules']
 " nnoremap <silent> <bs> :tmuxnavigateleft<cr>
 
 " rspec.vim mappings
-map <leader>sf :call runcurrentspecfile()<cr>
-map <leader>ss :call runnearestspec()<cr>
-map <leader>sl :call runlastspec()<cr>
+map <leader>sf :call RunCurrentSpecFile()<cr>
+map <leader>ss :call RunNearestSpec()<cr>
+map <leader>sl :call RunLastSpec()<cr>
 
 
 " tslime
-let g:rspec_command = 'call send_to_tmux("bin/rspec {spec}\n")'
+let g:rspec_command = 'call Send_to_Tmux("bin/rspec {spec}\n")'
 let g:tslime_always_current_session = 1
 let g:tslime_always_current_window = 1
 
