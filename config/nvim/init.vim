@@ -14,8 +14,8 @@ Plug 'thoughtbot/vim-rspec'
 Plug 'tpope/vim-commentary'
 " Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
-Plug 'tpope/vim-rhubarb.git'
-Plug 'vim-airline/vim-airline' 
+" Plug 'tpope/vim-rhubarb'
+" Plug 'vim-airline/vim-airline' 
 Plug 'w0rp/ale'
 " List ends here. Plugins become visible to Vim after this call.
 
@@ -96,4 +96,4 @@ let g:tslime_always_current_window = 1
 " set fillchars+=stl:\ ,stlnc:\   
 
 " airline
-let g:airline#extensions#branchenabled = 1 " because it slows nvim down
+" let g:airline#extensions#branchenabled = 1 " because it slows nvim down
