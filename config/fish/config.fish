@@ -12,3 +12,4 @@ end
 if test -d $HOME/hemnet/src/hemnet-terminal-command
   set -x PATH $HOME/hemnet/src/hemnet-terminal-command/bin $PATH
 end
+set -g fish_user_paths "/usr/local/opt/curl/bin" $fish_user_paths
