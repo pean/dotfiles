@@ -12,4 +12,4 @@ windows:
         - git status
         - nvim .
   - server: shoreman Procfile .env.local
-  - db: pgcli -U hemnet kundportal_dev
+  - db: pgsql -U hemnet kundportal_dev
