@@ -12,16 +12,25 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'scrooloose/nerdtree'
 Plug 'thoughtbot/vim-rspec'
 Plug 'tpope/vim-commentary'
-" Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
-" Plug 'tpope/vim-rhubarb'
-" Plug 'vim-airline/vim-airline' 
+Plug 'tpope/vim-rhubarb'
 Plug 'w0rp/ale'
 " List ends here. Plugins become visible to Vim after this call.
 
 call plug#end()
 
+set background=dark
 colorscheme dracula
+
+" dragcula + ale settings
+hi ErrorMsg ctermfg=203 ctermbg=NONE
+hi WarningMsg ctermfg=212 ctermbg=NONE
+hi ALEErrorSign ctermfg=203 ctermbg=NONE
+hi ALEError ctermfg=203 ctermbg=NONE
+hi ALEWarningSign ctermfg=212 ctermbg=NONE
+hi ALEWarning ctermfg=212 ctermbg=NONE
+
 
 set hidden
 
