@@ -69,18 +69,20 @@ function fish_prompt --description 'Write out the prompt'
             else
                 set color_cwd $fish_color_cwd
             end
-            set suffix '#'
+            set suffix '#>'
         case '*'
             set color_cwd $fish_color_cwd
-            set suffix '$'
+            set suffix '>'
     end
 
     # PWD
     set_color $color_cwd
+    echo
     echo -n (prompt_pwd)
     set_color normal
 
     printf '%s ' (__fish_vcs_prompt)
+    echo
 
     if not test $last_status -eq 0
         set_color $fish_color_error
