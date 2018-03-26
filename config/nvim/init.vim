@@ -88,9 +88,9 @@ let g:gutentags_ctags_exclude = ['tmp', 'node_modules']
 " nnoremap <silent> <bs> :tmuxnavigateleft<cr>
 
 " rspec.vim mappings
-map <leader>sf :call RunCurrentSpecFile()<cr>
-map <leader>ss :call RunNearestSpec()<cr>
-map <leader>sl :call RunLastSpec()<cr>
+map <leader>sf :Tmux <CR> <bar> :call RunCurrentSpecFile()<CR>
+map <leader>ss :Tmux <CR> <bar> :call RunNearestSpec()<CR>
+map <leader>sl :Tmux <CR> <bar> :call RunLastSpec()<CR>
 
 
 " tslime
