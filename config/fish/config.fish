@@ -4,10 +4,10 @@ set -x LANG en_US.UTF-8
 set -x VISUAL "nvim"
 set -x EDITOR $VISUAL
 
-if [ (which rbenv) ]
-  set -x PATH $HOME/.rbenv/shims $PATH
-  rbenv init - | source
-end
+#if [ (which rbenv) ]
+#  set -x PATH $HOME/.rbenv/shims $PATH
+#  rbenv init - | source
+#end
 
 if test -d $HOME/hemnet/src/hemnet-terminal-command
   set -x PATH $HOME/hemnet/src/hemnet-terminal-command/bin $PATH
@@ -18,3 +18,5 @@ export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 set -g fish_user_paths "/usr/local/opt/postgresql@9.6/bin" $fish_user_paths
 
 export KP_USER_EMAIL=peter.andersson@hemnet.se
+
+export GPG_TTY=(tty)

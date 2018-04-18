@@ -1,5 +1,6 @@
 [user]
 	name = Peter Andersson
+	signingkey = E38EE4228E52A7A2
 [alias]
 	s = status -uall -s
   d = diff
@@ -29,3 +30,5 @@
 
 
 
+[commit]
+	gpgsign = true

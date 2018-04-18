@@ -2,15 +2,18 @@
 call plug#begin('~/.vim/plugged')
 " Declare the list of plugins.
 Plug 'airblade/vim-gitgutter'
-Plug 'c0r73x/neotags.nvim'
+" Plug 'c0r73x/neotags.nvim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dracula/vim'
-Plug 'jgdavey/tslime.vim'
+Plug 'chriskempson/base16-vim'
 Plug 'jremmen/vim-ripgrep'
+" Plug 'jgdavey/tslime.vim'
+Plug 'pean/tslime.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'scrooloose/nerdtree'
-Plug 'thoughtbot/vim-rspec'
+" Plug 'thoughtbot/vim-rspec'
+Plug 'pean/vim-rspec'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
@@ -20,10 +23,10 @@ Plug 'w0rp/ale'
 
 call plug#end()
 
-set background=dark
 colorscheme dracula
+hi Normal ctermbg=none
 
-" dragcula + ale settings
+" dracula + ale settings
 hi ErrorMsg ctermfg=203 ctermbg=NONE
 hi WarningMsg ctermfg=212 ctermbg=NONE
 hi ALEErrorSign ctermfg=203 ctermbg=NONE
@@ -31,13 +34,11 @@ hi ALEError ctermfg=203 ctermbg=NONE
 hi ALEWarningSign ctermfg=212 ctermbg=NONE
 hi ALEWarning ctermfg=212 ctermbg=NONE
 
-
 set hidden
 
 set number
 set cursorline
-" set cursorcolumn
-set colorcolumn=100
+set colorcolumn=120
 set clipboard=unnamed
 set shiftwidth=2
 set tabstop=2
@@ -78,7 +79,7 @@ set signcolumn=yes"
 
 set nocompatible
 filetype off
-let &runtimepath.=',~/.vim/bundle/ale'
+" let &runtimepath.=',~/.vim/plugged/ale'
 filetype plugin on
 
 " gutentags
@@ -88,15 +89,18 @@ let g:gutentags_ctags_exclude = ['tmp', 'node_modules']
 " nnoremap <silent> <bs> :tmuxnavigateleft<cr>
 
 " rspec.vim mappings
-map <leader>sf :Tmux <CR> <bar> :call RunCurrentSpecFile()<CR>
+map <leader>sa :Tmux <CR> <bar> :call RunCurrentSpecFile()<CR>
 map <leader>ss :Tmux <CR> <bar> :call RunNearestSpec()<CR>
 map <leader>sl :Tmux <CR> <bar> :call RunLastSpec()<CR>
+map <leader>sf :Tmux <CR> <bar> :call RunFailedSpecs()<CR>
+map <leader>se :call RunNearestSpec()<CR>
 
 
 " tslime
 let g:rspec_command = 'call Send_to_Tmux("bin/rspec {spec}\n")'
 let g:tslime_always_current_session = 1
 let g:tslime_always_current_window = 1
+let g:tslime_always_current_pane = 1
 
 " powerline
 " set rtp+=/usr/local/lib/python3.6/site-packages/powerline/bindings/vim

@@ -1,7 +1,7 @@
 name: hemnet-dev
 root: ~/hemnet/src/hemnet-ng
 
-pre: open /Applications/Docker.app/ && hemnet stack start && make update && make services
+pre: open /Applications/Docker.app/ ; hemnet stack start ; make update-deps
 
 windows:
   - editor:
@@ -11,5 +11,5 @@ windows:
         - git diff
         - git status
         - nvim .
-  - server: make server
+  - server: make services update server
   - db: bin/rails dbconsole
