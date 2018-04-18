@@ -21,3 +21,4 @@ This fixes tmux install/conifg:
 `brew install reattach-to-user-namespace`
 
 https://superuser.com/a/454827/248155
+
