@@ -19,6 +19,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-rhubarb'
 Plug 'w0rp/ale'
+Plug 'https://gitlab.com/code-stats/code-stats-vim.git'
 " List ends here. Plugins become visible to Vim after this call.
 
 call plug#end()
