@@ -74,9 +74,12 @@ map <Leader>r :BTags<CR>
 " Ripgrep
 map <Leader>g :Rg 
 map <Leader>gw :Rg <C-R><C-W><CR>
+" let g:rg_hightlight=1
+" let g:rg_binary='/usr/local/bin/rg'
+
 
 " GitGutter
-set signcolumn=yes"
+set signcolumn=yes
 
 set nocompatible
 filetype off
@@ -113,3 +116,7 @@ let g:tslime_always_current_pane = 1
 
 " airline
 " let g:airline#extensions#branchenabled = 1 " because it slows nvim down
+
+map <leader>a :only<CR>:sp<CR>:A<CR>
+
+:command JSONFormat %!python -m json.tool
