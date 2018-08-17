@@ -26,9 +26,6 @@ fi
 
 alias tmux="TERM=screen-256color tmux"
 
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-
 # Path to the bash it configuration
 export BASH_IT="$HOME/.bash_it"
 
