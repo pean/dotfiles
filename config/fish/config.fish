@@ -15,3 +15,5 @@ set -g fish_user_paths "/usr/local/opt/postgresql@9.6/bin" $fish_user_paths
 export KP_USER_EMAIL=peter.andersson@hemnet.se
 
 export GPG_TTY=(tty)
+
+test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
