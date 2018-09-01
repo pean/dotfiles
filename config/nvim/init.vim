@@ -119,4 +119,5 @@ let g:tslime_always_current_pane = 1
 
 map <leader>a :only<CR>:sp<CR>:A<CR>
 
-:command JSONFormat %!python -m json.tool
+" CodeStats
+source ~/.codestats.vim
