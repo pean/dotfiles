@@ -6,7 +6,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dracula/vim'
 Plug 'chriskempson/base16-vim'
-Plug 'jremmen/vim-ripgrep'
+Plug 'jremmen/vim-ripgrep', { 'commit': '0df3ac2c3e51d27637251a5849f892c3a0f0bce0' }
 " Plug 'jgdavey/tslime.vim'
 Plug 'pean/tslime.vim'
 Plug 'junegunn/fzf.vim'
