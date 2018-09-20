@@ -88,6 +88,7 @@ filetype plugin on
 
 " gutentags
 let g:gutentags_ctags_exclude = ['tmp', 'node_modules']
+au FileType gitcommit,gitrebase let g:gutentags_enabled=0
 
 " tmux nav
 " nnoremap <silent> <bs> :tmuxnavigateleft<cr>
