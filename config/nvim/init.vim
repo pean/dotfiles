@@ -5,12 +5,13 @@ Plug 'airblade/vim-gitgutter'
 " Plug 'c0r73x/neotags.nvim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dracula/vim'
-Plug 'chriskempson/base16-vim'
+" Plug 'chriskempson/base16-vim'
 Plug 'jremmen/vim-ripgrep', { 'commit': '0df3ac2c3e51d27637251a5849f892c3a0f0bce0' }
 " Plug 'jgdavey/tslime.vim'
 Plug 'pean/tslime.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'skywind3000/gutentags_plus'
 Plug 'scrooloose/nerdtree'
 " Plug 'thoughtbot/vim-rspec'
 Plug 'pean/vim-rspec'
@@ -45,7 +46,8 @@ set shiftwidth=2
 set tabstop=2
 set expandtab
 set nowrap
-
+set list
+set listchars=tab:>-,trail:-,extends:>
 set splitbelow
 set splitright
 
