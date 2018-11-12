@@ -108,6 +108,7 @@ map <leader>sl :Tmux <CR> <bar> :call RunLastSpec()<CR>
 map <leader>sf :Tmux <CR> <bar> :call RunFailedSpecs()<CR>
 map <leader>se :unlet g:tslime <CR> <bar> :call RunNearestSpec()<CR>
 
+cmap FormatJSON %!python -m json.tool
 
 " tslime
 let g:rspec_command = 'call Send_to_Tmux("bin/rspec {spec}\n")'
