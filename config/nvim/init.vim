@@ -122,7 +122,7 @@ let g:tslime_always_current_pane = 1
 " set t_co=256
 " set guifont=source\ code\ pro\ for\ powerline
 " let g:powerline_symbols = 'fancy'
-" set fillchars+=stl:\ ,stlnc:\   
+" set fillchars+=stl:\ ,stlnc:\
 
 " airline
 " let g:airline#extensions#branchenabled = 1 " because it slows nvim down
