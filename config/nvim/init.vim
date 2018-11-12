@@ -106,7 +106,7 @@ map <leader>sa :Tmux <CR> <bar> :call RunCurrentSpecFile()<CR>
 map <leader>ss :Tmux <CR> <bar> :call RunNearestSpec()<CR>
 map <leader>sl :Tmux <CR> <bar> :call RunLastSpec()<CR>
 map <leader>sf :Tmux <CR> <bar> :call RunFailedSpecs()<CR>
-map <leader>se :call RunNearestSpec()<CR>
+map <leader>se :unlet g:tslime <CR> <bar> :call RunNearestSpec()<CR>
 
 
 " tslime
