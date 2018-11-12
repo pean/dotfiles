@@ -93,7 +93,10 @@ filetype plugin on
 
 " gutentags
 let g:gutentags_ctags_exclude = ['tmp', 'node_modules']
-au FileType gitcommit,gitrebase let g:gutentags_enabled=0
+let g:gutentags_modules = ['ctags']
+au FileType diff,gitcommit,gitrebase let g:gutentags_enabled=0
+let g:gutentags_cache_dir = expand('~/.cache/tags')
+let g:gutentags_plus_nomap = 1
 
 " tmux nav
 " nnoremap <silent> <bs> :tmuxnavigateleft<cr>
