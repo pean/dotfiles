@@ -55,6 +55,9 @@ set whichwrap+=<,>,h,l,[,]
 
 let mapleader = ","
 
+" ALE
+map <Leader>an :ALENext<CR>
+
 " NERDTree
 let NERDTreeShowHidden=1
 map <Leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
