@@ -11,5 +11,5 @@ windows:
         - git diff
         - git status
         - nvim .
-  - server: shoreman Procfile .env.local
+  - server: bin/rails s -p 3002
   - db: pgcli kundportal_dev
