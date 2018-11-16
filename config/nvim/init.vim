@@ -77,7 +77,7 @@ nnoremap <Leader>tw :call fzf#vim#tags("<C-R><C-W>")<CR>
 map <Leader>r :BTags<CR>
 
 " Ripgrep
-map <Leader>gg :Rg
+map <Leader>gg :Rg 
 map <Leader>gw :Rg <C-R><C-W><CR>
 " let g:rg_hightlight=1
 " let g:rg_binary='/usr/local/bin/rg'
