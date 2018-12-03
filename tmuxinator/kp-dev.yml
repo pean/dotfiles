@@ -11,5 +11,5 @@ windows:
         - git diff
         - git status
         - nvim .
-  - server: bin/rails s -p 3002
-  - db: pgcli kundportal_dev
+  - server: make server
+  - db: bin/rails dbconsole
