@@ -55,6 +55,8 @@ set whichwrap+=<,>,h,l,[,]
 
 let mapleader = ","
 
+map <Leader>n :noh<CR>
+
 " ALE
 map <Leader>an :ALENext<CR>
 
