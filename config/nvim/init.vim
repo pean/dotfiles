@@ -102,6 +102,7 @@ let g:gutentags_plus_nomap = 1
 
 " tmux nav
 " nnoremap <silent> <bs> :tmuxnavigateleft<cr>
+let g:tmux_navigator_disable_when_zoomed = 1
 
 " rspec.vim mappings
 map <leader>sa :Tmux <CR> <bar> :call RunCurrentSpecFile()<CR>
