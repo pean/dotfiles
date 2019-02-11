@@ -1,26 +1,29 @@
 " Plugins will be downloaded under the specified directory.
 call plug#begin('~/.vim/plugged')
 " Declare the list of plugins.
-Plug 'airblade/vim-gitgutter'
 " Plug 'c0r73x/neotags.nvim'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'dracula/vim'
 " Plug 'chriskempson/base16-vim'
-Plug 'jremmen/vim-ripgrep', { 'commit': '0df3ac2c3e51d27637251a5849f892c3a0f0bce0' }
 " Plug 'jgdavey/tslime.vim'
-Plug 'pean/tslime.vim'
+" Plug 'thoughtbot/vim-rspec'
+Plug 'airblade/vim-gitgutter'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'danishprakash/vim-githubinator'
+Plug 'dracula/vim'
+Plug 'https://gitlab.com/code-stats/code-stats-vim.git'
+Plug 'jremmen/vim-ripgrep', { 'commit': '0df3ac2c3e51d27637251a5849f892c3a0f0bce0' }
 Plug 'junegunn/fzf.vim'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'skywind3000/gutentags_plus'
-Plug 'scrooloose/nerdtree'
-" Plug 'thoughtbot/vim-rspec'
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
+Plug 'pean/tslime.vim'
 Plug 'pean/vim-rspec'
+Plug 'scrooloose/nerdtree'
+Plug 'skywind3000/gutentags_plus'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-rhubarb'
 Plug 'w0rp/ale'
-Plug 'https://gitlab.com/code-stats/code-stats-vim.git'
 " List ends here. Plugins become visible to Vim after this call.
 
 call plug#end()
