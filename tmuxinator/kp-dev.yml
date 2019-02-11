@@ -12,4 +12,4 @@ windows:
         - git status
         - nvim .
   - server: make server
-  - db: bin/rails dbconsole
+  - db: pgcli -h localhost -p 18023 -U postgres kundportal_dev
