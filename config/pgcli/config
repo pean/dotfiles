@@ -7,7 +7,7 @@ smart_completion = True
 
 # Display the completions in several columns. (More completions will be
 # visible.)
-wider_completion_menu = False
+wider_completion_menu = True
 
 # Multi-line mode allows breaking up the sql statements into multiple lines. If
 # this is set to True, then the end of the statements must have a semi-colon.
@@ -29,7 +29,7 @@ expand = False
 auto_expand = False
 
 # If set to True, table suggestions will include a table alias
-generate_aliases = False
+generate_aliases = True
 
 # log_file location.
 # In Unix/Linux: ~/.config/pgcli/log
