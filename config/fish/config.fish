@@ -17,4 +17,8 @@ export KP_USER_EMAIL=peter.andersson@hemnet.se
 export GPG_TTY=(tty)
 
 test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
+
 set -g fish_user_paths "/usr/local/opt/openssl/bin" $fish_user_paths
+set -gx LDFLAGS "-L/usr/local/opt/openssl/lib"
+set -gx CPPFLAGS "-I/usr/local/opt/openssl/include"
+set -gx PKG_CONFIG_PATH "/usr/local/opt/openssl/lib/pkgconfig"
