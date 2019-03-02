@@ -59,6 +59,9 @@ set whichwrap+=<,>,h,l,[,]
 let mapleader = ","
 
 map <Leader>n :noh<CR>
+map <Leader>bd :%bd!<CR>
+map <Leader>bp :bprevious<CR>
+map <Leader>bn :bnext<CR>
 
 " ALE
 map <Leader>an :ALENext<CR>
@@ -72,11 +75,6 @@ map <Leader>df :execute 'NERDTreeFind '<CR>
 set rtp+=/usr/local/opt/fzf
 map <Leader>f :GFiles<CR>
 map <Leader>b :Buffers<CR>
-map <Leader>e :bp<CR>
-map <Leader>r :bl<CR>
-" map <Leader>w :bd<CR>
-map <Leader>w :b#<bar>bd#<CR>
-map <Leader>ww :b#<CR>
 map <Leader>tt :Tags<CR>
 nnoremap <Leader>tw :call fzf#vim#tags("<C-R><C-W>")<CR>
 map <Leader>r :BTags<CR>
@@ -122,16 +120,6 @@ let g:tslime_always_current_session = 1
 let g:tslime_always_current_window = 1
 let g:tslime_always_current_pane = 1
 
-" powerline
-" set rtp+=/usr/local/lib/python3.6/site-packages/powerline/bindings/vim
-" set laststatus=2
-" set t_co=256
-" set guifont=source\ code\ pro\ for\ powerline
-" let g:powerline_symbols = 'fancy'
-" set fillchars+=stl:\ ,stlnc:\
-
-" airline
-" let g:airline#extensions#branchenabled = 1 " because it slows nvim down
 
 map <leader>a :only<CR>:sp<CR>:A<CR>
 
