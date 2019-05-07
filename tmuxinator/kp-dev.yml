@@ -1,15 +1,16 @@
 name: kp-dev
 root: ~/hemnet/src/kundportalen
 
-on_project_first_start: brew services run postgresql ; brew services run redis
+# on_project_first_start: brew services run postgresql ; brew services run redis
+on_project_first_start: make update-deps ; make services
 
 windows:
   - editor:
       layout: f552,204x51,0,0{80x51,0,0[80x15,0,0,0,80x17,0,16,2,80x17,0,34,3],123x51,81,0,1}
       panes:
-        - bundle exec rails c
+        - bin/rails console
         - git diff
         - git status
         - nvim .
-  - server: make server
+  - server: bin/rails server --port 3002
   - db: pgcli -h localhost -p 18023 -U postgres kundportal_dev
