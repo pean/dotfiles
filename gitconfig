@@ -4,6 +4,7 @@
 [alias]
 	s = status -uall -s
   c = commit -v
+  ca = commit --amend
   cf = commit --fixup
   cleanup = branch --merged | rg -v master | xargs git branch -d
   cm = commit -m
