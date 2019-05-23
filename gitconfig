@@ -3,15 +3,15 @@
 	signingkey = E38EE4228E52A7A2
 [alias]
 	s = status -uall -s
-  d = diff
-  co = checkout
   c = commit -v
-  cm = commit -m
   cf = commit --fixup
-  ri = rebase --interactive
-  logp = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-  l = log --oneline
   cleanup = branch --merged | rg -v master | xargs git branch -d
+  cm = commit -m
+  co = checkout
+  d = diff
+  l = log --oneline
+  logp = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  ri = rebase --interactive
 
 [core]
   editor=nvim
