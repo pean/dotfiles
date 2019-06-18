@@ -1,8 +1,9 @@
 [user]
 	name = Peter Andersson
-	signingkey = E38EE4228E52A7A2
+	signingkey =
 [alias]
 	s = status -uall -s
+  ap = add -p
   c = commit -v
   ca = commit --amend
   cf = commit --fixup
