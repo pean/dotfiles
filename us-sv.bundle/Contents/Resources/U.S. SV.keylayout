@@ -1,6 +1,6 @@
 <?xml version="1.1" encoding="UTF-8"?>
 <!DOCTYPE keyboard SYSTEM "file://localhost/System/Library/DTDs/KeyboardLayout.dtd">
-<!--Last edited by Ukelele version 3.4.0.277 on 2019-09-11 at 12:22 (CEST)-->
+<!--Last edited by Ukelele version 3.4.0.277 on 2019-09-13 at 09:49 (CEST)-->
 <keyboard group="0" id="13073" name="U.S. SV" maxout="1">
     <layouts>
         <layout first="0" last="17" mapSet="16c" modifiers="f4"/>
@@ -406,15 +406,15 @@
             <key code="30" output="‘"/>
             <key code="31" output="ø"/>
             <key code="32" action="3"/>
-            <key code="33" output="“"/>
+            <key code="33" output="å"/>
             <key code="34" action="2"/>
             <key code="35" output="π"/>
             <key code="36" output="&#x000D;"/>
             <key code="37" output="¬"/>
             <key code="38" output="∆"/>
-            <key code="39" output="æ"/>
+            <key code="39" output="ä"/>
             <key code="40" output="˚"/>
-            <key code="41" output="…"/>
+            <key code="41" output="ö"/>
             <key code="42" output="«"/>
             <key code="43" output="≤"/>
             <key code="44" output="÷"/>
@@ -515,15 +515,15 @@
             <key code="30" output="’"/>
             <key code="31" output="Ø"/>
             <key code="32" output="¨"/>
-            <key code="33" output="”"/>
+            <key code="33" output="Å"/>
             <key code="34" output="ˆ"/>
             <key code="35" output="∏"/>
             <key code="36" output="&#x000D;"/>
             <key code="37" output="Ò"/>
             <key code="38" output="Ô"/>
-            <key code="39" output="Æ"/>
+            <key code="39" output="Ä"/>
             <key code="40" output=""/>
-            <key code="41" output="Ú"/>
+            <key code="41" output="Ö"/>
             <key code="42" output="»"/>
             <key code="43" output="¯"/>
             <key code="44" output="¿"/>
@@ -951,15 +951,15 @@
             <key code="30" output=""/>
             <key code="31" output=""/>
             <key code="32" output=""/>
-            <key code="33" output="Å"/>
+            <key code="33" output=""/>
             <key code="34" output=""/>
             <key code="35" output=""/>
             <key code="36" output="&#x000D;"/>
             <key code="37" output=""/>
             <key code="38" output=""/>
-            <key code="39" output="Ä"/>
+            <key code="39" output=""/>
             <key code="40" output=""/>
-            <key code="41" output="Ö"/>
+            <key code="41" output=""/>
             <key code="42" output=""/>
             <key code="43" output=""/>
             <key code="44" output=""/>
