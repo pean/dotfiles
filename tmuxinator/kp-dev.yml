@@ -2,7 +2,7 @@ name: kp-dev
 root: ~/hemnet/src/kundportalen
 
 # on_project_first_start: brew services run postgresql ; brew services run redis
-on_project_first_start: make update-deps ; make services
+on_project_first_start: open /Applications/Docker.app/ ; hemnet stack start ; make update-deps ; make services
 
 windows:
   - editor:

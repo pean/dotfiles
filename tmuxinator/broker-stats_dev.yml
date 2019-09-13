@@ -1,7 +1,7 @@
 name: broker_stats-dev
 root: ~/hemnet/src/broker-stats
 
-pre: brew services run postgresql && brew services run redis
+on_project_first_start: brew services run postgresql && brew services run redis
 
 windows:
   - editor:
