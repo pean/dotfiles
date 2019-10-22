@@ -11,7 +11,7 @@
   cm = commit -m
   co = checkout
   d = diff
-  l = log --oneline
+  l = log --oneline -15
   logp = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   ri = rebase --interactive
 
