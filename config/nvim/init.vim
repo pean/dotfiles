@@ -8,6 +8,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'danishprakash/vim-githubinator'
+Plug 'dense-analysis/ale'
 Plug 'dracula/vim'
 Plug 'https://gitlab.com/code-stats/code-stats-vim.git'
 Plug 'jremmen/vim-ripgrep', { 'commit': '0df3ac2c3e51d27637251a5849f892c3a0f0bce0' }
@@ -23,7 +24,6 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-rhubarb'
-Plug 'w0rp/ale'
 " List ends here. Plugins become visible to Vim after this call.
 
 call plug#end()
