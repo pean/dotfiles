@@ -14,6 +14,7 @@
   l = log --oneline -15
   logp = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   ri = rebase --interactive
+  pf = push --force-with-lease
 
 [core]
   editor=nvim
