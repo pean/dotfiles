@@ -12,5 +12,5 @@ windows:
         - git diff
         - git status
         - nvim .
-  - server: bin/rails server --port 3002
+  - server: bin/rails server --port 4000
   - db: pgcli -h localhost -p 18023 -U postgres kundportal_dev
