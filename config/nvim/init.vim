@@ -43,7 +43,7 @@ set hidden
 
 set number
 set cursorline
-set colorcolumn=120
+set colorcolumn=100
 set clipboard=unnamed
 set shiftwidth=2
 set tabstop=2
