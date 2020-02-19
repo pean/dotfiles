@@ -24,6 +24,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-rhubarb'
+Plug 'vim-ruby/vim-ruby'
 " List ends here. Plugins become visible to Vim after this call.
 
 call plug#end()
@@ -119,6 +120,9 @@ let g:tslime_always_current_pane = 1
 
 
 map <leader>a :only<CR>:sp<CR>:A<CR>
+
+let ruby_fold = 1
+set nofoldenable
 
 " CodeStats
 source ~/.codestats.vim
