@@ -24,6 +24,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-surround'
 Plug 'vim-ruby/vim-ruby'
 " List ends here. Plugins become visible to Vim after this call.
 
