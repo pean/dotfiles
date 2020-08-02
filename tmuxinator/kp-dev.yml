@@ -14,3 +14,4 @@ windows:
         - nvim .
   - server: bin/rails server --port 4000
   - db: pgcli -h localhost -p 18023 -U postgres kundportal_dev
+  - dw-tunnel: hemnet open-tunnel prod -h dwapi-web.prod.hemnet -p 80 -l 5000
