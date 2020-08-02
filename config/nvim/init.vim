@@ -13,13 +13,13 @@ Plug 'dracula/vim'
 Plug 'https://gitlab.com/code-stats/code-stats-vim.git'
 Plug 'jremmen/vim-ripgrep', { 'commit': '0df3ac2c3e51d27637251a5849f892c3a0f0bce0' }
 Plug 'junegunn/fzf.vim'
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'pean/tslime.vim'
 Plug 'pean/vim-rspec'
 Plug 'scrooloose/nerdtree'
-Plug 'skywind3000/gutentags_plus'
+" Plug 'skywind3000/gutentags_plus'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
@@ -93,11 +93,11 @@ filetype off
 filetype plugin on
 
 " gutentags
-let g:gutentags_ctags_exclude = ['tmp', 'node_modules']
-let g:gutentags_modules = ['ctags']
-au FileType diff,gitcommit,gitrebase let g:gutentags_enabled=0
-let g:gutentags_cache_dir = expand('~/.cache/tags')
-let g:gutentags_plus_nomap = 1
+" let g:gutentags_ctags_exclude = ['tmp', 'node_modules']
+" let g:gutentags_modules = ['ctags']
+" au FileType diff,gitcommit,gitrebase let g:gutentags_enabled=0
+" let g:gutentags_cache_dir = expand('~/.cache/tags')
+" let g:gutentags_plus_nomap = 1
 
 " tmux nav
 " nnoremap <silent> <bs> :tmuxnavigateleft<cr>
