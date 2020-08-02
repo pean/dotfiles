@@ -73,9 +73,10 @@ map <Leader>df :execute 'NERDTreeFind '<CR>
 " fzf
 set rtp+=/usr/local/opt/fzf
 map <Leader>f :GFiles<CR>
+map <Leader>h :Rg<CR>
 map <Leader>b :Buffers<CR>
 map <Leader>tt :Tags<CR>
-nnoremap <Leader>tw :call fzf#vim#tags("<C-R><C-W>")<CR>
+" nnoremap <Leader>tw :call fzf#vim#tags("<C-R><C-W>")<CR>
 map <Leader>r :BTags<CR>
 
 " Ripgrep
@@ -109,6 +110,7 @@ map <leader>sa :Tmux <CR> <bar> :call RunCurrentSpecFile()<CR>
 map <leader>ss :Tmux <CR> <bar> :call RunNearestSpec()<CR>
 map <leader>sl :Tmux <CR> <bar> :call RunLastSpec()<CR>
 map <leader>sf :Tmux <CR> <bar> :call RunFailedSpecs()<CR>
+map <leader>sn :Tmux <CR> <bar> :call RunNextFailedSpec()<CR>
 map <leader>se :unlet g:tslime <CR> <bar> :call RunNearestSpec()<CR>
 
 cmap FormatJSON %!python -m json.tool
