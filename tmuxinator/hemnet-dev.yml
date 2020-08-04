@@ -1,5 +1,5 @@
 name: hemnet-dev
-root: ~/hemnet/src/hemnet-ng
+root: ~/src/hemnet/hemnet-ng
 
 on_project_first_start: open /Applications/Docker.app/ ; hemnet stack start ; make update-deps
 
