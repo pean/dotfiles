@@ -1,6 +1,7 @@
 [user]
 	name = Peter Andersson
-	signingkey =
+  path = ~/.gitconfig-signingkey
+
 [alias]
 	s = status -uall -s
   ap = add -p
