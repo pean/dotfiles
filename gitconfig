@@ -1,9 +1,9 @@
 [user]
-	name = Peter Andersson
+  name = Peter Andersson
   path = ~/.gitconfig-signingkey
 
 [alias]
-	s = status -uall -s
+  s = status -uall -s
   ap = add -p
   c = commit -v
   ca = commit --amend
@@ -22,7 +22,7 @@
   excludesfile = ~/.gitignore
   attributesfile = ~/.gitattributes
 [rebase]
-	autosquash = true
+  autosquash = true
 
 [includeIf "gitdir:~/wa/"]
   path = .gitconfig-wa
@@ -33,7 +33,5 @@
 [includeIf "gitdir:~/hemnet/"]
   path = .gitconfig-hemnet
 
-
-
 [commit]
-	gpgsign = true
+  gpgsign = true
