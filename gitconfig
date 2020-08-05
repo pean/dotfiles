@@ -24,13 +24,13 @@
 [rebase]
   autosquash = true
 
-[includeIf "gitdir:~/wa/"]
+[includeIf "gitdir:~/src/wa/"]
   path = .gitconfig-wa
 [includeIf "gitdir:~/.dotfiles/"]
   path = .gitconfig-wa
-[includeIf "gitdir:~/snowfall/"]
+[includeIf "gitdir:~/src/snowfall/"]
   path = .gitconfig-snowfall
-[includeIf "gitdir:~/hemnet/"]
+[includeIf "gitdir:~/src/hemnet/"]
   path = .gitconfig-hemnet
 
 [commit]
