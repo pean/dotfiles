@@ -8,5 +8,14 @@
 	<string>us-se</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>KLInfo_U.S. SE</key>
+	<dict>
+		<key>TICapsLockLanguageSwitchCapable</key>
+		<false/>
+		<key>TISInputSourceID</key>
+		<string>org.sil.ukelele.keyboardlayout.u.s.sv.u.s.se</string>
+		<key>TISIntendedLanguage</key>
+		<string>en</string>
+	</dict>
 </dict>
 </plist>
