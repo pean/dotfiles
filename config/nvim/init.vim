@@ -30,7 +30,11 @@ Plug 'vim-ruby/vim-ruby'
 
 call plug#end()
 
-colorscheme dracula
+packadd dracula_pro
+
+let g:dracula_colorterm = 0
+colorscheme dracula_pro
+
 hi Normal ctermbg=none
 
 " dracula + ale settings
