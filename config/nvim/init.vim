@@ -48,7 +48,6 @@ hi ALEWarning ctermfg=212 ctermbg=NONE
 set hidden
 
 set number
-set cursorline
 set colorcolumn=80,100,120
 hi! link ColorColumn StatusLine
 set clipboard=unnamed
@@ -134,3 +133,19 @@ set nofoldenable
 
 " CodeStats
 source ~/.codestats.vim
+
+set nocursorline
+
+function! OnWinEnter()
+  set cursorline
+endfunction
+
+function! OnWinLeave()
+  set nocursorline
+endfunction
+
+augroup HighlightPane
+  autocmd!
+  autocmd WinEnter * call OnWinEnter()
+  autocmd WinLeave * call OnWinLeave()
+augroup END
