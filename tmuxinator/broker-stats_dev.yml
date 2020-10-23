@@ -12,4 +12,4 @@ windows:
         - git status
         - nvim .
   - server: bundle exec rails server -p 3004
-  - db: psql -U hemnet broker-stats_development
+  - db: pgcli -U postgres -p 18023 broker-stats_development
