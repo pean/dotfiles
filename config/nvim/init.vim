@@ -49,7 +49,8 @@ set hidden
 
 set number
 set cursorline
-set colorcolumn=100
+set colorcolumn=80,100,120
+hi! link ColorColumn StatusLine
 set clipboard=unnamed
 set shiftwidth=2
 set tabstop=2
