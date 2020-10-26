@@ -22,3 +22,4 @@ This fixes tmux install/conifg:
 
 https://superuser.com/a/454827/248155
 
+🚀
