@@ -17,6 +17,7 @@ Plug 'jremmen/vim-ripgrep', { 'commit': '0df3ac2c3e51d27637251a5849f892c3a0f0bce
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'pean/tslime.vim'
@@ -68,29 +69,31 @@ set whichwrap+=<,>,h,l,[,]
 
 let mapleader = ","
 
-map <Leader>n :noh<CR>
+map <leader>n :noh<CR>
+map <leader>cn :cnext<CR>
+map <leader>bd :%bd!<CR>
 
 " ALE
-map <Leader>an :ALENext<CR>
+map <leader>an :ALENext<CR>
 
 " NERDTree
 let NERDTreeShowHidden=1
-map <Leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
-map <Leader>df :execute 'NERDTreeFind '<CR>
+map <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
+map <leader>df :execute 'NERDTreeFind '<CR>
 
 " fzf
 " set rtp+=/usr/local/opt/fzf
-" map <Leader>f :GFiles<CR>
-" map <Leader>h :Rg<CR>
-" map <Leader>b :Buffers<CR>
-" map <Leader>tt :Tags<CR>
-" " nnoremap <Leader>tw :call fzf#vim#tags("<C-R><C-W>")<CR>
-" map <Leader>r :BTags<CR>
+" map <leader>f :GFiles<CR>
+" map <leader>h :Rg<CR>
+" map <leader>b :Buffers<CR>
+" map <leader>tt :Tags<CR>
+" " nnoremap <leader>tw :call fzf#vim#tags("<C-R><C-W>")<CR>
+" map <leader>r :BTags<CR>
 
 " " Ripgrep
-map <Leader>gg :Rg 
-map <Leader>gw :Rg <C-R><C-W><CR>
-" let g:rg_hightlight=1
+map <leader>gg :Rg
+map <leader>gw :Rg <C-R><C-W><CR>
+"  g:rg_hightlight=1
 " let g:rg_binary='/usr/local/bin/rg'
 
 " Telscope (to replace fzf and rg
@@ -99,7 +102,6 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fc <cmd>Telescope grep_string theme=get_cursor initial_mode=normal previewer=false<cr>
 nnoremap <leader>fw <cmd>Telescope grep_string<cr>
 nnoremap <leader>fb <cmd>Telescope buffers initial_mode=normal<cr>
-nnoremap <leader>b <cmd>Telescope buffers initial_mode=normal<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fd <cmd>Telescope git_status initial_mode=normal<cr>
 
@@ -162,7 +164,7 @@ let g:rspec_command = 'call Send_to_Tmux("bin/rspec {spec}\n")'
 let g:tslime_always_current_session = 1
 let g:tslime_always_current_window = 1
 let g:tslime_always_current_pane = 1
-
+let g:tslime_autoset_pane = 1
 
 map <leader>a :only<CR>:sp<CR>:A<CR>
 
