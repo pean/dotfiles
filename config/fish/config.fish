@@ -24,3 +24,4 @@ set -gx PKG_CONFIG_PATH "/usr/local/opt/openssl/lib/pkgconfig"
 
 source (brew --prefix asdf)/asdf.fish
 
+set fish_greeting
