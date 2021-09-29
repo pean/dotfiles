@@ -1,6 +1,16 @@
 # RCM Style Dotfiles
 
+Dotfiles are managed by RCM
+https://github.com/thoughtbot/rcm
+
 Clone to ~/.dotfiles
+
+# Brewfile
+
+Generate `Brewfile`:
+```
+brew bundle dump -f
+```
 
 ## Install these things
 
