@@ -12,12 +12,16 @@ Plug 'dense-analysis/ale'
 Plug 'dracula/vim'
 Plug 'https://gitlab.com/code-stats/code-stats-vim.git'
 Plug 'jremmen/vim-ripgrep', { 'commit': '0df3ac2c3e51d27637251a5849f892c3a0f0bce0' }
-Plug 'junegunn/fzf.vim'
-" Plug 'ludovicchabant/vim-gutentags'
+" Plug 'junegunn/fzf.vim'
+" Telescope
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'pean/tslime.vim'
 Plug 'pean/vim-rspec'
+Plug 'rizzatti/dash.vim'
 Plug 'scrooloose/nerdtree'
 " Plug 'skywind3000/gutentags_plus'
 Plug 'tpope/vim-commentary'
@@ -30,7 +34,11 @@ Plug 'vim-ruby/vim-ruby'
 
 call plug#end()
 
-colorscheme dracula
+packadd dracula_pro
+
+let g:dracula_colorterm = 0
+colorscheme dracula_pro
+
 hi Normal ctermbg=none
 
 " dracula + ale settings
@@ -44,8 +52,8 @@ hi ALEWarning ctermfg=212 ctermbg=NONE
 set hidden
 
 set number
-set cursorline
-set colorcolumn=100
+set colorcolumn=80,100,120
+hi! link ColorColumn StatusLine
 set clipboard=unnamed
 set shiftwidth=2
 set tabstop=2
@@ -71,19 +79,53 @@ map <Leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
 map <Leader>df :execute 'NERDTreeFind '<CR>
 
 " fzf
-set rtp+=/usr/local/opt/fzf
-map <Leader>f :GFiles<CR>
-map <Leader>h :Rg<CR>
-map <Leader>b :Buffers<CR>
-map <Leader>tt :Tags<CR>
-" nnoremap <Leader>tw :call fzf#vim#tags("<C-R><C-W>")<CR>
-map <Leader>r :BTags<CR>
+" set rtp+=/usr/local/opt/fzf
+" map <Leader>f :GFiles<CR>
+" map <Leader>h :Rg<CR>
+" map <Leader>b :Buffers<CR>
+" map <Leader>tt :Tags<CR>
+" " nnoremap <Leader>tw :call fzf#vim#tags("<C-R><C-W>")<CR>
+" map <Leader>r :BTags<CR>
 
-" Ripgrep
+" " Ripgrep
 map <Leader>gg :Rg 
 map <Leader>gw :Rg <C-R><C-W><CR>
 " let g:rg_hightlight=1
 " let g:rg_binary='/usr/local/bin/rg'
+
+" Telscope (to replace fzf and rg
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fc <cmd>Telescope grep_string theme=get_cursor initial_mode=normal previewer=false<cr>
+nnoremap <leader>fw <cmd>Telescope grep_string<cr>
+nnoremap <leader>fb <cmd>Telescope buffers initial_mode=normal<cr>
+nnoremap <leader>b <cmd>Telescope buffers initial_mode=normal<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>fd <cmd>Telescope git_status initial_mode=normal<cr>
+
+lua << EOF
+require('telescope').setup{
+  defaults = {
+    layout_strategy = "vertical",
+    layout_config = {
+      width = 0.95,
+      height = 0.95,
+    },
+  },
+  pickers = {
+    buffers = {
+      previewer = false,
+      sort_lastused = true,
+      theme = "dropdown",
+    },
+    grep_string = {
+      word_match = "-w",
+    },
+  },
+}
+
+require('telescope').load_extension('fzf')
+EOF
 
 
 " GitGutter
@@ -129,3 +171,19 @@ set nofoldenable
 
 " CodeStats
 source ~/.codestats.vim
+
+set nocursorline
+
+function! OnWinEnter()
+  set cursorline
+endfunction
+
+function! OnWinLeave()
+  set nocursorline
+endfunction
+
+augroup HighlightPane
+  autocmd!
+  autocmd WinEnter * call OnWinEnter()
+  autocmd WinLeave * call OnWinLeave()
+augroup END
