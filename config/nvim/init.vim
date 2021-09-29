@@ -91,7 +91,7 @@ map <leader>df :execute 'NERDTreeFind '<CR>
 " map <leader>r :BTags<CR>
 
 " " Ripgrep
-map <leader>gg :Rg
+map <leader>gg :Rg 
 map <leader>gw :Rg <C-R><C-W><CR>
 "  g:rg_hightlight=1
 " let g:rg_binary='/usr/local/bin/rg'
