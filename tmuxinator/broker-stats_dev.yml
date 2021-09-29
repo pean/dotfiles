@@ -1,5 +1,5 @@
 name: broker_stats-dev
-root: ~/hemnet/src/broker-stats
+root: ~/src/hemnet/broker-stats
 
 on_project_first_start: brew services run postgresql && brew services run redis
 
@@ -12,4 +12,4 @@ windows:
         - git status
         - nvim .
   - server: bundle exec rails server -p 3004
-  - db: psql -U hemnet broker-stats_development
+  - db: pgcli -U postgres -p 18023 broker-stats_development

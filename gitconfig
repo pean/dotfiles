@@ -1,8 +1,9 @@
 [user]
-	name = Peter Andersson
-	signingkey =
+  name = Peter Andersson
+  path = ~/.gitconfig-signingkey
+
 [alias]
-	s = status -uall -s
+  s = status -uall -s
   ap = add -p
   c = commit -v
   ca = commit --amend
@@ -21,18 +22,16 @@
   excludesfile = ~/.gitignore
   attributesfile = ~/.gitattributes
 [rebase]
-	autosquash = true
+  autosquash = true
 
-[includeIf "gitdir:~/wa/"]
+[includeIf "gitdir:~/src/wa/"]
   path = .gitconfig-wa
 [includeIf "gitdir:~/.dotfiles/"]
   path = .gitconfig-wa
-[includeIf "gitdir:~/snowfall/"]
+[includeIf "gitdir:~/src/snowfall/"]
   path = .gitconfig-snowfall
-[includeIf "gitdir:~/hemnet/"]
+[includeIf "gitdir:~/src/hemnet/"]
   path = .gitconfig-hemnet
 
-
-
 [commit]
-	gpgsign = true
+  gpgsign = true
