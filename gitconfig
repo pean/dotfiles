@@ -24,7 +24,7 @@
 [rebase]
   autosquash = true
 
-[includeIf "gitdir:~/src/wa/"]
+[includeIf "gitdir:~/src/pean/"]
   path = .gitconfig-wa
 [includeIf "gitdir:~/.dotfiles/"]
   path = .gitconfig-wa
