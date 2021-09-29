@@ -51,6 +51,7 @@ local rules = notificationFilters + [
       ],
     },
     actions: {
+      archive: true,
       labels: [
         'github/dependabot',
       ],
@@ -69,6 +70,7 @@ local tests = [
       { from: "dependabot[bot]" },
     ],
     actions: {
+      archive: true,
       labels: [
         'github/dependabot',
       ],
