@@ -12,4 +12,4 @@ windows:
         - git status
         - nvim .
   - server: make services update server
-  - db: bin/rails dbconsole
+  - db: pgcli -h localhost -p 18003 -U postgres hemnet_dev
