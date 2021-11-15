@@ -49,7 +49,7 @@ local rules = notificationFilters + [
   {
     filter: {
       and: [
-        { from: "dependabot[bot]", },
+        { from: 'dependabot[bot]' },
       ],
     },
     actions: {
@@ -62,14 +62,14 @@ local rules = notificationFilters + [
 ];
 
 local labels = lib.rulesLabels(rules) + [
-  { name: "jonas-and-youtube" }
+  { name: 'jonas-and-youtube' },
 ];
 
 local tests = [
   {
-    name: "dependabot goes to github/dependabot",
+    name: 'dependabot goes to github/dependabot',
     messages: [
-      { from: "dependabot[bot]" },
+      { from: 'dependabot[bot]' },
     ],
     actions: {
       archive: true,
@@ -77,14 +77,14 @@ local tests = [
         'github/dependabot',
       ],
     },
-  }
+  },
 ];
 
 {
-  version: "v1alpha3",
+  version: 'v1alpha3',
   author: {
-    name: "Peter Andersson",
-    email: "peter.andersson@hemnet.se"
+    name: 'Peter Andersson',
+    email: 'peter.andersson@hemnet.se',
   },
   labels: labels,
   rules: rules,
