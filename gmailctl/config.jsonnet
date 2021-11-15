@@ -6,6 +6,7 @@
 
 // Uncomment if you want to use the standard library.
 local lib = import 'gmailctl.libsonnet';
+local variables = import 'variables.libsonnet';
 
 // GitHub notifications as cc
 local notifications = [
@@ -35,6 +36,7 @@ local notificationFilters = [
     },
     actions: {
       archive: notification.archive,
+      forward: if notification.archive == false then variables.slack_email else null,
       labels: [
         'github/' + notification.label,
       ],
