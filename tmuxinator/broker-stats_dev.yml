@@ -3,6 +3,8 @@ root: ~/src/hemnet/broker-stats
 
 on_project_first_start: brew services run postgresql && brew services run redis
 
+pre_window: asdf local ruby 2.7.4
+
 windows:
   - editor:
       layout: f552,204x51,0,0{80x51,0,0[80x15,0,0,0,80x17,0,16,2,80x17,0,34,3],123x51,81,0,1}
@@ -12,4 +14,4 @@ windows:
         - git status
         - nvim .
   - server: bundle exec rails server -p 3004
-  - db: pgcli -U postgres -p 18023 broker-stats_development
+  - db: pgcli -U postgres -h localhost -p 18023 broker-stats_development
