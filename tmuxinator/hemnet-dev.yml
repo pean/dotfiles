@@ -3,6 +3,8 @@ root: ~/src/hemnet/hemnet-ng
 
 on_project_first_start: open /Applications/Docker.app/ ; hemnet stack start ; make update-deps
 
+pre_window: asdf local ruby 2.7.5
+
 windows:
   - editor:
       layout: f552,204x51,0,0{80x51,0,0[80x15,0,0,0,80x17,0,16,2,80x17,0,34,3],123x51,81,0,1}
