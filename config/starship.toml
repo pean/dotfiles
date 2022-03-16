@@ -1,0 +1,13 @@
+[ruby]
+disabled = true
+
+[nodejs]
+disabled = true
+
+[git_branch]
+style = "bold purple"
+format = "[$symbol$branch]($style) "
+
+[git_status]
+stashed = ""
+style = "bold green"
