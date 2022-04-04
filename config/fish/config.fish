@@ -11,7 +11,9 @@ set -g fish_user_paths "/usr/local/opt/curl/bin" $fish_user_paths
 
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 set -g fish_user_paths "/usr/local/opt/postgresql@9.6/bin" $fish_user_paths
+
 export KP_USER_EMAIL=peter.andersson@hemnet.se
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 export GPG_TTY=(tty)
 
