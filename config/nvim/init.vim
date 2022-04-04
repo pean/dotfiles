@@ -4,33 +4,43 @@ call plug#begin('~/.vim/plugged')
 " Plug 'c0r73x/neotags.nvim'
 " Plug 'chriskempson/base16-vim'
 " Plug 'jgdavey/tslime.vim'
+" Plug 'junegunn/fzf.vim'
+" Plug 'rizzatti/dash.vim'
+" Plug 'skywind3000/gutentags_plus'
 " Plug 'thoughtbot/vim-rspec'
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'danishprakash/vim-githubinator'
 Plug 'dense-analysis/ale'
 Plug 'dracula/vim'
+Plug 'google/vim-jsonnet'
 Plug 'https://gitlab.com/code-stats/code-stats-vim.git'
-Plug 'jremmen/vim-ripgrep', { 'commit': '0df3ac2c3e51d27637251a5849f892c3a0f0bce0' }
-" Plug 'junegunn/fzf.vim'
-" Telescope
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'jparise/vim-graphql'        " GraphQL syntax
+" Plug 'jremmen/vim-ripgrep', { 'commit': '0df3ac2c3e51d27637251a5849f892c3a0f0bce0' }
+Plug 'jremmen/vim-ripgrep'
+Plug 'leafgarland/typescript-vim' " TypeScript syntax
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
+" Plug 'mrjones2014/dash.nvim', { 'do': 'make install' }
 Plug 'mxw/vim-jsx'
-Plug 'pangloss/vim-javascript'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'pangloss/vim-javascript'    " JavaScript support
 Plug 'pean/tslime.vim'
 Plug 'pean/vim-rspec'
-Plug 'rizzatti/dash.vim'
 Plug 'scrooloose/nerdtree'
-" Plug 'skywind3000/gutentags_plus'
+Plug 'skanehira/preview-markdown.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
 Plug 'vim-ruby/vim-ruby'
+Plug 'vim-test/vim-test'
+Plug 'ruifm/gitlinker.nvim'
+Plug 'dewyze/vim-ruby-block-helpers'
+Plug 'github/copilot.vim'
 " List ends here. Plugins become visible to Vim after this call.
 
 call plug#end()
@@ -72,6 +82,8 @@ let mapleader = ","
 map <leader>n :noh<CR>
 map <leader>cn :cnext<CR>
 map <leader>bd :%bd!<CR>
+map <leader>bn :bnext<CR>
+map <leader>bp :bprev<CR>
 
 " ALE
 map <leader>an :ALENext<CR>
@@ -104,6 +116,7 @@ nnoremap <leader>fw <cmd>Telescope grep_string<cr>
 nnoremap <leader>fb <cmd>Telescope buffers initial_mode=normal<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fd <cmd>Telescope git_status initial_mode=normal<cr>
+nnoremap <leader>ft <cmd>Telescope tags<cr>
 
 lua << EOF
 require('telescope').setup{
@@ -127,6 +140,7 @@ require('telescope').setup{
 }
 
 require('telescope').load_extension('fzf')
+require"gitlinker".setup()
 EOF
 
 
@@ -141,10 +155,10 @@ filetype plugin on
 " gutentags
 " let g:gutentags_ctags_exclude = ['tmp', 'node_modules']
 " let g:gutentags_modules = ['ctags']
-" au FileType diff,gitcommit,gitrebase let g:gutentags_enabled=0
+au FileType diff,gitcommit,gitrebase let g:gutentags_enabled=0
 " let g:gutentags_cache_dir = expand('~/.cache/tags')
 " let g:gutentags_plus_nomap = 1
-let g:gutentags_exclude_filetypes = ['gitcommit', 'gitconfig', 'gitrebase', 'gitsendemail', 'git']
+" let g:gutentags_exclude_filetypes = ['gitcommit', 'gitconfig', 'gitrebase', 'gitsendemail', 'git']
 
 " tmux nav
 " nnoremap <silent> <bs> :tmuxnavigateleft<cr>
@@ -157,6 +171,14 @@ map <leader>sl :Tmux <CR> <bar> :call RunLastSpec()<CR>
 map <leader>sf :Tmux <CR> <bar> :call RunFailedSpecs()<CR>
 map <leader>sn :Tmux <CR> <bar> :call RunNextFailedSpec()<CR>
 map <leader>se :unlet g:tslime <CR> <bar> :call RunNearestSpec()<CR>
+
+" vin-test mappings, replaces rspec above
+" map <leader>sa :Tmux <CR> <bar> :call :TestFile<CR>
+" map <leader>ss :Tmux <CR> <bar> :TestNearest<CR>
+" map <leader>sl :Tmux <CR> <bar> :TestLast<CR>
+" map <leader>sf :Tmux <CR> <bar> :call RunFailedSpecs()<CR>
+" map <leader>sn :Tmux <CR> <bar> :call RunNextFailedSpec()<CR>
+" map <leader>se :unlet g:tslime <CR> <bar> :call RunNearestSpec()<CR>
 
 cmap FormatJSON %!python -m json.tool
 
@@ -172,8 +194,13 @@ map <leader>a :only<CR>:sp<CR>:A<CR>
 let ruby_fold = 1
 set nofoldenable
 
+" markdown preview
+let g:preview_markdown_parser = 'mdcat'
+let g:preview_markdown_auto_update = 1
+
 " CodeStats
 source ~/.codestats.vim
+
 
 set nocursorline
 
@@ -190,3 +217,7 @@ augroup HighlightPane
   autocmd WinEnter * call OnWinEnter()
   autocmd WinLeave * call OnWinLeave()
 augroup END
+
+" Copilot
+imap <silent><script><expr> <C-e> copilot#Next()
+imap <silent><script><expr> <C-w> copilot#Previous()
