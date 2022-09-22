@@ -150,7 +150,6 @@ set signcolumn=yes
 
 set nocompatible
 filetype off
-" let &runtimepath.=',~/.vim/plugged/ale'
 filetype plugin on
 
 " gutentags
