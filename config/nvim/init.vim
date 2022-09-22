@@ -8,6 +8,7 @@ call plug#begin('~/.vim/plugged')
 " Plug 'rizzatti/dash.vim'
 " Plug 'skywind3000/gutentags_plus'
 " Plug 'thoughtbot/vim-rspec'
+" Plug 'pean/vim-rspec'
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'danishprakash/vim-githubinator'
@@ -28,7 +29,6 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'pangloss/vim-javascript'    " JavaScript support
 Plug 'pean/tslime.vim'
-Plug 'pean/vim-rspec'
 Plug 'scrooloose/nerdtree'
 Plug 'skanehira/preview-markdown.vim'
 Plug 'tpope/vim-commentary'
@@ -165,20 +165,22 @@ au FileType diff,gitcommit,gitrebase let g:gutentags_enabled=0
 let g:tmux_navigator_disable_when_zoomed = 1
 
 " rspec.vim mappings
-map <leader>sa :Tmux <CR> <bar> :call RunCurrentSpecFile()<CR>
-map <leader>ss :Tmux <CR> <bar> :call RunNearestSpec()<CR>
-map <leader>sl :Tmux <CR> <bar> :call RunLastSpec()<CR>
-map <leader>sf :Tmux <CR> <bar> :call RunFailedSpecs()<CR>
-map <leader>sn :Tmux <CR> <bar> :call RunNextFailedSpec()<CR>
-map <leader>se :unlet g:tslime <CR> <bar> :call RunNearestSpec()<CR>
-
-" vin-test mappings, replaces rspec above
-" map <leader>sa :Tmux <CR> <bar> :call :TestFile<CR>
-" map <leader>ss :Tmux <CR> <bar> :TestNearest<CR>
-" map <leader>sl :Tmux <CR> <bar> :TestLast<CR>
+" map <leader>sa :Tmux <CR> <bar> :call RunCurrentSpecFile()<CR>
+" map <leader>ss :Tmux <CR> <bar> :call RunNearestSpec()<CR>
+" map <leader>sl :Tmux <CR> <bar> :call RunLastSpec()<CR>
 " map <leader>sf :Tmux <CR> <bar> :call RunFailedSpecs()<CR>
 " map <leader>sn :Tmux <CR> <bar> :call RunNextFailedSpec()<CR>
 " map <leader>se :unlet g:tslime <CR> <bar> :call RunNearestSpec()<CR>
+
+" vin-test mappings, replaces rspec above
+let test#strategy = "tslime"
+map <leader>su :TestSuite<CR>
+map <leader>sa :TestFile<CR>
+map <leader>ss :TestNearest<CR>
+map <leader>sl :TestLast<CR>
+map <leader>sf :TestSuite --only-failures<CR>
+map <leader>sn :TestSuite --next-failure<CR>
+map <leader>se :unlet g:tslime <CR> <bar> :call RunNearestSpec()<CR>
 
 cmap FormatJSON %!python -m json.tool
 
