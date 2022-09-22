@@ -4,31 +4,35 @@ call plug#begin('~/.vim/plugged')
 " Plug 'c0r73x/neotags.nvim'
 " Plug 'chriskempson/base16-vim'
 " Plug 'jgdavey/tslime.vim'
+" Plug 'jremmen/vim-ripgrep', { 'commit': '0df3ac2c3e51d27637251a5849f892c3a0f0bce0' }
 " Plug 'junegunn/fzf.vim'
+" Plug 'mrjones2014/dash.nvim', { 'do': 'make install' }
+" Plug 'pean/vim-rspec'
 " Plug 'rizzatti/dash.vim'
 " Plug 'skywind3000/gutentags_plus'
 " Plug 'thoughtbot/vim-rspec'
-" Plug 'pean/vim-rspec'
 Plug 'airblade/vim-gitgutter'
+Plug 'chrisbra/Colorizer'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'danishprakash/vim-githubinator'
 Plug 'dense-analysis/ale'
+Plug 'dewyze/vim-ruby-block-helpers'
 Plug 'dracula/vim'
+Plug 'github/copilot.vim'
 Plug 'google/vim-jsonnet'
 Plug 'https://gitlab.com/code-stats/code-stats-vim.git'
 Plug 'jparise/vim-graphql'        " GraphQL syntax
-" Plug 'jremmen/vim-ripgrep', { 'commit': '0df3ac2c3e51d27637251a5849f892c3a0f0bce0' }
 Plug 'jremmen/vim-ripgrep'
 Plug 'leafgarland/typescript-vim' " TypeScript syntax
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
-" Plug 'mrjones2014/dash.nvim', { 'do': 'make install' }
 Plug 'mxw/vim-jsx'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'pangloss/vim-javascript'    " JavaScript support
 Plug 'pean/tslime.vim'
+Plug 'ruifm/gitlinker.nvim'
 Plug 'scrooloose/nerdtree'
 Plug 'skanehira/preview-markdown.vim'
 Plug 'tpope/vim-commentary'
@@ -38,10 +42,6 @@ Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-test/vim-test'
-Plug 'ruifm/gitlinker.nvim'
-Plug 'dewyze/vim-ruby-block-helpers'
-Plug 'github/copilot.vim'
-Plug 'chrisbra/Colorizer'
 " List ends here. Plugins become visible to Vim after this call.
 
 call plug#end()
