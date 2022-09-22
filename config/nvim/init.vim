@@ -41,6 +41,7 @@ Plug 'vim-test/vim-test'
 Plug 'ruifm/gitlinker.nvim'
 Plug 'dewyze/vim-ruby-block-helpers'
 Plug 'github/copilot.vim'
+Plug 'chrisbra/Colorizer'
 " List ends here. Plugins become visible to Vim after this call.
 
 call plug#end()
@@ -221,3 +222,8 @@ augroup END
 " Copilot
 imap <silent><script><expr> <C-e> copilot#Next()
 imap <silent><script><expr> <C-w> copilot#Previous()
+
+" Colorizer
+" let g:colorizer_auto_color = 1
+let g:colorizer_auto_filetype='css,html,scss'
+let g:colorizer_skip_comments = 1
