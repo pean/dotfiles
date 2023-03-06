@@ -28,6 +28,8 @@
   path = .gitconfig-wa
 [includeIf "gitdir:~/.dotfiles/"]
   path = .gitconfig-wa
+[includeIf "gitdir:~/Downloads/"]
+  path = .gitconfig-wa
 [includeIf "gitdir:~/src/snowfall/"]
   path = .gitconfig-snowfall
 [includeIf "gitdir:~/src/hemnet/"]
