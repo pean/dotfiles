@@ -1,5 +1,6 @@
 " Plugins will be downloaded under the specified directory.
 call plug#begin('~/.vim/plugged')
+
 " Declare the list of plugins.
 " Plug 'c0r73x/neotags.nvim'
 " Plug 'chriskempson/base16-vim'
@@ -11,36 +12,38 @@ call plug#begin('~/.vim/plugged')
 " Plug 'rizzatti/dash.vim'
 " Plug 'skywind3000/gutentags_plus'
 " Plug 'thoughtbot/vim-rspec'
+
 Plug 'airblade/vim-gitgutter'
 Plug 'chrisbra/Colorizer'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'danishprakash/vim-githubinator'
+" Plug 'danishprakash/vim-githubinator'
 Plug 'dense-analysis/ale'
-Plug 'dewyze/vim-ruby-block-helpers'
+" Plug 'dewyze/vim-ruby-block-helpers'
 Plug 'dracula/vim'
 Plug 'github/copilot.vim'
-Plug 'google/vim-jsonnet'
+" Plug 'google/vim-jsonnet'
 Plug 'https://gitlab.com/code-stats/code-stats-vim.git'
-Plug 'jparise/vim-graphql'        " GraphQL syntax
+" Plug 'jparise/vim-graphql'        " GraphQL syntax
 Plug 'jremmen/vim-ripgrep'
 Plug 'leafgarland/typescript-vim' " TypeScript syntax
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
-Plug 'mxw/vim-jsx'
+" Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
+" Plug 'mxw/vim-jsx'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'pangloss/vim-javascript'    " JavaScript support
+" Plug 'pangloss/vim-javascript'    " JavaScript support
 Plug 'pean/tslime.vim'
-Plug 'ruifm/gitlinker.nvim'
+" Plug '~/src/pean/tslime.vim'
+" Plug 'ruifm/gitlinker.nvim'
 Plug 'scrooloose/nerdtree'
-Plug 'skanehira/preview-markdown.vim'
+" Plug 'skanehira/preview-markdown.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
-Plug 'tpope/vim-rhubarb'
-Plug 'tpope/vim-surround'
-Plug 'vim-ruby/vim-ruby'
+" Plug 'tpope/vim-rhubarb'
+" Plug 'tpope/vim-surround'
+" Plug 'vim-ruby/vim-ruby'
 Plug 'vim-test/vim-test'
 " List ends here. Plugins become visible to Vim after this call.
 
@@ -60,8 +63,8 @@ hi ALEErrorSign ctermfg=203 ctermbg=NONE
 hi ALEError ctermfg=203 ctermbg=NONE
 hi ALEWarningSign ctermfg=212 ctermbg=NONE
 hi ALEWarning ctermfg=212 ctermbg=NONE
-
-set hidden
+let g:ale_virtualtext_cursor = 'current'
+let g:ale_linters_ignore = { 'ruby': ['standardrb'] }
 
 set number
 set colorcolumn=80,100,120
@@ -141,7 +144,7 @@ require('telescope').setup{
 }
 
 require('telescope').load_extension('fzf')
-require"gitlinker".setup()
+-- require"gitlinker".setup()
 EOF
 
 
@@ -180,7 +183,6 @@ map <leader>ss :TestNearest<CR>
 map <leader>sl :TestLast<CR>
 map <leader>sf :TestSuite --only-failures<CR>
 map <leader>sn :TestSuite --next-failure<CR>
-map <leader>se :unlet g:tslime <CR> <bar> :call RunNearestSpec()<CR>
 
 cmap FormatJSON %!python -m json.tool
 
@@ -189,7 +191,8 @@ let g:rspec_command = 'call Send_to_Tmux("bin/rspec {spec}\n")'
 let g:tslime_always_current_session = 1
 let g:tslime_always_current_window = 1
 let g:tslime_always_current_pane = 1
-let g:tslime_autoset_pane = 1
+let g:tslime_autoset_pane = 2
+let g:tslime_pre_command = "C-c"
 
 map <leader>a :only<CR>:sp<CR>:A<CR>
 
