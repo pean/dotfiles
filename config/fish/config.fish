@@ -29,3 +29,6 @@ source (brew --prefix asdf)/libexec/asdf.fish
 set fish_greeting
 
 starship init fish | source
+
+# for broker integration
+set -g fish_user_paths ".git/safe/../../bin" $fish_user_paths
