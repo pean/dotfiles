@@ -229,5 +229,5 @@ imap <silent><script><expr> <C-w> copilot#Previous()
 
 " Colorizer
 " let g:colorizer_auto_color = 1
-let g:colorizer_auto_filetype='css,html,scss'
+let g:colorizer_auto_filetype='css,html,scss,erb'
 let g:colorizer_skip_comments = 1
