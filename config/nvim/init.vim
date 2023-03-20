@@ -136,6 +136,11 @@ require('telescope').setup{
       previewer = false,
       sort_lastused = true,
       theme = "dropdown",
+      mappings = {
+        n = {
+          ["d"] = "delete_buffer"
+        },
+      },
     },
     grep_string = {
       word_match = "-w",
