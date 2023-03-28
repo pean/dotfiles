@@ -61,9 +61,7 @@ local rules = notificationFilters + [
   },
 ];
 
-local labels = lib.rulesLabels(rules) + [
-  { name: 'jonas-and-youtube' },
-];
+local labels = lib.rulesLabels(rules);
 
 local tests = [
   {
@@ -84,7 +82,7 @@ local tests = [
   version: 'v1alpha3',
   author: {
     name: 'Peter Andersson',
-    email: 'peter.andersson@hemnet.se',
+    email: 'peter.andersson@getdreams.com',
   },
   labels: labels,
   rules: rules,
