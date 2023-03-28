@@ -34,6 +34,8 @@
   path = .gitconfig-snowfall
 [includeIf "gitdir:~/src/hemnet/"]
   path = .gitconfig-hemnet
+[includeIf "gitdir:~/src/dreams/"]
+  path = .gitconfig-dreams
 
 [commit]
   gpgsign = true
