@@ -34,7 +34,7 @@
   path = .gitconfig-snowfall
 [includeIf "gitdir:~/src/hemnet/"]
   path = .gitconfig-hemnet
-[includeIf "gitdir:~/src/dreams/"]
+[includeIf "gitdir:~/src/getdreams/"]
   path = .gitconfig-dreams
 
 [commit]
