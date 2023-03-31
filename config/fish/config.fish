@@ -20,9 +20,6 @@ set -gx PKG_CONFIG_PATH "/usr/local/opt/openssl/lib/pkgconfig"
 
 source (brew --prefix asdf)/libexec/asdf.fish
 
-alias reponame="basename -s .git $(git config --get remote.origin.url)"
-alias muxdev="tmuxinator start -n $(reponame) dev ."
-
 set fish_greeting
 
 starship init fish | source
