@@ -8,13 +8,14 @@
   c = commit -v
   ca = commit --amend
   cf = commit --fixup
-  cleanup = branch --merged | rg -v master | xargs git branch -d
+  ; cleanup = !branch -v | rg \\[gone\\] | awk '{print $1}' | xargs -I{} git branch -D {}
+  ; cleanupdry = !git branch -v | rg \\[gone\\] | awk '{print $1}'
   cm = commit -m
   co = checkout
   d = diff
   l = log --oneline -15
   logp = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-  ri = rebase --interactive
+  ri = rebase --interactive --autostash --autosquash
   pf = push --force-with-lease
 
 [core]
@@ -42,3 +43,8 @@
 
 [push]
   default = current
+[credential]
+  helper = cache
+
+[url "git@github.com:"]
+  insteadOf = https://github.com/
