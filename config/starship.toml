@@ -1,3 +1,5 @@
+right_format = """$cmd_duration"""
+
 [ruby]
 disabled = true
 
@@ -11,3 +13,16 @@ format = "[$symbol$branch]($style) "
 [git_status]
 stashed = ""
 style = "bold green"
+
+[git_metrics]
+disabled = false
+
+[aws]
+disabled = true
+
+[shell]
+disabled = true
+
+[cmd_duration]
+format = "[$duration]($style)"
+min_time = 0
