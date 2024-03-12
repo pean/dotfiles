@@ -16,6 +16,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'chrisbra/Colorizer'
 Plug 'christoomey/vim-tmux-navigator'
+" Generate link/open web to github, repalced with gitlinker
 " Plug 'danishprakash/vim-githubinator'
 Plug 'dense-analysis/ale'
 " Plug 'dewyze/vim-ruby-block-helpers'
@@ -27,15 +28,14 @@ Plug 'https://gitlab.com/code-stats/code-stats-vim.git'
 Plug 'jremmen/vim-ripgrep'
 Plug 'leafgarland/typescript-vim' " TypeScript syntax
 Plug 'ludovicchabant/vim-gutentags'
-" Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
-" Plug 'mxw/vim-jsx'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-telescope/telescope.nvim'
-" Plug 'pangloss/vim-javascript'    " JavaScript support
 Plug 'pean/tslime.vim'
 " Plug '~/src/pean/tslime.vim'
-" Plug 'ruifm/gitlinker.nvim'
+" Get link to github with <leader>gy
+" Replaces vim-githubinator
+Plug 'ruifm/gitlinker.nvim'
 Plug 'scrooloose/nerdtree'
 " Plug 'skanehira/preview-markdown.vim'
 Plug 'tpope/vim-commentary'
@@ -45,6 +45,12 @@ Plug 'tpope/vim-rails'
 " Plug 'tpope/vim-surround'
 " Plug 'vim-ruby/vim-ruby'
 Plug 'vim-test/vim-test'
+Plug 'rhysd/ghpr-blame.vim'
+
+" Javascript etc
+Plug 'pangloss/vim-javascript'    " JavaScript support
+Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
+
 " List ends here. Plugins become visible to Vim after this call.
 
 call plug#end()
@@ -63,7 +69,9 @@ hi ALEError ctermfg=203 ctermbg=NONE
 hi ALEWarningSign ctermfg=212 ctermbg=NONE
 hi ALEWarning ctermfg=212 ctermbg=NONE
 let g:ale_virtualtext_cursor = 'current'
+" let g:ale_linters_ignore = { 'ruby': ['rubocop'] }
 let g:ale_linters_ignore = { 'ruby': ['standardrb'] }
+let g:ale_ruby_rubocop_executable = 'bundle'
 
 set number
 set colorcolumn=80,100,120
@@ -112,7 +120,7 @@ map <leader>gw :Rg <C-R><C-W><CR>
 " let g:rg_binary='/usr/local/bin/rg'
 
 " Telscope (to replace fzf and rg
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>ff <cmd>Telescope find_files hidden=true<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fc <cmd>Telescope grep_string theme=get_cursor initial_mode=normal previewer=false<cr>
 nnoremap <leader>fw <cmd>Telescope grep_string<cr>
@@ -129,12 +137,19 @@ require('telescope').setup{
       width = 0.95,
       height = 0.95,
     },
+    vimgrep_arguments = {
+      'rg',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--column',
+      '--smart-case',
+      '--hidden',
+    },
   },
   pickers = {
     buffers = {
-      previewer = false,
       sort_lastused = true,
-      theme = "dropdown",
       mappings = {
         n = {
           ["d"] = "delete_buffer"
@@ -148,7 +163,7 @@ require('telescope').setup{
 }
 
 require('telescope').load_extension('fzf')
--- require"gitlinker".setup()
+require("gitlinker").setup()
 EOF
 
 
@@ -235,3 +250,6 @@ imap <silent><script><expr> <C-w> copilot#Previous()
 " let g:colorizer_auto_color = 1
 let g:colorizer_auto_filetype='css,html,scss,erb'
 let g:colorizer_skip_comments = 1
+
+" GHPR Blame
+let g:ghpr_github_auth_token = $GITHUB_TOKEN
