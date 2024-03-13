@@ -1,6 +1,9 @@
 [user]
   name = Peter Andersson
-  path = ~/.gitconfig-signingkey
+  ; GPG
+  ; path = ~/.gitconfig-signingkey
+  ; SSH
+  signingkey = ~/.ssh/id_ed25519.pub
 
 [alias]
   s = status -uall -s
@@ -37,6 +40,12 @@
   path = .gitconfig-hemnet
 [includeIf "gitdir:~/src/getdreams/"]
   path = .gitconfig-dreams
+
+[gpg]
+  format = ssh
+
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 
 [commit]
   gpgsign = true
