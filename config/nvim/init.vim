@@ -178,7 +178,7 @@ filetype plugin on
 " let g:gutentags_ctags_exclude = ['tmp', 'node_modules']
 " let g:gutentags_modules = ['ctags']
 au FileType diff,gitcommit,gitrebase let g:gutentags_enabled=0
-" let g:gutentags_cache_dir = expand('~/.cache/tags')
+let g:gutentags_cache_dir = expand('~/.cache/tags')
 " let g:gutentags_plus_nomap = 1
 " let g:gutentags_exclude_filetypes = ['gitcommit', 'gitconfig', 'gitrebase', 'gitsendemail', 'git']
 
