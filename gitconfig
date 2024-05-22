@@ -3,7 +3,10 @@
   ; GPG
   ; path = ~/.gitconfig-signingkey
   ; SSH
-  signingkey = ~/.ssh/id_ed25519.pub
+  ; 1Password
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICMtjhZjUKmt6oFxggjVV8M/yVo7JhA0i/5UNhP5KXoU
+  ; Regular certificate
+  ; signingkey = ~/.ssh/id_ed25519.pub
 
 [alias]
   s = status -uall -s
