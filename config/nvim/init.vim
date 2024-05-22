@@ -14,8 +14,13 @@ call plug#begin('~/.vim/plugged')
 " Plug 'thoughtbot/vim-rspec'
 
 Plug 'airblade/vim-gitgutter'
-Plug 'chrisbra/Colorizer'
+
+" disabling because none of them works right now
+" Plug 'chrisbra/Colorizer'
+" Plug 'norcalli/nvim-colorizer.lua'
+
 Plug 'christoomey/vim-tmux-navigator'
+
 " Generate link/open web to github, repalced with gitlinker
 " Plug 'danishprakash/vim-githubinator'
 Plug 'dense-analysis/ale'
@@ -58,6 +63,8 @@ call plug#end()
 packadd! dracula_pro
 let g:dracula_colorterm = 0
 colorscheme dracula_pro
+
+" set termguicolors
 
 hi Normal ctermbg=none
 
