@@ -20,8 +20,10 @@ set -gx LDFLAGS "-L/usr/local/opt/openssl/lib"
 set -gx CPPFLAGS "-I/usr/local/opt/openssl/include"
 set -gx PKG_CONFIG_PATH "/usr/local/opt/openssl/lib/pkgconfig"
 
-source (brew --prefix asdf)/libexec/asdf.fish
+# source (brew --prefix asdf)/libexec/asdf.fish
 
 set fish_greeting
 
 starship init fish | source
+mise activate fish | source
+fzf --fish | source
