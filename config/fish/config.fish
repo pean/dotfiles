@@ -27,3 +27,10 @@ set fish_greeting
 starship init fish | source
 mise activate fish | source
 fzf --fish | source
+
+if status is-interactive
+  # Workaround for Homebrew tmuxinator issue
+  # https://github.com/Homebrew/homebrew-core/issues/59484
+  # https://discourse.brew.sh/t/why-does-tmuxinator-sets-gem-home/7296
+  set -e GEM_HOME
+end
