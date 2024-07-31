@@ -26,6 +26,13 @@ local notifications = [
   { type: 'your_activity', label: 'your activity', archive: false },
 ];
 
+local bots = {
+  or: [
+    { from: 'dependabot[bot]' },
+    { from: 'Dreams Bot' },
+  ],
+};
+
 local notificationFilters = [
   {
     filter: {
@@ -38,6 +45,7 @@ local notificationFilters = [
       archive: notification.archive,
       forward: if notification.archive == false then variables.slack_email else null,
       labels: [
+        'github',
         'github/' + notification.label,
       ],
     },
@@ -45,7 +53,7 @@ local notificationFilters = [
   for notification in notifications
 ];
 
-local rules = notificationFilters + [
+local rules = [
   {
     filter: {
       and: [
@@ -53,13 +61,24 @@ local rules = notificationFilters + [
       ],
     },
     actions: {
-      archive: true,
       labels: [
         'github/dependabot',
       ],
     },
   },
-];
+  {
+    filter: {
+      and: [
+        { from: 'Dreams Bot' },
+      ],
+    },
+    actions: {
+      labels: [
+        'github/dreams bot',
+      ],
+    },
+  },
+] + notificationFilters;
 
 local labels = lib.rulesLabels(rules);
 
@@ -70,9 +89,19 @@ local tests = [
       { from: 'dependabot[bot]' },
     ],
     actions: {
-      archive: true,
       labels: [
         'github/dependabot',
+      ],
+    },
+  },
+  {
+    name: 'dreams bot goes to github/dreams bot',
+    messages: [
+      { from: 'Dreams Bot' },
+    ],
+    actions: {
+      labels: [
+        'github/dreams bot',
       ],
     },
   },
