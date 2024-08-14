@@ -8,6 +8,7 @@ set -g fish_user_paths "/usr/local/opt/curl/bin" $fish_user_paths
 set -g fish_user_paths "/opt/homebrew/bin" $fish_user_paths
 set -g fish_user_paths "/opt/homebrew/sbin" $fish_user_paths
 set -g fish_user_paths "/opt/homebrew/opt/make/libexec/gnubin" $fish_user_paths
+set -g fish_user_paths "/Users/peter/src/getdreams/dreams-cli/target/release" $fish_user_paths
 
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
