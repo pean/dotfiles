@@ -125,9 +125,10 @@ map <leader>gg :Rg
 map <leader>gw :Rg <C-R><C-W><CR>
 "  g:rg_hightlight=1
 " let g:rg_binary='/usr/local/bin/rg'
+" let g:rg_command = 'g:rg_binary --vimgrep --hidden --smart-case'
 
 " Telscope (to replace fzf and rg
-nnoremap <leader>ff <cmd>Telescope find_files hidden=true<cr>
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fc <cmd>Telescope grep_string theme=get_cursor initial_mode=normal previewer=false<cr>
 nnoremap <leader>fw <cmd>Telescope grep_string<cr>
