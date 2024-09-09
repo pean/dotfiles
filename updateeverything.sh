@@ -11,3 +11,7 @@ fisher update
 mas upgrade
 
 ~/.tmux/plugins/tpm/bin/update_plugins all
+
+mise plugin update
+
+softwareupdate -i -a
