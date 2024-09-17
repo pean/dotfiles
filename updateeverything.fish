@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/opt/homebrew/bin/fish
+
 
 # upgrade plug + upgrade plugins
 nvim +PlugUpgrade +PlugUpdate +qa
