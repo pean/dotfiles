@@ -3,6 +3,7 @@ return {
   { "github/copilot.vim" },
 
   -- Code stats
+  -- Create `~/.config/nvim/secrets.lua` with `vim.g.codestats_api_key = "your-api-key"`
   { url = "https://gitlab.com/code-stats/code-stats-vim.git" },
 
   -- Git Gutter
