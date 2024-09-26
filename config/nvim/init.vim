@@ -56,6 +56,7 @@ Plug 'rhysd/ghpr-blame.vim'
 Plug 'pangloss/vim-javascript'    " JavaScript support
 Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
 
+Plug 'epwalsh/obsidian.nvim'
 " List ends here. Plugins become visible to Vim after this call.
 
 call plug#end()
@@ -172,6 +173,15 @@ require('telescope').setup{
 
 require('telescope').load_extension('fzf')
 require("gitlinker").setup()
+
+require('obsidian').setup({
+  workspaces = {
+    {
+      name = "dreams",
+      path = "~/obsidian/dreams",
+    },
+  },
+})
 EOF
 
 
@@ -261,3 +271,9 @@ let g:colorizer_skip_comments = 1
 
 " GHPR Blame
 let g:ghpr_github_auth_token = $GITHUB_TOKEN
+
+
+" Obsidian
+map <leader>of :ObsidianQuickSwitch<CR>
+map <leader>og :ObsidianSearch<CR>
+map <leader>on :ObsidianNew<CR>
