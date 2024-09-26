@@ -15,4 +15,7 @@ mas upgrade
 
 mise plugin update
 
+pip3 install --upgrade (pip3 list | awk 'NR>2 {print $1}')
+pip install --upgrade (pip list | awk 'NR>2 {print $1}')
+
 softwareupdate -i -a
