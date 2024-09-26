@@ -41,7 +41,7 @@ Plug 'pean/tslime.vim'
 " Get link to github with <leader>gy
 " Replaces vim-githubinator
 Plug 'ruifm/gitlinker.nvim'
-Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdtree'
 " Plug 'skanehira/preview-markdown.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
