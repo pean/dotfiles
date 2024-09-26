@@ -199,6 +199,8 @@ au FileType diff,gitcommit,gitrebase let g:gutentags_enabled=0
 let g:gutentags_cache_dir = expand('~/.cache/tags')
 " let g:gutentags_plus_nomap = 1
 " let g:gutentags_exclude_filetypes = ['gitcommit', 'gitconfig', 'gitrebase', 'gitsendemail', 'git']
+" define this to not use ctags from xcode
+let g:gutentags_ctags_executable = '/opt/homebrew/opt/universal-ctags/bin/ctags'
 
 " tmux nav
 " nnoremap <silent> <bs> :tmuxnavigateleft<cr>
