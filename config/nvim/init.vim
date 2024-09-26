@@ -25,7 +25,7 @@ Plug 'christoomey/vim-tmux-navigator'
 " Plug 'danishprakash/vim-githubinator'
 Plug 'dense-analysis/ale'
 " Plug 'dewyze/vim-ruby-block-helpers'
-Plug 'dracula/vim'
+" Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'github/copilot.vim'
 " Plug 'google/vim-jsonnet'
 Plug 'https://gitlab.com/code-stats/code-stats-vim.git'
