@@ -14,8 +14,8 @@
   c = commit -v
   ca = commit --amend
   cf = commit --fixup
-  cleanup =     !git fetch --all -p -q; git branch -vv | grep ": gone]" | awk '{ print $1 }' | xargs -n 1 git branch -D                                                                                                                                                                                                                                                                                                       2s
-  cleanupdry =  !git fetch --all -p -q; git branch -vv | grep ": gone]" | awk '{ print $1 }'
+  cleanup =     "!git fetch --all -p -q; git branch -vv | grep ': gone]' | awk '{ print $1 }' | xargs -n 1 git branch -D"
+  cleanupdry =  "!git fetch --all -p -q; git branch -vv | grep ': gone]' | awk '{ print $1 }'"
 
   cm = commit -m
   co = checkout
