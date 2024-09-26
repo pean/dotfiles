@@ -20,7 +20,7 @@
   cm = commit -m
   co = checkout
   d = diff
-  l = log --oneline -15
+  l = log -10 --pretty=format:'%Cblue%>(14)%cr%Creset %C(yellow)%h%Creset%C(auto)%d%Creset %s'
   logp = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   ri = rebase --interactive --autostash --autosquash
   pf = push --force-with-lease
