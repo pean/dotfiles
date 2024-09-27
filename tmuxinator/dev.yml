@@ -9,7 +9,7 @@ windows:
         - bin/rails console
         - git diff
         - git status
-        - nvim .
+        - nvim
   - server: ls
   - db: ls
 
