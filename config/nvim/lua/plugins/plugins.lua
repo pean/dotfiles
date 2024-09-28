@@ -76,7 +76,7 @@ return {
     "pean/tslime.vim",
     init = function()
       vim.g.tslime_always_current_session = 1
-      -- vim.g.tslime_always_current_window = 1 -- fixed pane (otherwise select)
+      vim.g.tslime_always_current_window = 1 -- fixed pane (otherwise select)
       -- vim.g.tslime_autoset_pane = 1 -- select largest pane
       vim.g.tslime_pre_command = "C-c"
     end,
