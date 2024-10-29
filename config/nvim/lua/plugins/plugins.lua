@@ -104,6 +104,12 @@ return {
   -- vim-fugitive
   { "tpope/vim-fugitive" },
 
+  -- rhubarb.vim - for GBrowse through fugitive
+  {
+    "tpope/vim-rhubarb",
+    dependencies = { "tpope/vim-fugitive" },
+  },
+
   -- gutentags
   {
     "ludovicchabant/vim-gutentags",
