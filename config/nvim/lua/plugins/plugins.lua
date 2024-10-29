@@ -127,4 +127,12 @@ return {
       vim.g.gutentags_ctags_executable = "/opt/homebrew/bin/ctags"
     end,
   },
+
+  -- color preview
+  {
+    "brenoprata10/nvim-highlight-colors",
+    opts = {
+      enable_tailwind = true,
+    }
+  },
 }
