@@ -15,6 +15,7 @@ starship init fish | source
 mise activate fish | source
 fzf --fish | source
 zoxide init fish | source
+atuin init fish  --disable-up-arrow | source
 
 if status is-interactive
   # Workaround for Homebrew tmuxinator issue
