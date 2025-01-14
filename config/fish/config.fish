@@ -14,6 +14,7 @@ set -g fish_user_path "$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools" $fish_u
 starship init fish | source
 mise activate fish | source
 fzf --fish | source
+zoxide init fish | source
 
 if status is-interactive
   # Workaround for Homebrew tmuxinator issue
