@@ -1,5 +1,6 @@
 name: dev
-root: <% @args[0] %>
+attach: <%= @args[0] %>
+# root: <% @args[0] %>
 on_project_start: mise install
 # on_project_first_start: kitty @ set-tab-title $(basename -s .git $(git rev-parse --show-toplevel))
 windows:
