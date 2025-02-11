@@ -14,7 +14,7 @@ font-feature = -ss09
 font-size = 12.5
 font-variation = wght=200
 macos-titlebar-style = hidden
-theme = dracula_pro
+theme = catppuccin-mocha
 window-decoration = false
 window-inherit-font-size = false
 window-padding-color = extend
