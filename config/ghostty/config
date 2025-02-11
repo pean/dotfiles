@@ -11,6 +11,16 @@ font-feature = -ss04
 font-feature = -ss05
 font-feature = -ss06
 font-feature = -ss09
+
+# alternate 0
+font-feature = cv01=2
+
+# alternate 1
+font-feature = -cv02
+
+# six point asterisk *
+font-feature = +cv31
+
 font-size = 12.5
 font-variation = wght=200
 macos-titlebar-style = hidden
