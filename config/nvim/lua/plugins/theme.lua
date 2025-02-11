@@ -5,6 +5,7 @@ return {
     lazy = true,
     dir = "~/.config/nvim/pack/themes/dracula_pro",
   },
+  { "nordtheme/vim" },
   { 
     "catppuccin/nvim",
     name = "catppuccin",
