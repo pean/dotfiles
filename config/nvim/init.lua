@@ -18,9 +18,13 @@ vim.opt.wrap = false -- do not wrap lines
 vim.api.nvim_set_hl(0, "ColorColumn", { link = "StatusLine" })
 
 vim.opt.termguicolors = true
-vim.cmd.colorscheme("dracula_pro")
+
+-- vim.opt.cmdheight = 0
 
 require("config.code-stats")
 require("config.cursorline")
 
 require("config.lazy")
+
+-- vim.cmd.colorscheme(dracula_pro")
+vim.cmd.colorscheme("catppuccin")
