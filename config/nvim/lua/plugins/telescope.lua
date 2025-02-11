@@ -42,10 +42,16 @@ return {
         },
         grep_string = {
           word_match = "-w",
-
+          disable_devicons = true,
+        },
+        live_grep =  {
+          disable_devicons = true,
         },
         git_status = {
           initial_mode = "normal",
+        },
+        find_files = {
+          disable_devicons = true,
         },
       },
       extensions = { "fzf" },
