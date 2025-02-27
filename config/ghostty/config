@@ -13,7 +13,7 @@ font-feature = -ss06
 font-feature = -ss09
 
 # alternate 0
-font-feature = cv01=2
+font-feature = cv01=3
 
 # alternate 1
 font-feature = -cv02
