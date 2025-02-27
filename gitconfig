@@ -33,6 +33,8 @@
 [diff]
   algorithm = histogram
   colorMoved = true
+  renames = true
+  mnemonicPrefix = true
 
 [merge]
   conflictStyle = zdiff3
