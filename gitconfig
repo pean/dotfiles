@@ -43,6 +43,9 @@
 [rebase]
   autosquash = true
 
+[include]
+  path = ~/.config/delta/delta.gitconfig
+
 [includeIf "gitdir:~/src/pean/"]
   path = .gitconfig-wa
 [includeIf "gitdir:~/.dotfiles/"]
