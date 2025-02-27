@@ -38,7 +38,7 @@
   conflictStyle = zdiff3
 
 [rerere]
-	enabled = true
+  enabled = true
 
 [rebase]
   autosquash = true
@@ -78,6 +78,6 @@
 [url "git@github.com:"]
   insteadOf = https://github.com/
 [credential "https://github.com"]
-	helper = !/opt/homebrew/bin/gh auth git-credential
+  helper = !/opt/homebrew/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = !/opt/homebrew/bin/gh auth git-credential
+  helper = !/opt/homebrew/bin/gh auth git-credential
