@@ -29,6 +29,14 @@
   editor=nvim
   excludesfile = ~/.gitignore
   attributesfile = ~/.gitattributes
+
+[diff]
+  algorithm = histogram
+  colorMoved = true
+
+[merge]
+  conflictStyle = zdiff3
+
 [rebase]
   autosquash = true
 
@@ -53,9 +61,11 @@
 
 [commit]
   gpgsign = true
+  verbose = true
 
 [push]
   default = current
+
 [credential]
   helper = cache
 
