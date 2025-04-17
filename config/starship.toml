@@ -9,6 +9,9 @@ disabled = true
 [rust]
 disabled = true
 
+[python]
+disabled = true
+
 [nodejs]
 disabled = true
 
