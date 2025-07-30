@@ -67,6 +67,7 @@ return {
         vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)  -- Show diagnostic popup
         vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)         -- Previous diagnostic
         vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)         -- Next diagnostic
+        vim.keymap.set('n', '<space>q', vim.diagnostic.setqflist, opts)   -- Open all diagnostics in quickfix list
         
         -- Disable LSP formatting for JS/TS files to use Prettier instead
         if client.name == "ts_ls" then
