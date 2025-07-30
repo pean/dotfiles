@@ -69,16 +69,16 @@ return {
         vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)           -- Previous diagnostic
         vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)           -- Next diagnostic
         
-        -- Auto-format on save (if enabled)
-        if client.supports_method("textDocument/formatting") then
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            buffer = bufnr,
-            callback = function()
-              if vim.g.autoformat_enabled then
-                vim.lsp.buf.format { async = false }
-              end
-            end,
-          })
+        -- Disable LSP formatting for JS/TS files if conform.nvim is available
+        -- This prevents conflicts between LSP and Prettier formatting
+        if client.name == "ts_ls" then
+          client.server_capabilities.documentFormattingProvider = false
+          client.server_capabilities.documentRangeFormattingProvider = false
+        end
+        
+        -- Auto-format on type for supported languages (TypeScript/JavaScript)
+        if client.supports_method("textDocument/onTypeFormatting") then
+          vim.api.nvim_buf_set_option(bufnr, 'formatexpr', 'v:lua.vim.lsp.formatexpr()')
         end
       end
 
@@ -130,6 +130,65 @@ return {
           })
         end,
         
+        ["ts_ls"] = function()
+          lspconfig.ts_ls.setup({
+            on_attach = on_attach,
+            filetypes = { 
+              "javascript", 
+              "javascriptreact", 
+              "typescript", 
+              "typescriptreact",
+              "typescript.tsx"
+            },
+            settings = {
+              typescript = {
+                format = {
+                  enable = true,
+                  indentSize = 2,
+                  tabSize = 2,
+                  insertSpaceAfterCommaDelimiter = true,
+                  insertSpaceAfterSemicolonInForStatements = true,
+                  insertSpaceBeforeAndAfterBinaryOperators = true,
+                  insertSpaceAfterKeywordsInControlFlowStatements = true,
+                  insertSpaceAfterFunctionKeywordForAnonymousFunctions = false,
+                  insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = false,
+                  insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = false,
+                  insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces = false,
+                  insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces = false,
+                  placeOpenBraceOnNewLineForFunctions = false,
+                  placeOpenBraceOnNewLineForControlBlocks = false,
+                },
+                preferences = {
+                  quotePreference = "double",
+                  includePackageJsonAutoImports = "auto",
+                },
+              },
+              javascript = {
+                format = {
+                  enable = true,
+                  indentSize = 2,
+                  tabSize = 2,
+                  insertSpaceAfterCommaDelimiter = true,
+                  insertSpaceAfterSemicolonInForStatements = true,
+                  insertSpaceBeforeAndAfterBinaryOperators = true,
+                  insertSpaceAfterKeywordsInControlFlowStatements = true,
+                  insertSpaceAfterFunctionKeywordForAnonymousFunctions = false,
+                  insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = false,
+                  insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = false,
+                  insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces = false,
+                  insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces = false,
+                  placeOpenBraceOnNewLineForFunctions = false,
+                  placeOpenBraceOnNewLineForControlBlocks = false,
+                },
+                preferences = {
+                  quotePreference = "double",
+                  includePackageJsonAutoImports = "auto",
+                },
+              },
+            },
+          })
+        end,
+        
         ["rust_analyzer"] = function()
           lspconfig.rust_analyzer.setup({
             on_attach = on_attach,
@@ -150,13 +209,6 @@ return {
       -- LSP completion
       vim.opt.omnifunc = 'v:lua.vim.lsp.omnifunc'
       vim.keymap.set('i', '<C-Space>', '<C-x><C-o>', { noremap = true })
-
-      -- Auto-format toggle
-      vim.g.autoformat_enabled = true
-      vim.keymap.set('n', '<leader>af', function()
-        vim.g.autoformat_enabled = not vim.g.autoformat_enabled
-        print("Auto-format on save: " .. (vim.g.autoformat_enabled and "enabled" or "disabled"))
-      end, { noremap = true })
     end,
   },
 }
