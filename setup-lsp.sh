@@ -1,85 +1,72 @@
 #!/bin/bash
 
 # =============================================================================
-# Neovim LSP Setup Script
+# Neovim LSP Setup Script with Mason
 # =============================================================================
-# This script installs the minimal dependencies needed for a full LSP setup:
-# - nvim-lspconfig plugin (the only required plugin)
-# - Common language servers for popular programming languages
+# This script sets up a modern LSP configuration using Mason for automatic
+# language server management. Mason will handle downloading and installing
+# language servers automatically.
 #
-# After running this script, restart Neovim and LSP features will be available
+# Setup includes:
+# - Mason + mason-lspconfig + nvim-lspconfig (via lazy.nvim)
+# - Automatic installation of TypeScript, Ruby, Python, and Lua servers
+# - No manual server installation required!
 # =============================================================================
 
-echo "Setting up Neovim LSP with minimal dependencies..."
-
-# =============================================================================
-# Plugin Installation
-# =============================================================================
-# Create plugin directory using Neovim's built-in package management
-mkdir -p ~/.config/nvim/pack/plugins/start
-
-# Install nvim-lspconfig (the only plugin we need)
-# This provides pre-configured setups for various language servers
-if [ ! -d ~/.config/nvim/pack/plugins/start/nvim-lspconfig ]; then
-    echo "Installing nvim-lspconfig..."
-    git clone https://github.com/neovim/nvim-lspconfig ~/.config/nvim/pack/plugins/start/nvim-lspconfig
-else
-    echo "nvim-lspconfig already installed"
-fi
+echo "Setting up Neovim LSP with Mason (modern automatic setup)..."
 
 echo ""
 echo "============================================================================="
-echo "Language Server Installation"
+echo "Setup Instructions"
 echo "============================================================================="
-echo "Installing language servers for common programming languages..."
 echo ""
-
-# =============================================================================
-# JavaScript/TypeScript Language Servers
-# =============================================================================
-# Check if npm is available for JS/TS servers
-if command -v npm &> /dev/null; then
-    echo "Installing TypeScript/JavaScript LSP servers..."
-    npm install -g typescript typescript-language-server
-    
-    echo "Installing additional language servers..."
-    npm install -g vscode-langservers-extracted  # for JSON, HTML, CSS, ESLint
-    npm install -g pyright  # Python
-else
-    echo "npm not found. To install JS/TS LSP servers, run:"
-    echo "  npm install -g typescript typescript-language-server"
-    echo "  npm install -g vscode-langservers-extracted"
-    echo "  npm install -g pyright"
-fi
-
-# Check if gem is available for Ruby
-if command -v gem &> /dev/null; then
-    echo "Installing Ruby LSP server..."
-    gem install solargraph
-else
-    echo "gem not found. To install Ruby LSP server, run:"
-    echo "  gem install solargraph"
-fi
-
-# Check if brew is available for Lua
-if command -v brew &> /dev/null; then
-    echo "Installing Lua LSP server..."
-    brew install lua-language-server
-else
-    echo "brew not found. To install Lua LSP server:"
-    echo "  brew install lua-language-server"
-    echo "  or download from: https://github.com/LuaLS/lua-language-server"
-fi
-
+echo "1. The LSP configuration is now managed through lazy.nvim plugins"
+echo "2. Mason will automatically install language servers when you start Neovim"
+echo "3. No manual installation required!"
 echo ""
-echo "Setup complete! Restart Neovim and LSP should work."
+echo "To complete setup:"
+echo "  1. Start Neovim"
+echo "  2. Run :Lazy sync    (to install/update plugins)"
+echo "  3. Run :Mason        (to see installed servers)"
 echo ""
-echo "Key bindings:"
-echo "  gd      - Go to definition"
-echo "  K       - Show hover information"
-echo "  <space>rn - Rename symbol"
-echo "  <space>ca - Code actions"
-echo "  gr      - Show references"
-echo "  <space>f - Format document"
-echo "  [d      - Previous diagnostic"
-echo "  ]d      - Next diagnostic"
+echo "Language servers that will be auto-installed:"
+echo "  - ts_ls      (TypeScript/JavaScript)"
+echo "  - ruby_lsp   (Ruby)"
+echo "  - pyright    (Python)"
+echo "  - lua_ls     (Lua)"
+echo ""
+echo "============================================================================="
+echo "LSP Key Bindings"
+echo "============================================================================="
+echo "  gd         - Go to definition"
+echo "  K          - Show hover information"
+echo "  gi         - Go to implementation"
+echo "  <C-k>      - Show signature help"
+echo "  <space>rn  - Rename symbol"
+echo "  <space>ca  - Code actions"
+echo "  gr         - Show references"
+echo "  <space>f   - Format document"
+echo "  <space>e   - Show diagnostic"
+echo "  [d         - Previous diagnostic"
+echo "  ]d         - Next diagnostic"
+echo "  <leader>af - Toggle auto-format on save"
+echo "  <C-Space>  - Trigger completion (insert mode)"
+echo ""
+echo "============================================================================="
+echo "Manual Installation (if auto-install fails)"
+echo "============================================================================="
+echo "If Mason fails to install servers, you can install manually:"
+echo ""
+echo "TypeScript/JavaScript:"
+echo "  npm install -g typescript typescript-language-server"
+echo ""
+echo "Ruby:"
+echo "  gem install ruby-lsp"
+echo ""
+echo "Python:"
+echo "  npm install -g pyright"
+echo ""
+echo "Lua:"
+echo "  brew install lua-language-server"
+echo ""
+echo "Setup complete! Start Neovim to begin using LSP features."

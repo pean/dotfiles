@@ -60,16 +60,7 @@ return {
     end,
   },
 
-  -- ALE
-  {
-    "dense-analysis/ale",
-    config = function()
-      vim.g.ale_linters_ignore = {
-        ruby = { "standardrb" },
-      }
-      vim.g.ale_ruby_rubocop_executable = "bundle"
-    end,
-  },
+
 
   -- tslime
   {
