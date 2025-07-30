@@ -19,7 +19,6 @@ return {
           yaml = { "prettier" },
           markdown = { "prettier" },
           lua = { "stylua" },
-          rust = { "rustfmt" },
           ruby = { "rubocop" },
         },
         
@@ -77,12 +76,10 @@ return {
     config = function()
       require("mason-tool-installer").setup({
         ensure_installed = {
-          "prettier",    -- JS/TS/React formatter
-          "stylua",      -- Lua formatter
-          "rustfmt",     -- Rust formatter (usually comes with rust toolchain)
-          "rubocop",     -- Ruby formatter/linter
+          "prettier",
+          "stylua",
+          "rubocop",
         },
-        auto_update = false,
         run_on_start = true,
       })
     end,
