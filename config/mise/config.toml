@@ -3,3 +3,6 @@ ruby = "3.3.4"
 yarn = "latest"
 rust = "latest"
 python = "latest"
+
+[settings]
+idiomatic_version_file_enable_tools = ["ruby"]
