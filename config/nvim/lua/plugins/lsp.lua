@@ -78,12 +78,20 @@ return {
         if client.supports_method("textDocument/onTypeFormatting") then
           vim.api.nvim_buf_set_option(bufnr, 'formatexpr', 'v:lua.vim.lsp.formatexpr()')
         end
+        
+        -- Enable inlay hints if supported (shows type info and parameter names inline)
+        if client.supports_method("textDocument/inlayHint") then
+          vim.lsp.inlay_hint.enable(bufnr, true)
+        end
       end
 
       -- Configure how diagnostics are displayed
-      -- Note: virtual_text, signs, underline, and update_in_insert are all defaults
-      -- Only specify if changing behavior
-      vim.diagnostic.config({})
+      vim.diagnostic.config({
+        virtual_text = true,      -- Show diagnostic messages inline next to code
+        signs = true,             -- Show diagnostic signs in gutter
+        underline = true,         -- Underline diagnostic text
+        update_in_insert = false, -- Don't update diagnostics while typing
+      })
 
       -- Custom diagnostic signs in the gutter
       local signs = { Error = "✘", Warn = "▲", Hint = "⚑", Info = "»" }
