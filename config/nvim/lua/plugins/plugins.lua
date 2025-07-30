@@ -6,6 +6,17 @@ return {
   -- Create `~/.config/nvim/secrets.lua` with `vim.g.codestats_api_key = "your-api-key"`
   { url = "https://gitlab.com/code-stats/code-stats-vim.git" },
 
+  -- Auto pairs with smart indentation
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    config = function()
+      require("nvim-autopairs").setup({
+        check_ts = true,
+      })
+    end,
+  },
+
   -- Git Gutter
   {
     "airblade/vim-gitgutter",

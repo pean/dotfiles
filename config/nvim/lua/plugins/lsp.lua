@@ -49,7 +49,7 @@ return {
       
       -- LSP On-Attach Function - sets up keybindings when LSP attaches to buffer
       local function on_attach(client, bufnr)
-        local opts = { buffer = bufnr }
+        local opts = { noremap = true, silent = true, buffer = bufnr }
         
         -- Core LSP keybindings
         vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
@@ -73,7 +73,20 @@ return {
           client.server_capabilities.documentFormattingProvider = false
           client.server_capabilities.documentRangeFormattingProvider = false
         end
+        
+        -- Auto-format on type for supported languages (TypeScript/JavaScript)
+        if client.supports_method("textDocument/onTypeFormatting") then
+          vim.api.nvim_buf_set_option(bufnr, 'formatexpr', 'v:lua.vim.lsp.formatexpr()')
+        end
       end
+
+      -- Diagnostic configuration
+      vim.diagnostic.config({
+        virtual_text = true,
+        signs = true,
+        underline = true,
+        update_in_insert = false,
+      })
 
       -- Custom diagnostic signs
       local signs = { Error = "✘", Warn = "▲", Hint = "⚑", Info = "»" }
@@ -86,6 +99,13 @@ return {
       -- TypeScript/JavaScript with enhanced React support
       lspconfig.ts_ls.setup({
         on_attach = on_attach,
+        filetypes = { 
+          "javascript", 
+          "javascriptreact", 
+          "typescript", 
+          "typescriptreact",
+          "typescript.tsx"
+        },
         settings = {
           typescript = {
             preferences = {
@@ -104,10 +124,44 @@ return {
       lspconfig.ruby_lsp.setup({
         on_attach = on_attach,
         cmd = { "/Users/peter/.dotfiles/scripts/ruby-lsp-wrapper.sh" },
+        filetypes = { "ruby" },
+        root_dir = lspconfig.util.root_pattern("Gemfile", ".git"),
+        init_options = {
+          enabledFeatures = {
+            "codeActions",
+            "diagnostics", 
+            "documentHighlights",
+            "documentLink",
+            "documentSymbols",
+            "foldingRanges",
+            "formatting",
+            "hover",
+            "inlayHint",
+            "onTypeFormatting",
+            "selectionRanges",
+            "semanticHighlighting",
+            "completion",
+            "codeLens",
+            "definition",
+            "workspaceSymbol",
+            "signatureHelp",
+            "typeHierarchy"
+          },
+          -- Completely disable custom bundle creation
+          customBundleGemfile = false,
+          useCustomBundle = false,
+          bundleGemfile = false,
+        },
         settings = {
           rubyLsp = {
+            -- Force disable custom bundle features
+            bundleGemfile = false,
+            customBundleGemfile = false,
+            useCustomBundle = false,
+            -- Always use RuboCop instead of StandardRB
             linters = { "rubocop" },
             formatter = "rubocop",
+            disabledFeatures = { "standard" },
           }
         },
       })
@@ -127,6 +181,16 @@ return {
       -- Rust with cargo + clippy
       lspconfig.rust_analyzer.setup({
         on_attach = on_attach,
+        settings = {
+          ["rust-analyzer"] = {
+            cargo = {
+              allFeatures = true,
+            },
+            checkOnSave = {
+              command = "cargo clippy",
+            },
+          },
+        },
       })
 
       -- Web languages (CSS, HTML, JSON, YAML)

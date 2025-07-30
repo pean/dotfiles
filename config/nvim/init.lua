@@ -15,6 +15,20 @@ vim.opt.tabstop = 2 -- tab width
 vim.opt.whichwrap:append("<,>,h,l,[,]")
 vim.opt.wrap = false -- do not wrap lines
 
+-- Better indentation behavior
+vim.opt.autoindent = true -- maintain indent of current line
+vim.opt.smartindent = true -- smart autoindenting when starting new line
+vim.opt.cindent = true -- C-style indenting for better brace handling
+
+-- Simple filetype indentation
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "ruby" },
+  callback = function()
+    vim.bo.cindent = true
+    vim.bo.cinkeys = "0{,0},0),0],0#,!^F,o,O,e,0=end"
+  end,
+})
+
 vim.api.nvim_set_hl(0, "ColorColumn", { link = "StatusLine" })
 
 vim.opt.termguicolors = true
