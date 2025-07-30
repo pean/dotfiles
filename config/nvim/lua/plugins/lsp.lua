@@ -26,8 +26,12 @@ return {
         ensure_installed = {
           "ts_ls",        -- TypeScript/JavaScript
           "ruby_lsp",     -- Ruby
-          "pyright",      -- Python
           "lua_ls",       -- Lua
+          "rust_analyzer", -- Rust
+          "cssls",        -- CSS
+          "html",         -- HTML
+          "jsonls",       -- JSON
+          "yamlls",       -- YAML
         },
         automatic_installation = true,
       })
@@ -123,6 +127,22 @@ return {
             cmd = { "ruby-lsp" },
             filetypes = { "ruby" },
             root_dir = lspconfig.util.root_pattern("Gemfile", ".git"),
+          })
+        end,
+        
+        ["rust_analyzer"] = function()
+          lspconfig.rust_analyzer.setup({
+            on_attach = on_attach,
+            settings = {
+              ["rust-analyzer"] = {
+                cargo = {
+                  allFeatures = true,
+                },
+                checkOnSave = {
+                  command = "cargo clippy",
+                },
+              },
+            },
           })
         end,
       })
