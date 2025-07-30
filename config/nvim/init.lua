@@ -18,8 +18,7 @@ vim.opt.whichwrap:append("<,>,h,l,[,]") -- Allow cursor to wrap around lines
 vim.opt.wrap = false -- do not wrap long lines
 
 -- Better indentation behavior
-vim.opt.autoindent = true -- maintain indent of current line when creating new line
-vim.opt.smartindent = true -- smart autoindenting when starting new line
+-- autoindent and smartindent are enabled by default in Neovim
 vim.opt.cindent = true -- C-style indenting for better brace handling
 
 -- Ruby-specific real-time indentation

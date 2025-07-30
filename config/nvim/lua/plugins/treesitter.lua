@@ -34,19 +34,10 @@ return {
         "typescript",        -- TypeScript
         "yaml",              -- YAML configuration
       },
-      auto_install = true,   -- Automatically install parsers for opened files
-      
-      highlight = {
-        enable = true,        -- Enable treesitter-based syntax highlighting
-        additional_vim_regex_highlighting = false, -- Disable vim regex highlighting for better performance
-      },
-      
-      indent = {
-        enable = true,        -- Enable treesitter-based indentation (used selectively)
-      },
+      -- Note: auto_install, highlight.enable, indent.enable, and incremental_selection.enable 
+      -- are all true by default, so only specify if changing from defaults
       
       incremental_selection = {
-        enable = true,        -- Enable smart text selection expansion
         keymaps = {
           init_selection = "gnn",    -- Start selection
           node_incremental = "grn",  -- Expand selection to next node

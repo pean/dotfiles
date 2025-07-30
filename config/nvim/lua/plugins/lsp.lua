@@ -81,12 +81,9 @@ return {
       end
 
       -- Configure how diagnostics are displayed
-      vim.diagnostic.config({
-        virtual_text = true,      -- Show diagnostic text inline
-        signs = true,             -- Show diagnostic signs in gutter
-        underline = true,         -- Underline diagnostic text
-        update_in_insert = false, -- Don't update diagnostics while typing
-      })
+      -- Note: virtual_text, signs, underline, and update_in_insert are all defaults
+      -- Only specify if changing behavior
+      vim.diagnostic.config({})
 
       -- Custom diagnostic signs in the gutter
       local signs = { Error = "✘", Warn = "▲", Hint = "⚑", Info = "»" }

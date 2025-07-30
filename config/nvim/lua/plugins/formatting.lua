@@ -38,7 +38,7 @@ return {
           
           return {
             timeout_ms = 500,   -- Max time to wait for formatting
-            lsp_fallback = true, -- Use LSP formatting if conform formatter unavailable
+            -- lsp_fallback = true is the default
           }
         end,
       })
@@ -68,8 +68,8 @@ return {
       -- Manual formatting keymap (alternative to <space>f from LSP)
       vim.keymap.set({ "n", "v" }, "<leader>mp", function()
         require("conform").format({
-          lsp_fallback = true, -- Use LSP if conform formatter not available
-          async = false,       -- Wait for formatting to complete
+          -- lsp_fallback = true, -- Default behavior
+          -- async = false,       -- Default behavior
           timeout_ms = 1000,   -- Max time to wait
         })
       end, { desc = "Format file or range (in visual mode)" })
