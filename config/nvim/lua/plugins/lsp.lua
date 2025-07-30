@@ -194,6 +194,10 @@ return {
             bundleGemfile = false,
             customBundleGemfile = false,
             useCustomBundle = false,
+            -- Always use RuboCop instead of StandardRB
+            linters = { "rubocop" },
+            formatter = "rubocop",
+            disabledFeatures = { "standard" },
           }
         },
       })

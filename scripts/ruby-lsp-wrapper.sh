@@ -11,5 +11,10 @@ mise activate fish | source
 set -x RUBY_LSP_DISABLE_BUNDLE_SETUP 1
 set -x RUBY_LSP_BUNDLE false
 
+# Force RuboCop usage over StandardRB
+set -x RUBY_LSP_LINTERS rubocop
+set -x RUBY_LSP_FORMATTER rubocop
+set -x STANDARDRB_DISABLE 1
+
 # Run ruby-lsp with the current directory's Ruby version
 exec ruby-lsp $argv
