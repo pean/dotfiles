@@ -97,114 +97,106 @@ return {
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
       end
 
-      -- Setup language servers with Mason-lspconfig
-      require("mason-lspconfig").setup_handlers({
-        -- Default handler for all servers
-        function(server_name)
-          lspconfig[server_name].setup({
-            on_attach = on_attach,
-          })
-        end,
-        
-        -- Custom configurations for specific servers
-        ["lua_ls"] = function()
-          lspconfig.lua_ls.setup({
-            on_attach = on_attach,
-            settings = {
-              Lua = {
-                runtime = { version = 'LuaJIT' },
-                diagnostics = { globals = {'vim'} },
-                workspace = { library = vim.api.nvim_get_runtime_file("", true) },
-                telemetry = { enable = false },
-              },
+      -- Setup language servers manually
+      -- TypeScript/JavaScript with enhanced React support
+      lspconfig.ts_ls.setup({
+        on_attach = on_attach,
+        filetypes = { 
+          "javascript", 
+          "javascriptreact", 
+          "typescript", 
+          "typescriptreact",
+          "typescript.tsx"
+        },
+        settings = {
+          typescript = {
+            format = {
+              enable = true,
+              indentSize = 2,
+              tabSize = 2,
+              insertSpaceAfterCommaDelimiter = true,
+              insertSpaceAfterSemicolonInForStatements = true,
+              insertSpaceBeforeAndAfterBinaryOperators = true,
+              insertSpaceAfterKeywordsInControlFlowStatements = true,
+              insertSpaceAfterFunctionKeywordForAnonymousFunctions = false,
+              insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = false,
+              insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = false,
+              insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces = false,
+              insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces = false,
+              placeOpenBraceOnNewLineForFunctions = false,
+              placeOpenBraceOnNewLineForControlBlocks = false,
             },
-          })
-        end,
-        
-        ["ruby_lsp"] = function()
-          lspconfig.ruby_lsp.setup({
-            on_attach = on_attach,
-            cmd = { "ruby-lsp" },
-            filetypes = { "ruby" },
-            root_dir = lspconfig.util.root_pattern("Gemfile", ".git"),
-          })
-        end,
-        
-        ["ts_ls"] = function()
-          lspconfig.ts_ls.setup({
-            on_attach = on_attach,
-            filetypes = { 
-              "javascript", 
-              "javascriptreact", 
-              "typescript", 
-              "typescriptreact",
-              "typescript.tsx"
+            preferences = {
+              quotePreference = "double",
+              includePackageJsonAutoImports = "auto",
             },
-            settings = {
-              typescript = {
-                format = {
-                  enable = true,
-                  indentSize = 2,
-                  tabSize = 2,
-                  insertSpaceAfterCommaDelimiter = true,
-                  insertSpaceAfterSemicolonInForStatements = true,
-                  insertSpaceBeforeAndAfterBinaryOperators = true,
-                  insertSpaceAfterKeywordsInControlFlowStatements = true,
-                  insertSpaceAfterFunctionKeywordForAnonymousFunctions = false,
-                  insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = false,
-                  insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = false,
-                  insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces = false,
-                  insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces = false,
-                  placeOpenBraceOnNewLineForFunctions = false,
-                  placeOpenBraceOnNewLineForControlBlocks = false,
-                },
-                preferences = {
-                  quotePreference = "double",
-                  includePackageJsonAutoImports = "auto",
-                },
-              },
-              javascript = {
-                format = {
-                  enable = true,
-                  indentSize = 2,
-                  tabSize = 2,
-                  insertSpaceAfterCommaDelimiter = true,
-                  insertSpaceAfterSemicolonInForStatements = true,
-                  insertSpaceBeforeAndAfterBinaryOperators = true,
-                  insertSpaceAfterKeywordsInControlFlowStatements = true,
-                  insertSpaceAfterFunctionKeywordForAnonymousFunctions = false,
-                  insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = false,
-                  insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = false,
-                  insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces = false,
-                  insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces = false,
-                  placeOpenBraceOnNewLineForFunctions = false,
-                  placeOpenBraceOnNewLineForControlBlocks = false,
-                },
-                preferences = {
-                  quotePreference = "double",
-                  includePackageJsonAutoImports = "auto",
-                },
-              },
+          },
+          javascript = {
+            format = {
+              enable = true,
+              indentSize = 2,
+              tabSize = 2,
+              insertSpaceAfterCommaDelimiter = true,
+              insertSpaceAfterSemicolonInForStatements = true,
+              insertSpaceBeforeAndAfterBinaryOperators = true,
+              insertSpaceAfterKeywordsInControlFlowStatements = true,
+              insertSpaceAfterFunctionKeywordForAnonymousFunctions = false,
+              insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = false,
+              insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = false,
+              insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces = false,
+              insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces = false,
+              placeOpenBraceOnNewLineForFunctions = false,
+              placeOpenBraceOnNewLineForControlBlocks = false,
             },
-          })
-        end,
-        
-        ["rust_analyzer"] = function()
-          lspconfig.rust_analyzer.setup({
-            on_attach = on_attach,
-            settings = {
-              ["rust-analyzer"] = {
-                cargo = {
-                  allFeatures = true,
-                },
-                checkOnSave = {
-                  command = "cargo clippy",
-                },
-              },
+            preferences = {
+              quotePreference = "double",
+              includePackageJsonAutoImports = "auto",
             },
-          })
-        end,
+          },
+        },
       })
+
+      -- Ruby
+      lspconfig.ruby_lsp.setup({
+        on_attach = on_attach,
+        cmd = { "ruby-lsp" },
+        filetypes = { "ruby" },
+        root_dir = lspconfig.util.root_pattern("Gemfile", ".git"),
+      })
+
+      -- Lua with Neovim support
+      lspconfig.lua_ls.setup({
+        on_attach = on_attach,
+        settings = {
+          Lua = {
+            runtime = { version = 'LuaJIT' },
+            diagnostics = { globals = {'vim'} },
+            workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+            telemetry = { enable = false },
+          },
+        },
+      })
+
+      -- Rust with cargo + clippy
+      lspconfig.rust_analyzer.setup({
+        on_attach = on_attach,
+        settings = {
+          ["rust-analyzer"] = {
+            cargo = {
+              allFeatures = true,
+            },
+            checkOnSave = {
+              command = "cargo clippy",
+            },
+          },
+        },
+      })
+
+      -- Web languages (CSS, HTML, JSON, YAML)
+      lspconfig.cssls.setup({ on_attach = on_attach })
+      lspconfig.html.setup({ on_attach = on_attach })
+      lspconfig.jsonls.setup({ on_attach = on_attach })
+      lspconfig.yamlls.setup({ on_attach = on_attach })
 
       -- LSP completion
       vim.opt.omnifunc = 'v:lua.vim.lsp.omnifunc'
