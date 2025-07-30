@@ -23,30 +23,7 @@ return {
           ruby = { "rubocop" },
         },
         
-        -- Prettier configuration for React/Next.js
-        formatters = {
-          prettier = {
-            args = {
-              "--stdin-filepath",
-              "$FILENAME",
-              "--tab-width", "2",
-              "--use-tabs", "false",
-              "--single-quote", "false",
-              "--jsx-single-quote", "false",
-              "--bracket-spacing", "true",
-              "--bracket-same-line", "false",
-              "--arrow-parens", "avoid",
-              "--trailing-comma", "es5",
-              "--end-of-line", "lf",
-              "--embedded-language-formatting", "auto",
-              "--jsx-bracket-same-line", "false",
-              "--print-width", "80",
-              "--prose-wrap", "preserve",
-              "--quote-props", "as-needed",
-              "--semi", "true",
-            },
-          },
-        },
+        -- Prettier will use repository's own configuration (.prettierrc, package.json, etc.)
         
         -- Format on save
         format_on_save = function(bufnr)
