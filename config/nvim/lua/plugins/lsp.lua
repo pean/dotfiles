@@ -183,8 +183,18 @@ return {
             "signatureHelp",
             "typeHierarchy"
           },
-          -- Disable custom bundle to work better with mise
-          customBundleGemfile = "",
+          -- Completely disable custom bundle creation
+          customBundleGemfile = false,
+          useCustomBundle = false,
+          bundleGemfile = false,
+        },
+        settings = {
+          rubyLsp = {
+            -- Force disable custom bundle features
+            bundleGemfile = false,
+            customBundleGemfile = false,
+            useCustomBundle = false,
+          }
         },
       })
 
