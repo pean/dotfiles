@@ -156,12 +156,36 @@ return {
         },
       })
 
-      -- Ruby
+      -- Ruby with mise compatibility
       lspconfig.ruby_lsp.setup({
         on_attach = on_attach,
-        cmd = { "ruby-lsp" },
+        cmd = { "/Users/peter/.dotfiles/scripts/ruby-lsp-wrapper.sh" },
         filetypes = { "ruby" },
         root_dir = lspconfig.util.root_pattern("Gemfile", ".git"),
+        init_options = {
+          enabledFeatures = {
+            "codeActions",
+            "diagnostics", 
+            "documentHighlights",
+            "documentLink",
+            "documentSymbols",
+            "foldingRanges",
+            "formatting",
+            "hover",
+            "inlayHint",
+            "onTypeFormatting",
+            "selectionRanges",
+            "semanticHighlighting",
+            "completion",
+            "codeLens",
+            "definition",
+            "workspaceSymbol",
+            "signatureHelp",
+            "typeHierarchy"
+          },
+          -- Disable custom bundle to work better with mise
+          customBundleGemfile = "",
+        },
       })
 
       -- Lua with Neovim support
