@@ -3,51 +3,55 @@ return {
   config = function()
     local treesitter = require("nvim-treesitter.configs")
     treesitter.setup({
+      -- Language parsers to install automatically
       ensure_installed = {
-        "bash",
-        "css",
-        "csv",
-        "diff",
-        "dockerfile",
-        "fish",
-        "git_config",
-        "git_rebase",
-        "gitcommit",
-        "gitignore",
-        "html",
-        "javascript",
-        "json",
-        "lua",
-        "make",
-        "markdown",
-        "markdown_inline",
-        "python",
-        "regex",
-        "ruby",
-        "rust",
-        "sql",
-        "ssh_config",
-        "tmux",
-        "toml",
-        "tsx",
-        "typescript",
-        "yaml",
+        "bash",              -- Shell scripts
+        "css",               -- CSS styling
+        "csv",               -- CSV data files
+        "diff",              -- Git diffs
+        "dockerfile",        -- Docker files
+        "fish",              -- Fish shell scripts
+        "git_config",        -- Git configuration
+        "git_rebase",        -- Git rebase files
+        "gitcommit",         -- Git commit messages
+        "gitignore",         -- .gitignore files
+        "html",              -- HTML markup
+        "javascript",        -- JavaScript
+        "json",              -- JSON data
+        "lua",               -- Lua (Neovim config)
+        "make",              -- Makefiles
+        "markdown",          -- Markdown documentation
+        "markdown_inline",   -- Inline markdown
+        "python",            -- Python scripts
+        "regex",             -- Regular expressions
+        "ruby",              -- Ruby language
+        "rust",              -- Rust language
+        "sql",               -- SQL queries
+        "ssh_config",        -- SSH configuration
+        "tmux",              -- Tmux configuration
+        "toml",              -- TOML config files
+        "tsx",               -- TypeScript React (TSX)
+        "typescript",        -- TypeScript
+        "yaml",              -- YAML configuration
       },
-      auto_install = true,
+      auto_install = true,   -- Automatically install parsers for opened files
+      
       highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = false, -- Disable for better performance
+        enable = true,        -- Enable treesitter-based syntax highlighting
+        additional_vim_regex_highlighting = false, -- Disable vim regex highlighting for better performance
       },
+      
       indent = {
-        enable = true,
+        enable = true,        -- Enable treesitter-based indentation (used selectively)
       },
+      
       incremental_selection = {
-        enable = true,
+        enable = true,        -- Enable smart text selection expansion
         keymaps = {
-          init_selection = "gnn", -- set to `false` to disable one of the mappings
-          node_incremental = "grn",
-          scope_incremental = "grc",
-          node_decremental = "grm",
+          init_selection = "gnn",    -- Start selection
+          node_incremental = "grn",  -- Expand selection to next node
+          scope_incremental = "grc", -- Expand selection to next scope
+          node_decremental = "grm",  -- Shrink selection
         },
       },
     })

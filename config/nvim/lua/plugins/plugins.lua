@@ -1,18 +1,18 @@
 return {
-  -- Copilot
+  -- GitHub Copilot AI code completion
   { "github/copilot.vim" },
 
-  -- Code stats
+  -- Code statistics tracking (optional - requires API key)
   -- Create `~/.config/nvim/secrets.lua` with `vim.g.codestats_api_key = "your-api-key"`
   { url = "https://gitlab.com/code-stats/code-stats-vim.git" },
 
-  -- Auto pairs with smart indentation
+  -- Auto pairs with smart indentation - automatically close brackets, quotes, etc.
   {
     "windwp/nvim-autopairs",
-    event = "InsertEnter",
+    event = "InsertEnter", -- Load only when entering insert mode
     config = function()
       require("nvim-autopairs").setup({
-        check_ts = true,
+        check_ts = true, -- Use treesitter for better pair detection context
       })
     end,
   },
