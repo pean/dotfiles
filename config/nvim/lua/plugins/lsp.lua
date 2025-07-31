@@ -206,9 +206,6 @@ return {
       lspconfig.html.setup({ on_attach = on_attach })    -- HTML language server
       lspconfig.jsonls.setup({ on_attach = on_attach })  -- JSON language server
       lspconfig.yamlls.setup({ on_attach = on_attach })  -- YAML language server
-
-      -- LSP completion configuration
-      vim.keymap.set('i', '<C-Space>', '<C-x><C-o>', { noremap = true }) -- Trigger completion with Ctrl+Space
     end,
   },
 }
