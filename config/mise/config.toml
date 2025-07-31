@@ -1,5 +1,5 @@
 [tools]
-ruby = "3.3.4"
+ruby = "3.3.6"
 yarn = "latest"
 rust = "latest"
 python = "latest"

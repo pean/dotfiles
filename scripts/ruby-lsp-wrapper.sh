@@ -1,21 +1,18 @@
-#!/usr/bin/env fish
-# Ruby LSP wrapper for mise compatibility with fish shell
-# This script ensures Ruby LSP uses the correct Ruby version managed by mise
+#!/opt/homebrew/bin/fish
+# Ruby LSP wrapper with compatibility handling
 
-# Ensure mise is in the PATH (sometimes needed in non-interactive shells)
+# Ensure mise is available
 set -x PATH $HOME/.local/bin $PATH
 
-# Let mise handle Ruby version selection based on project's .ruby-version or .mise.toml
+# Use the project's Ruby version
 mise activate fish | source
 
-# Disable Ruby LSP custom bundle creation (prevents conflicts with mise-managed gems)
-set -x RUBY_LSP_DISABLE_BUNDLE_SETUP 1
-set -x RUBY_LSP_BUNDLE false
+# Configure Ruby LSP to skip problematic gems that require newer Ruby versions
+set -x RUBY_LSP_EXPERIMENTAL_FEATURES "false"
 
-# Force RuboCop usage over StandardRB for consistent linting/formatting
-set -x RUBY_LSP_LINTERS rubocop
-set -x RUBY_LSP_FORMATTER rubocop
-set -x STANDARDRB_DISABLE 1
+# Debug output
+echo "LSP using Ruby: "(which ruby) >&2
+echo "LSP Ruby version: "(ruby -v) >&2
 
-# Run ruby-lsp with the current directory's Ruby version and pass all arguments
+# Run ruby-lsp and let it handle bundle conflicts gracefully
 exec ruby-lsp $argv

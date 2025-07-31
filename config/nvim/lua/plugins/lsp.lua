@@ -32,6 +32,7 @@ return {
           "html",         -- HTML
           "jsonls",       -- JSON
           "yamlls",       -- YAML
+          -- Removed rubocop to avoid conflicts with Ruby LSP
         },
       })
     end,
@@ -82,24 +83,24 @@ return {
         
         -- Enable inlay hints if supported (shows type info and parameter names inline)
         if client.supports_method("textDocument/inlayHint") then
-          vim.lsp.inlay_hint.enable(bufnr, true)
+          vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
         end
       end
 
       -- Configure how diagnostics are displayed
       vim.diagnostic.config({
         virtual_text = true,      -- Show diagnostic messages inline next to code
-        signs = true,             -- Show diagnostic signs in gutter
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = "✘",
+            [vim.diagnostic.severity.WARN] = "▲", 
+            [vim.diagnostic.severity.HINT] = "⚑",
+            [vim.diagnostic.severity.INFO] = "»",
+          }
+        },
         underline = true,         -- Underline diagnostic text
         update_in_insert = false, -- Don't update diagnostics while typing
       })
-
-      -- Custom diagnostic signs in the gutter
-      local signs = { Error = "✘", Warn = "▲", Hint = "⚑", Info = "»" }
-      for type, icon in pairs(signs) do
-        local hl = "DiagnosticSign" .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-      end
 
       -- Setup language servers manually with specific configurations
       
@@ -127,49 +128,33 @@ return {
         },
       })
 
-      -- Ruby with mise compatibility and explicit feature control
+      -- Ruby LSP with compatibility handling for version constraints
       lspconfig.ruby_lsp.setup({
         on_attach = on_attach,
-        cmd = { "/Users/peter/.dotfiles/scripts/ruby-lsp-wrapper.sh" }, -- Custom wrapper for mise
+        cmd = { "/Users/peter/.dotfiles/scripts/ruby-lsp-wrapper.sh" },
         filetypes = { "ruby" },
-        root_dir = lspconfig.util.root_pattern("Gemfile", ".git"), -- Project detection
+        root_dir = lspconfig.util.root_pattern("Gemfile", ".git"),
         init_options = {
-          -- Explicitly enable all Ruby LSP features
+          -- Core features that work without problematic dependencies
           enabledFeatures = {
-            "codeActions",         -- Quick fixes and refactoring
-            "diagnostics",         -- Error/warning detection
-            "documentHighlights",  -- Highlight symbol occurrences
-            "documentLink",        -- Clickable links in comments
-            "documentSymbols",     -- Outline/symbol navigation
-            "foldingRanges",       -- Code folding
-            "formatting",          -- Code formatting
-            "hover",               -- Show documentation on hover
-            "inlayHint",           -- Show type hints inline
-            "onTypeFormatting",    -- Format as you type
-            "selectionRanges",     -- Smart text selection
-            "semanticHighlighting",-- Better syntax highlighting
-            "completion",          -- Auto-completion
-            "codeLens",           -- Run/debug buttons for tests
-            "definition",         -- Go-to-definition
-            "workspaceSymbol",    -- Project-wide symbol search
-            "signatureHelp",      -- Method parameter hints
-            "typeHierarchy"       -- Class inheritance navigation
+            "codeActions",
+            "diagnostics",
+            "documentHighlights", 
+            "documentSymbols",
+            "foldingRanges",
+            "formatting",
+            "hover",
+            "completion",
+            "definition",
+            "signatureHelp"
           },
-          -- Disable Ruby LSP's custom bundle creation (causes issues with mise)
-          customBundleGemfile = false,
-          useCustomBundle = false,
-          bundleGemfile = false,
+          -- Disable experimental features that may require newer gems
+          experimentalFeaturesEnabled = false,
         },
         settings = {
           rubyLsp = {
-            -- Force disable custom bundle features (redundant but explicit)
-            bundleGemfile = false,
-            customBundleGemfile = false,
-            useCustomBundle = false,
-            -- Always use RuboCop instead of StandardRB for linting/formatting
-            linters = { "rubocop" },
+            -- Use basic formatting to avoid dependency conflicts
             formatter = "rubocop",
-            disabledFeatures = { "standard" }, -- Disable StandardRB integration
           }
         },
       })
