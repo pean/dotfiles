@@ -112,30 +112,6 @@ return {
     dependencies = { "tpope/vim-fugitive" },
   },
 
-  -- gutentags
-  {
-    "ludovicchabant/vim-gutentags",
-    -- dependencies = { "skywind3000/gutentags_plus" },
-    init = function()
-      -- Disable Gutentags for specific filetypes
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = { "diff", "gitcommit", "gitrebase" },
-        callback = function()
-          vim.g.gutentags_enabled = 0
-        end,
-      })
-
-      -- vim.g.gutentags_modules = { "ctags", "gtags_cscope" }
-      vim.g.gutentags_modules = { "ctags" }
-
-      -- Set Gutentags cache directory
-      vim.g.gutentags_cache_dir = vim.fn.expand("~/.cache/tags")
-
-      -- Define the ctags executable (avoiding Xcode ctags)
-      vim.g.gutentags_ctags_executable = "/opt/homebrew/bin/ctags"
-    end,
-  },
-
   -- color preview
   {
     "brenoprata10/nvim-highlight-colors",
