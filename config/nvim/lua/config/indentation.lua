@@ -1,4 +1,5 @@
 -- Filetype-specific indentation settings
+-- Note: Treesitter handles smart indentation, these are just basic settings
 
 -- Ruby and Rails specific indentation
 vim.api.nvim_create_autocmd("FileType", {
@@ -8,25 +9,21 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.tabstop = 2
     vim.opt_local.softtabstop = 2
     vim.opt_local.expandtab = true
-    vim.opt_local.autoindent = true
-    vim.opt_local.smartindent = true
   end,
 })
 
--- JavaScript/TypeScript indentation
+-- JavaScript/TypeScript/React indentation
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+  pattern = { "javascript", "javascriptreact", "typescript", "typescriptreact", "tsx" },
   callback = function()
     vim.opt_local.shiftwidth = 2
     vim.opt_local.tabstop = 2
     vim.opt_local.softtabstop = 2
     vim.opt_local.expandtab = true
-    vim.opt_local.autoindent = true
-    vim.opt_local.smartindent = true
   end,
 })
 
--- HTML/CSS indentation
+-- Web languages indentation
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "html", "css", "scss", "sass" },
   callback = function()
@@ -34,12 +31,10 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.tabstop = 2
     vim.opt_local.softtabstop = 2
     vim.opt_local.expandtab = true
-    vim.opt_local.autoindent = true
-    vim.opt_local.smartindent = true
   end,
 })
 
--- YAML indentation (important for proper YAML formatting)
+-- YAML indentation
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "yaml", "yml" },
   callback = function()
@@ -47,8 +42,6 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.tabstop = 2
     vim.opt_local.softtabstop = 2
     vim.opt_local.expandtab = true
-    vim.opt_local.autoindent = true
-    vim.opt_local.smartindent = false -- YAML doesn't work well with smartindent
   end,
 })
 
@@ -60,7 +53,16 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.tabstop = 2
     vim.opt_local.softtabstop = 2
     vim.opt_local.expandtab = true
-    vim.opt_local.autoindent = true
-    vim.opt_local.smartindent = true
+  end,
+})
+
+-- Lua indentation
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "lua" },
+  callback = function()
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.tabstop = 2
+    vim.opt_local.softtabstop = 2
+    vim.opt_local.expandtab = true
   end,
 })
