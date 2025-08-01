@@ -90,16 +90,22 @@ return {
         virtual_text = true,
         signs = {
           text = {
-            [vim.diagnostic.severity.ERROR] = "󰅚 ",
-            [vim.diagnostic.severity.WARN] = "󰀪 ",
-            [vim.diagnostic.severity.HINT] = "󰌶 ",
-            [vim.diagnostic.severity.INFO] = " "
+            [vim.diagnostic.severity.ERROR] = "󰅚",
+            [vim.diagnostic.severity.WARN] = "󰀪",
+            [vim.diagnostic.severity.HINT] = "󰌶",
+            [vim.diagnostic.severity.INFO] = ""
           }
         },
         underline = true,
         update_in_insert = false,
         severity_sort = true,
       })
+
+      -- Define diagnostic sign highlights
+      vim.api.nvim_set_hl(0, 'DiagnosticSignError', { fg = '#f38ba8' })
+      vim.api.nvim_set_hl(0, 'DiagnosticSignWarn', { fg = '#fab387' })
+      vim.api.nvim_set_hl(0, 'DiagnosticSignHint', { fg = '#89dceb' })
+      vim.api.nvim_set_hl(0, 'DiagnosticSignInfo', { fg = '#89b4fa' })
     end
   },
 
