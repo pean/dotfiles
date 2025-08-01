@@ -67,12 +67,54 @@ return {
         lspconfig[server].setup(config)
       end
 
+      -- Custom go-to-definition that avoids quickfix for single/duplicate results
+      local function goto_definition()
+        local params = vim.lsp.util.make_position_params()
+        vim.lsp.buf_request(0, 'textDocument/definition', params, function(err, result, ctx, config)
+          if err then
+            vim.notify('Error getting definition: ' .. err.message, vim.log.levels.ERROR)
+            return
+          end
+          
+          if not result or vim.tbl_isempty(result) then
+            vim.notify('No definition found', vim.log.levels.INFO)
+            return
+          end
+          
+          -- If single result or multiple identical results, go directly
+          if #result == 1 then
+            vim.lsp.util.jump_to_location(result[1], 'utf-8')
+          else
+            -- Check if all results point to the same location (duplicates)
+            local first = result[1]
+            local all_same = true
+            for i = 2, #result do
+              if result[i].uri ~= first.uri or 
+                 result[i].range.start.line ~= first.range.start.line or
+                 result[i].range.start.character ~= first.range.start.character then
+                all_same = false
+                break
+              end
+            end
+            
+            if all_same then
+              -- All results are the same, just go to the first one
+              vim.lsp.util.jump_to_location(first, 'utf-8')
+            else
+              -- Multiple different locations, use quickfix
+              vim.lsp.util.set_qflist(vim.lsp.util.locations_to_items(result, 'utf-8'))
+              vim.cmd('copen')
+            end
+          end
+        end)
+      end
+
       -- LSP keymaps
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('UserLspConfig', {}),
         callback = function(ev)
           local opts = { buffer = ev.buf }
-          vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+          vim.keymap.set('n', 'gd', goto_definition, opts)
           vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
           vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
           vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
