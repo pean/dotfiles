@@ -33,7 +33,6 @@ vim.cmd("filetype plugin indent on")
 
 require("config.code-stats")
 require("config.cursorline")
-require("config.indentation")
 
 require("config.lazy")
 
