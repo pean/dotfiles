@@ -69,7 +69,15 @@ return {
 
       -- Custom go-to-definition that avoids quickfix for single/duplicate results
       local function goto_definition()
-        local params = vim.lsp.util.make_position_params()
+        local clients = vim.lsp.get_clients({ bufnr = 0 })
+        if #clients == 0 then
+          vim.notify('No LSP clients attached', vim.log.levels.WARN)
+          return
+        end
+        
+        local client = clients[1]
+        local params = vim.lsp.util.make_position_params(0, client.offset_encoding)
+        
         vim.lsp.buf_request(0, 'textDocument/definition', params, function(err, result, ctx, config)
           if err then
             vim.notify('Error getting definition: ' .. err.message, vim.log.levels.ERROR)
@@ -83,7 +91,7 @@ return {
           
           -- If single result or multiple identical results, go directly
           if #result == 1 then
-            vim.lsp.util.jump_to_location(result[1], 'utf-8')
+            vim.lsp.util.jump_to_location(result[1], client.offset_encoding)
           else
             -- Check if all results point to the same location (duplicates)
             local first = result[1]
@@ -99,10 +107,10 @@ return {
             
             if all_same then
               -- All results are the same, just go to the first one
-              vim.lsp.util.jump_to_location(first, 'utf-8')
+              vim.lsp.util.jump_to_location(first, client.offset_encoding)
             else
               -- Multiple different locations, use quickfix
-              vim.lsp.util.set_qflist(vim.lsp.util.locations_to_items(result, 'utf-8'))
+              vim.lsp.util.set_qflist(vim.lsp.util.locations_to_items(result, client.offset_encoding))
               vim.cmd('copen')
             end
           end
