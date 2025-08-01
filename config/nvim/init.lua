@@ -7,15 +7,14 @@ vim.keymap.set("n", "<leader>bd", ":%bd!<CR>")
 vim.opt.clipboard = "unnamed" -- interact with system clipboard
 vim.opt.colorcolumn = { 80, 100, 120 }
 
--- Indentation settings
+-- Indentation settings (Treesitter handles smart indentation)
 vim.opt.expandtab = true -- use spaces instead of tabs
 vim.opt.tabstop = 2 -- tab width
 vim.opt.softtabstop = 2 -- number of spaces tab counts for while editing
 vim.opt.shiftwidth = 2 -- indentation level
 vim.opt.autoindent = true -- copy indent from current line when starting new line
-vim.opt.smartindent = true -- do smart autoindenting when starting new line
-vim.opt.cindent = true -- enables automatic C program indenting
 vim.opt.shiftround = true -- round indent to multiple of shiftwidth
+-- Note: smartindent and cindent disabled to avoid conflicts with Treesitter
 
 vim.opt.list = true -- show whitespace and some special characters
 vim.opt.listchars = { tab = ">-", trail = "-", extends = ">" }
