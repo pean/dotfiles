@@ -40,9 +40,21 @@ return {
         ruby_lsp = {
           cmd = { vim.fn.expand("~/.dotfiles/scripts/ruby-lsp-wrapper.sh") },
           filetypes = { "ruby" },
+          root_dir = function(fname)
+            return require('lspconfig').util.root_pattern("Gemfile", ".git", ".ruby-version", ".mise.toml")(fname)
+          end,
           settings = {
             rubyLsp = {
-              formatter = "rubocop"
+              formatter = "rubocop",
+              enabledFeatures = {
+                "documentHighlights",
+                "documentSymbols", 
+                "foldingRanges",
+                "selectionRanges",
+                "semanticHighlighting",
+                "formatting",
+                "codeActions"
+              }
             }
           }
         },
@@ -162,21 +174,90 @@ return {
     config = function()
       local null_ls = require("null-ls")
       
+      -- Helper function to determine rubocop command based on project
+      local function get_rubocop_command(utils)
+        -- Check for bundle exec first (Rails/Bundler projects)
+        if utils.root_has_file("Gemfile") then
+          return "bundle"
+        end
+        -- Check if mise is available and has rubocop
+        if vim.fn.executable("mise") == 1 then
+          return "mise"
+        end
+        -- Fallback to system rubocop
+        return "rubocop"
+      end
+
+      local function get_rubocop_args(utils, base_args)
+        local cmd = get_rubocop_command(utils)
+        if cmd == "bundle" then
+          return vim.list_extend({ "exec", "rubocop" }, base_args or {})
+        elseif cmd == "mise" then
+          return vim.list_extend({ "exec", "--", "rubocop" }, base_args or {})
+        else
+          return base_args or {}
+        end
+      end
+      
       null_ls.setup({
         sources = {
-          -- Ruby
+          -- Ruby diagnostics with version-aware rubocop
           null_ls.builtins.diagnostics.rubocop.with({
-            command = "bundle",
-            args = vim.list_extend({ "exec", "rubocop" }, null_ls.builtins.diagnostics.rubocop._opts.args or {}),
+            command = function(params)
+              local utils = require("null-ls.utils")
+              return get_rubocop_command(utils)
+            end,
+            args = function(params)
+              local utils = require("null-ls.utils")
+              return get_rubocop_args(utils, null_ls.builtins.diagnostics.rubocop._opts.args)
+            end,
             condition = function(utils)
-              return utils.root_has_file("Gemfile")
+              -- Only run if we have a Ruby project with rubocop available
+              local has_ruby_files = utils.root_has_file("*.rb") or 
+                                   utils.root_has_file("Gemfile") or 
+                                   utils.root_has_file(".ruby-version") or
+                                   utils.root_has_file(".mise.toml")
+              
+              if not has_ruby_files then return false end
+              
+              local cmd = get_rubocop_command(utils)
+              if cmd == "bundle" then
+                return utils.root_has_file("Gemfile")
+              elseif cmd == "mise" then
+                return vim.fn.executable("mise") == 1
+              else
+                return vim.fn.executable("rubocop") == 1
+              end
             end,
           }),
+          
+          -- Ruby formatting with version-aware rubocop
           null_ls.builtins.formatting.rubocop.with({
-            command = "bundle",
-            args = vim.list_extend({ "exec", "rubocop" }, null_ls.builtins.formatting.rubocop._opts.args or {}),
+            command = function(params)
+              local utils = require("null-ls.utils")
+              return get_rubocop_command(utils)
+            end,
+            args = function(params)
+              local utils = require("null-ls.utils")
+              return get_rubocop_args(utils, null_ls.builtins.formatting.rubocop._opts.args)
+            end,
             condition = function(utils)
-              return utils.root_has_file("Gemfile")
+              -- Same condition logic as diagnostics
+              local has_ruby_files = utils.root_has_file("*.rb") or 
+                                   utils.root_has_file("Gemfile") or 
+                                   utils.root_has_file(".ruby-version") or
+                                   utils.root_has_file(".mise.toml")
+              
+              if not has_ruby_files then return false end
+              
+              local cmd = get_rubocop_command(utils)
+              if cmd == "bundle" then
+                return utils.root_has_file("Gemfile")
+              elseif cmd == "mise" then
+                return vim.fn.executable("mise") == 1
+              else
+                return vim.fn.executable("rubocop") == 1
+              end
             end,
           }),
         },
