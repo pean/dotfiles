@@ -104,7 +104,7 @@ return {
           
           -- If single result or multiple identical results, go directly
           if #result == 1 then
-            vim.lsp.util.jump_to_location(result[1], supporting_client.offset_encoding)
+            vim.lsp.util.show_document(result[1], supporting_client.offset_encoding, { focus = true })
           else
             -- Check if all results point to the same location (duplicates)
             local first = result[1]
@@ -120,7 +120,7 @@ return {
             
             if all_same then
               -- All results are the same, just go to the first one
-              vim.lsp.util.jump_to_location(first, supporting_client.offset_encoding)
+              vim.lsp.util.show_document(first, supporting_client.offset_encoding, { focus = true })
             else
               -- Multiple different locations, use quickfix
               vim.lsp.util.set_qflist(vim.lsp.util.locations_to_items(result, supporting_client.offset_encoding))
