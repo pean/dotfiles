@@ -25,7 +25,7 @@ return {
   -- Obisidan
   {
     "epwalsh/obsidian.nvim",
-    depedencies = { "nvim-lua/plenary.nvim", lazy = true },
+    dependencies = { "nvim-lua/plenary.nvim", lazy = true },
     opts = {
       workspaces = {
         {
