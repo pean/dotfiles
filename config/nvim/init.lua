@@ -29,12 +29,9 @@ vim.opt.termguicolors = true
 -- Enable filetype detection and plugins for proper indentation
 vim.cmd("filetype plugin indent on")
 
--- vim.opt.cmdheight = 0
-
 require("config.code-stats")
 require("config.cursorline")
 
 require("config.lazy")
 
--- vim.cmd.colorscheme(dracula_pro")
 vim.cmd.colorscheme("catppuccin")
