@@ -1,51 +1,53 @@
 set nocompatible
 
-filetype on
+" Enable filetype detection and plugins for proper indentation
 filetype plugin indent on
-filetype plugin on
 
 syntax on
-syntax enable
 
-set shiftwidth=2
-set tabstop=2
-set softtabstop=2
-set expandtab 
-set smarttab
-set shiftround
-set autoindent 
-set backspace=indent,eol,start
+" Leader key
+let mapleader = ","
 
-set showmode
-set number
-set cursorline
+" Key mappings
+nnoremap <leader>n :noh<CR>
+nnoremap <leader>cn :cnext<CR>
+nnoremap <leader>bd :%bd!<CR>
 
+" Clipboard integration
 set clipboard=unnamed
 
-" Make search more sane
-set ignorecase " case insensitive search
-set smartcase " If there are uppercase letters, become case-sensitive.
-set incsearch " live incremental searching
-set showmatch " live match highlighting
-set hlsearch " highlight matches
-set gdefault " use the `g` flag by default.
+" Color columns
+set colorcolumn=80,100,120
 
-let mapleader = ","
-set hidden
+" Indentation settings
+set expandtab
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set autoindent
+set shiftround
+
+" Display whitespace and special characters
+set list
+set listchars=tab:>-,trail:-,extends:>
+set number
+set whichwrap+=<,>,h,l,[,]
 set nowrap
+
+" Search settings
+set ignorecase
+set smartcase
+set incsearch
+set showmatch
+set hlsearch
+
+" General settings
+set hidden
 set nobackup
 set noswapfile
-
-set whichwrap+=<,>,h,l,[,]
-set backspace=indent,eol,start
-
-set list
-set listchars=tab:>.,trail:.,extends:#,nbsp:.
-
-set colorcolumn=100
-
 set splitbelow
 set splitright
+set showmode
 
 if has("gui_running")
     :source ~/.gvimrc
