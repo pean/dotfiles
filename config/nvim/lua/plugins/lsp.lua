@@ -17,6 +17,8 @@ return {
         "html",            -- HTML
         "jsonls",          -- JSON
         "yamlls",          -- YAML
+        "lua_ls",          -- Lua
+        "rust_analyzer",   -- Rust
       }
     }
   },
@@ -53,6 +55,36 @@ return {
                 "formatting",
                 "codeActions"
               }
+            }
+          }
+        },
+        lua_ls = {
+          settings = {
+            Lua = {
+              runtime = { version = 'LuaJIT' },
+              diagnostics = {
+                globals = { 'vim' },
+              },
+              workspace = {
+                library = vim.api.nvim_get_runtime_file("", true),
+                checkThirdParty = false,
+              },
+              telemetry = { enable = false },
+            },
+          },
+        },
+        rust_analyzer = {
+          settings = {
+            ["rust-analyzer"] = {
+              cargo = { 
+                allFeatures = true,
+                loadOutDirsFromCheck = true,
+              },
+              procMacro = { enable = true },
+              checkOnSave = { 
+                command = "clippy",
+                allTargets = false,
+              },
             }
           }
         },
