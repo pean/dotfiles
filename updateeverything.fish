@@ -2,6 +2,8 @@
 
 # upgrade nvim plugins
 nvim --headless "+Lazy! sync " +qa
+nvim --headless "+MasonUpdate" +qa
+nvim --headless "+TSUpdate" +qa
 
 brew update # update brew
 brew upgrade # update packages
