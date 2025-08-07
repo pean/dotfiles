@@ -48,9 +48,3 @@ set noswapfile
 set splitbelow
 set splitright
 set showmode
-
-if has("gui_running")
-    :source ~/.gvimrc
-endif
-
-
