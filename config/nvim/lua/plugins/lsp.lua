@@ -168,6 +168,7 @@ return {
         callback = function(ev)
           local opts = { buffer = ev.buf }
           vim.keymap.set('n', 'gd', goto_definition, opts)
+          vim.keymap.set('n', '<C-]>', vim.lsp.buf.definition)
           vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
           vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
           vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
