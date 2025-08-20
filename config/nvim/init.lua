@@ -5,7 +5,9 @@ vim.keymap.set("n", "<leader>cn", ":cnext<CR>")
 vim.keymap.set("n", "<leader>bd", ":%bd!<CR>")
 
 vim.opt.clipboard = "unnamed" -- interact with system clipboard
-vim.opt.colorcolumn = { 80, 100, 120 }
+
+-- https://blog.glyph.im/2025/08/the-best-line-length.html
+vim.opt.colorcolumn = { 88 }
 
 -- Indentation settings (Treesitter handles smart indentation)
 vim.opt.expandtab = true -- use spaces instead of tabs
