@@ -6,9 +6,9 @@ decorations = "None"
 
 [font]
 size = 12.5
-normal = { family = "Monaspace Krypton Var", style = "Regular" }
-bold = { family = "Monaspace Krypton Var", style = "Bold" }
-italic = { family = "Monaspace Krypton Var", style = "Italic" }
-bold_italic = { family = "Monaspace Krypton Var", style = "Bold Italic" }
+normal = { family = "Monaspace Krypton", style = "Regular" }
+bold = { family = "Monaspace Krypton", style = "Bold" }
+italic = { family = "Monaspace Krypton", style = "Italic" }
+bold_italic = { family = "Monaspace Krypton", style = "Bold Italic" }
 offset = { x = 0, y = 8 }
 
