@@ -143,6 +143,7 @@ return {
             local all_same = true
             for i = 2, #result do
               if result[i].uri ~= first.uri or 
+                 not result[i].range or not first.range or
                  result[i].range.start.line ~= first.range.start.line or
                  result[i].range.start.character ~= first.range.start.character then
                 all_same = false
@@ -170,7 +171,9 @@ return {
           vim.keymap.set('n', 'gd', goto_definition, opts)
           vim.keymap.set('n', '<C-]>', vim.lsp.buf.definition)
           vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-          vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+          vim.keymap.set('n', 'gr', function()
+            require('telescope.builtin').lsp_references()
+          end, opts)
           vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
           vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
           vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
