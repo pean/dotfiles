@@ -7,7 +7,17 @@ vim.keymap.set("n", "<leader>bd", ":%bd!<CR>")
 vim.opt.clipboard = "unnamed" -- interact with system clipboard
 
 -- https://blog.glyph.im/2025/08/the-best-line-length.html
+-- Visual guide at 88 columns but no automatic wrapping
 vim.opt.colorcolumn = { 88 }
+
+-- Disable automatic text wrapping, let LSP handle formatting
+vim.opt.textwidth = 0 -- Disable textwidth-based wrapping
+vim.opt.formatoptions = "jqrol" -- Keep comment continuation and long line behavior
+-- j: remove comment leader when joining lines
+-- q: allow formatting with gq
+-- r: continue comments when pressing Enter
+-- o: continue comments with o and O
+-- l: don't break lines that are already long
 
 -- Indentation settings (Treesitter handles smart indentation)
 vim.opt.expandtab = true  -- use spaces instead of tabs
