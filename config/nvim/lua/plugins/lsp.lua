@@ -30,8 +30,6 @@ return {
       "williamboman/mason-lspconfig.nvim"
     },
     config = function()
-      local lspconfig = require('lspconfig')
-
       -- LSP servers configuration
       local servers = {
         ts_ls = {
@@ -41,7 +39,7 @@ return {
           cmd = { vim.fn.expand("~/.dotfiles/scripts/ruby-lsp-wrapper.sh") },
           filetypes = { "ruby" },
           root_dir = function(fname)
-            return require('lspconfig').util.root_pattern("Gemfile", ".git", ".ruby-version", ".mise.toml")(fname)
+            return vim.fs.root(fname, { "Gemfile", ".git", ".ruby-version", ".mise.toml" })
           end,
           settings = {
             rubyLsp = {
@@ -94,9 +92,9 @@ return {
         yamlls = {}
       }
 
-      -- Setup each server
+      -- Setup each server using vim.lsp.config
       for server, config in pairs(servers) do
-        lspconfig[server].setup(config)
+        vim.lsp.config(server, config)
       end
 
       -- Custom go-to-definition that avoids quickfix for single/duplicate results
