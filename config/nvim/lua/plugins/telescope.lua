@@ -1,7 +1,6 @@
 return {
   -- plenary required for telescope
-  {"nvim-lua/plenary.nvim"},
-
+  { "nvim-lua/plenary.nvim" },
 
   -- fzf extension for find files (and others)
   {
@@ -21,13 +20,13 @@ return {
           height = 0.95,
         },
         vimgrep_arguments = {
-          'rg',
-          '--no-heading',
-          '--with-filename',
-          '--line-number',
-          '--column',
-          '--smart-case',
-          '--hidden',
+          "rg",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+          "--smart-case",
+          "--hidden",
         },
       },
       pickers = {
@@ -36,7 +35,7 @@ return {
           sort_lastused = true,
           mappings = {
             n = {
-              ["d"] = "delete_buffer"
+              ["d"] = "delete_buffer",
             },
           },
         },
@@ -44,7 +43,7 @@ return {
           word_match = "-w",
           disable_devicons = true,
         },
-        live_grep =  {
+        live_grep = {
           disable_devicons = true,
         },
         git_status = {
@@ -66,8 +65,10 @@ return {
       vim.keymap.set("n", "<leader>fw", builtin.grep_string)
       vim.keymap.set("n", "<leader>fb", builtin.buffers)
       vim.keymap.set("n", "<leader>fh", builtin.help_tags)
-      vim.keymap.set("n", "<leader>fd", builtin.git_status)
+      vim.keymap.set("n", "<leader>fs", builtin.git_status)
+      vim.keymap.set("n", "<leader>fr", builtin.lsp_references)
+      vim.keymap.set("n", "<leader>fd", builtin.lsp_definitions)
       -- vim.keymap.set("n", "<leader>ft", builtin.tag)
     end,
-  }
+  },
 }
