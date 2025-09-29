@@ -102,3 +102,4 @@ SSH signing with 1Password integration is configured by default.
 - Fish shell is the primary shell with custom functions and completions
 - Neovim uses Lazy.nvim for modern plugin management
 - Ruby LSP requires special wrapper script for mise compatibility
+- only need to run rcm commands when adding or removing files but not on updates
