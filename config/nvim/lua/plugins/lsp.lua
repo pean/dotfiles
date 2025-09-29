@@ -11,14 +11,14 @@ return {
     dependencies = { "williamboman/mason.nvim" },
     opts = {
       ensure_installed = {
-        "ts_ls",           -- TypeScript/JavaScript
-        "ruby_lsp",        -- Ruby
-        "cssls",           -- CSS
-        "html",            -- HTML
-        "jsonls",          -- JSON
-        "yamlls",          -- YAML
-        "lua_ls",          -- Lua
-        "rust_analyzer",   -- Rust
+        "ts_ls",         -- TypeScript/JavaScript
+        "ruby_lsp",      -- Ruby
+        "cssls",         -- CSS
+        "html",          -- HTML
+        "jsonls",        -- JSON
+        "yamlls",        -- YAML
+        "lua_ls",        -- Lua
+        "rust_analyzer", -- Rust
       }
     }
   },
@@ -26,76 +26,133 @@ return {
   -- LSP Configuration
   {
     "neovim/nvim-lspconfig",
-    dependencies = { 
+    dependencies = {
       "williamboman/mason-lspconfig.nvim"
     },
     config = function()
-      -- LSP servers configuration
-      local servers = {
-        ts_ls = {
-          filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" }
-        },
-        ruby_lsp = {
-          cmd = { vim.fn.expand("~/.dotfiles/scripts/ruby-lsp-wrapper.sh") },
-          filetypes = { "ruby" },
-          root_dir = function(fname)
-            return vim.fs.root(fname, { "Gemfile", ".git", ".ruby-version", ".mise.toml" })
-          end,
-          settings = {
-            rubyLsp = {
-              formatter = "rubocop",
-              enabledFeatures = {
-                "documentHighlights",
-                "documentSymbols", 
-                "foldingRanges",
-                "selectionRanges",
-                "semanticHighlighting",
-                "formatting",
-                "codeActions"
-              }
+      -- Configure LSP servers using the modern vim.lsp.config API
+
+      -- TypeScript/JavaScript
+      vim.lsp.config('ts_ls', {
+        cmd = { 'typescript-language-server', '--stdio' },
+        filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+        root_markers = { 'package.json', 'tsconfig.json', 'jsconfig.json', '.git' }
+      })
+
+      -- Ruby
+      vim.lsp.config('ruby_lsp', {
+        cmd = { vim.fn.expand("~/.dotfiles/scripts/ruby-lsp-wrapper.sh") },
+        filetypes = { 'ruby' },
+        root_markers = { 'Gemfile', '.git', '.ruby-version', '.mise.toml' },
+        settings = {
+          rubyLsp = {
+            formatter = 'rubocop',
+            enabledFeatures = {
+              'documentHighlights',
+              'documentSymbols',
+              'foldingRanges',
+              'selectionRanges',
+              'semanticHighlighting',
+              'formatting',
+              'codeActions'
             }
           }
-        },
-        lua_ls = {
-          settings = {
-            Lua = {
-              runtime = { version = 'LuaJIT' },
-              diagnostics = {
-                globals = { 'vim' },
-              },
-              workspace = {
-                library = vim.api.nvim_get_runtime_file("", true),
-                checkThirdParty = false,
-              },
-              telemetry = { enable = false },
+        }
+      })
+
+      -- Lua
+      vim.lsp.config('lua_ls', {
+        cmd = { 'lua-language-server' },
+        filetypes = { 'lua' },
+        root_markers = { '.luarc.json', '.luarc.jsonc', '.git' },
+        settings = {
+          Lua = {
+            runtime = { version = 'LuaJIT' },
+            diagnostics = {
+              globals = { 'vim' },
             },
+            workspace = {
+              library = vim.api.nvim_get_runtime_file('', true),
+              checkThirdParty = false,
+            },
+            telemetry = { enable = false },
           },
         },
-        rust_analyzer = {
-          settings = {
-            ["rust-analyzer"] = {
-              cargo = { 
-                allFeatures = true,
-                loadOutDirsFromCheck = true,
-              },
-              procMacro = { enable = true },
-              checkOnSave = { 
-                command = "clippy",
-                allTargets = false,
-              },
-            }
-          }
-        },
-        cssls = {},
-        html = {},
-        jsonls = {},
-        yamlls = {}
-      }
+      })
 
-      -- Setup each server using vim.lsp.config
-      for server, config in pairs(servers) do
-        vim.lsp.config(server, config)
-      end
+      -- Rust
+      vim.lsp.config('rust_analyzer', {
+        cmd = { 'rust-analyzer' },
+        filetypes = { 'rust' },
+        root_markers = { 'Cargo.toml', 'rust-project.json', '.git' },
+        settings = {
+          ['rust-analyzer'] = {
+            cargo = {
+              allFeatures = true,
+              loadOutDirsFromCheck = true,
+            },
+            procMacro = { enable = true },
+            checkOnSave = {
+              command = 'clippy',
+              allTargets = false,
+            },
+          }
+        }
+      })
+
+      -- Web languages
+      vim.lsp.config('cssls', {
+        cmd = { 'vscode-css-language-server', '--stdio' },
+        filetypes = { 'css', 'scss', 'less' },
+        root_markers = { 'package.json', '.git' }
+      })
+
+      vim.lsp.config('html', {
+        cmd = { 'vscode-html-language-server', '--stdio' },
+        filetypes = { 'html' },
+        root_markers = { 'package.json', '.git' }
+      })
+
+      vim.lsp.config('jsonls', {
+        cmd = { 'vscode-json-language-server', '--stdio' },
+        filetypes = { 'json', 'jsonc' },
+        root_markers = { 'package.json', '.git' }
+      })
+
+      vim.lsp.config('yamlls', {
+        cmd = { 'yaml-language-server', '--stdio' },
+        filetypes = { 'yaml', 'yml' },
+        root_markers = { '.yamllint', '.git' }
+      })
+
+      -- Enable all configured servers
+      vim.lsp.enable({ 'ts_ls', 'ruby_lsp', 'lua_ls', 'rust_analyzer', 'cssls', 'html', 'jsonls', 'yamlls' })
+
+      -- Ensure Ruby LSP attaches to Ruby files (workaround for potential config issues)
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'ruby',
+        callback = function()
+          vim.lsp.start({
+            name = 'ruby_lsp',
+            cmd = { vim.fn.expand("~/.dotfiles/scripts/ruby-lsp-wrapper.sh") },
+            root_dir = vim.fs.root(vim.api.nvim_buf_get_name(0), { 'Gemfile', '.git', '.ruby-version', '.mise.toml' }),
+            settings = {
+              rubyLsp = {
+                formatter = 'rubocop',
+                enabledFeatures = {
+                  'documentHighlights',
+                  'documentSymbols',
+                  'foldingRanges',
+                  'selectionRanges',
+                  'semanticHighlighting',
+                  'formatting',
+                  'codeActions'
+                }
+              }
+            }
+          })
+        end,
+      })
 
       -- Custom go-to-definition that avoids quickfix for single/duplicate results
       local function goto_definition()
@@ -104,7 +161,7 @@ return {
           vim.notify('No LSP clients attached to current buffer', vim.log.levels.WARN)
           return
         end
-        
+
         -- Check if any client supports textDocument/definition
         local supporting_client = nil
         for _, client in ipairs(clients) do
@@ -113,25 +170,25 @@ return {
             break
           end
         end
-        
+
         if not supporting_client then
           vim.notify('Go to definition not supported for this file type', vim.log.levels.INFO)
           return
         end
-        
+
         local params = vim.lsp.util.make_position_params(0, supporting_client.offset_encoding)
-        
+
         vim.lsp.buf_request(0, 'textDocument/definition', params, function(err, result, ctx, config)
           if err then
             vim.notify('Error getting definition: ' .. err.message, vim.log.levels.ERROR)
             return
           end
-          
+
           if not result or vim.tbl_isempty(result) then
             vim.notify('No definition found', vim.log.levels.INFO)
             return
           end
-          
+
           -- If single result or multiple identical results, go directly
           if #result == 1 then
             vim.lsp.util.show_document(result[1], supporting_client.offset_encoding, { focus = true })
@@ -140,15 +197,15 @@ return {
             local first = result[1]
             local all_same = true
             for i = 2, #result do
-              if result[i].uri ~= first.uri or 
-                 not result[i].range or not first.range or
-                 result[i].range.start.line ~= first.range.start.line or
-                 result[i].range.start.character ~= first.range.start.character then
+              if result[i].uri ~= first.uri or
+                  not result[i].range or not first.range or
+                  result[i].range.start.line ~= first.range.start.line or
+                  result[i].range.start.character ~= first.range.start.character then
                 all_same = false
                 break
               end
             end
-            
+
             if all_same then
               -- All results are the same, just go to the first one
               vim.lsp.util.show_document(first, supporting_client.offset_encoding, { focus = true })
