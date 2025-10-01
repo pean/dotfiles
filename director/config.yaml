@@ -1,0 +1,47 @@
+version: 1.0.0
+playbooks:
+  - id: dev
+    name: dev
+    description: A proxy for getting started
+    prompts: []
+    servers:
+      - type: stdio
+        name: context-7
+        disabled: false
+        command: npx
+        args:
+          - -y
+          - "@upstash/context7-mcp"
+        env: {}
+      - type: stdio
+        name: git
+        disabled: false
+        command: uvx
+        args:
+          - mcp-server-git
+        env: {}
+      - type: stdio
+        name: memory
+        disabled: false
+        command: npx
+        args:
+          - -y
+          - "@modelcontextprotocol/server-memory"
+        env: {}
+      - type: stdio
+        name: sequential-thinking
+        disabled: false
+        command: npx
+        args:
+          - -y
+          - "@modelcontextprotocol/server-sequential-thinking"
+        env: {}
+      - type : stdio
+        name: serena
+        disabled: false
+        command: uvx
+        args:
+          - --from
+          - git+https://github.com/oraios/serena
+          - serena
+          - start-mcp-server
