@@ -115,5 +115,13 @@ return {
         -- Configuration options
       })
     end,
+  },
+  {
+    'numToStr/Comment.nvim',
+    opts = {
+      -- gcc to toggle line comment
+      -- gbc to toggle block comment
+      -- gc in visual mode to toggle selection
+    }
   }
 }
