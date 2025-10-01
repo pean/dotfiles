@@ -23,3 +23,5 @@ if status is-interactive
   # https://discourse.brew.sh/t/why-does-tmuxinator-sets-gem-home/7296
   set -e GEM_HOME
 end
+
+alias claude="/Users/peter/.claude/local/claude"
