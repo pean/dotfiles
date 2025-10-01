@@ -55,7 +55,16 @@ return {
               'semanticHighlighting',
               'formatting',
               'codeActions'
-            }
+            },
+            addonSettings = {
+              ["Ruby LSP Rails"] = {
+                enablePendingMigrationsPrompt = false
+              }
+            },
+            rubyVersionManager = {
+              identifier = "mise"
+            },
+            experimentalFeaturesEnabled = false
           }
         }
       })

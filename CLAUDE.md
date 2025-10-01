@@ -50,7 +50,10 @@ This is a personal dotfiles repository managed by [RCM](https://github.com/thoug
 - `config/alacritty/`, `config/kitty/`, `config/ghostty/` - Terminal emulator configs
 
 ### Scripts
-- `scripts/ruby-lsp-wrapper.sh` - Wrapper for Ruby LSP to handle mise compatibility
+- `scripts/ruby-lsp-wrapper.sh` - Wrapper for Ruby LSP that handles different Ruby versions via mise
+  - First tries `bundle exec ruby-lsp` if ruby-lsp is in Gemfile.lock
+  - Falls back to `mise exec -- ruby-lsp` for project-specific Ruby versions
+  - Auto-installs ruby-lsp gem if missing from the project's Ruby version
 - `config/fish/functions/` - Fish shell custom functions (muxdev, t, vim, etc.)
 
 ## Development Tools Setup
