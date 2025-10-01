@@ -108,4 +108,12 @@ return {
       enable_tailwind = true,
     }
   },
+  {
+    "NightsPaladin/sops.nvim",
+    config = function()
+      require("sops").setup({
+        -- Configuration options
+      })
+    end,
+  }
 }
