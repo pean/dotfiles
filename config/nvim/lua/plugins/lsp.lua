@@ -220,7 +220,10 @@ return {
               vim.lsp.util.show_document(first, supporting_client.offset_encoding, { focus = true })
             else
               -- Multiple different locations, use quickfix
-              vim.lsp.util.set_qflist(vim.lsp.util.locations_to_items(result, supporting_client.offset_encoding))
+              vim.fn.setqflist({}, ' ', {
+                title = 'LSP Definitions',
+                items = vim.lsp.util.locations_to_items(result, supporting_client.offset_encoding)
+              })
               vim.cmd('copen')
             end
           end
