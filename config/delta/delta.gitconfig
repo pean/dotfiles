@@ -2,7 +2,7 @@
   pager = delta
 
 [delta]
-  features = catppuccin-mocha
+  features = nord
   navigate = true
   line-numbers = true
 
@@ -10,4 +10,7 @@
   diffFilter = "delta --color-only"
 
 [include]
-  path = catppuccin.gitconfig
+  path = ~/.config/delta/nord.gitconfig
+# Catppuccin theme (preserved)
+# [include]
+#   path = ~/.config/delta/catppuccin.gitconfig

@@ -1,3 +1,5 @@
 jethrokuan/fzf
 dracula/fish
-catppuccin/fish
+# Nord theme is built into fish shell (v3.4.0+)
+# Activate with: fish_config theme choose Nord
+# catppuccin/fish
