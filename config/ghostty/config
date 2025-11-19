@@ -24,7 +24,7 @@ font-feature = +cv31
 font-size = 12.5
 font-variation = wght=200
 macos-titlebar-style = hidden
-theme = catppuccin-mocha
+theme = nord
 window-decoration = false
 window-inherit-font-size = false
 window-padding-color = extend

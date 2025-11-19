@@ -5,19 +5,23 @@ return {
     lazy = true,
     dir = "~/.config/nvim/pack/themes/dracula_pro",
   },
-  { "nordtheme/vim" },
-  { 
-    "catppuccin/nvim",
-    name = "catppuccin",
+  {
+    "nordtheme/vim",
+    name = "nord",
     priority = 1000,
-    init = function()
-      require('catppuccin').setup({
-        flavour = "mocha",
-        integrations = {
-          gitgutter = true,
-
-        }
-      })
-    end
   },
+  -- Catppuccin theme (preserved but commented out)
+  -- {
+  --   "catppuccin/nvim",
+  --   name = "catppuccin",
+  --   priority = 1000,
+  --   init = function()
+  --     require('catppuccin').setup({
+  --       flavour = "mocha",
+  --       integrations = {
+  --         gitgutter = true,
+  --       }
+  --     })
+  --   end
+  -- },
 }

@@ -1,0 +1,28 @@
+[delta "nord"]
+	blame-palette = "#2e3440 #3b4252 #434c5e #4c566a #5e6a7a"
+	commit-decoration-style = "#4c566a" bold box ul
+	dark = true
+	file-decoration-style = "#4c566a"
+	file-style = "#eceff4"
+	hunk-header-decoration-style = "#4c566a" box ul
+	hunk-header-file-style = bold
+	hunk-header-line-number-style = bold "#d8dee9"
+	hunk-header-style = file line-number syntax
+	line-numbers-left-style = "#4c566a"
+	line-numbers-minus-style = bold "#5e81ac"
+	line-numbers-plus-style = bold "#88c0d0"
+	line-numbers-right-style = "#4c566a"
+	line-numbers-zero-style = "#4c566a"
+	# Deletions in darker blue (nord10)
+	minus-emph-style = bold syntax "#3d4d60"
+	minus-style = syntax "#354151"
+	# Additions in lighter cyan (nord8)
+	plus-emph-style = bold syntax "#405358"
+	plus-style = syntax "#364548"
+	map-styles = \
+		bold purple => syntax "#4a3f4d", \
+		bold blue => syntax "#3e4a57", \
+		bold cyan => syntax "#3f4d51", \
+		bold yellow => syntax "#524d41"
+	# Should match the name of the bat theme
+	syntax-theme = Nord
