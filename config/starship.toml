@@ -1,8 +1,14 @@
 # Colors are from dracula theme, but modified a litle
 # https://github.com/dracula/starship/blob/master/starship.toml
 
-right_format = """$cmd_duration"""
+right_format = """$cmd_duration $time"""
 palette = "nord"
+
+[time]
+disabled = false
+format = "[$time]($style)"
+style = "overlay1"
+time_format = "%-m-%-d%k%M"
 [ruby]
 disabled = true
 
@@ -36,9 +42,11 @@ disabled = true
 disabled = true
 
 [cmd_duration]
-# style = "bold #f1fa8c"
 format = "[$duration]($style)"
+style = "overlay2"
 min_time = 0
+show_milliseconds = true
+show_notifications = false
 
 [docker_context]
 disabled = true
