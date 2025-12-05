@@ -1,10 +1,10 @@
 -- dracula pro
 return {
-  {
-    name = "dracula_pro",
-    lazy = true,
-    dir = "~/.config/nvim/pack/themes/dracula_pro",
-  },
+  -- {
+  --   name = "dracula_pro",
+  --   lazy = true,
+  --   dir = "~/.config/nvim/pack/themes/dracula_pro",
+  -- },
   {
     "nordtheme/vim",
     name = "nord",
