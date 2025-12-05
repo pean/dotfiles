@@ -3,3 +3,5 @@
 **/AGENTS.md
 .claude
 .serena*
+.overmind.env
+Procfile.dev
