@@ -1,9 +1,0 @@
-{
-  "mcp": {
-    "director": {
-      "type": "remote",
-      "url": "http://localhost:3673/dev/sse"
-    }
-  },
-  "$schema": "https://opencode.ai/config.json"
-}
