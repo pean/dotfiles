@@ -47,3 +47,11 @@ require("config.cursorline")
 require("config.lazy")
 
 vim.cmd.colorscheme("nord")
+
+-- Match tmux Nord border colors
+-- Inactive borders: nord3 (#4C566A)
+-- Active borders: nord15 (#B48EAD)
+vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#4C566A" })
+vim.api.nvim_set_hl(0, "VertSplit", { fg = "#4C566A" })
+-- For floating windows
+vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#B48EAD" })
