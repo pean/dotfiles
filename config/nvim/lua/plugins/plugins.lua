@@ -63,7 +63,10 @@ return {
 
   -- tslime
   {
-    "pean/tslime.vim",
+    -- Used to use my own fork with some changes, but my PR changes are inclued in main
+    -- https://github.com/jgdavey/tslime.vim/pull/30
+    -- "pean/tslime.vim",
+    "jgdavey/tslime.vim",
     init = function()
       vim.g.tslime_always_current_session = 1
       vim.g.tslime_always_current_window = 1 -- fixed pane (otherwise select)
