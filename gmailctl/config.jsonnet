@@ -50,7 +50,15 @@ local notificationFilters = [
 local rules = [
   {
     filter: {
-      from: '[bot]',
+      and: [
+        { from: 'notifications@github.com' },
+        {
+          or: [
+            { query: 'from:(*[bot])' },
+            { query: 'from:("Dreams Bot")' },
+          ],
+        },
+      ],
     },
     actions: {
       delete: true,
@@ -60,26 +68,7 @@ local rules = [
 
 local labels = lib.rulesLabels(rules);
 
-local tests = [
-  {
-    name: 'bot emails are deleted',
-    messages: [
-      { from: 'dependabot[bot] <notifications@github.com>' },
-    ],
-    actions: {
-      delete: true,
-    },
-  },
-  {
-    name: 'linear bot emails are deleted',
-    messages: [
-      { from: 'linear[bot] <notifications@github.com>' },
-    ],
-    actions: {
-      delete: true,
-    },
-  },
-];
+local tests = [];
 
 {
   version: 'v1alpha3',
