@@ -18,6 +18,7 @@ local notifications = [
   { type: 'mention', label: 'mention', archive: false },
   { type: 'push', label: 'push', archive: true },
   { type: 'review_requested', label: 'review requested', archive: false },
+  { type: 'review', label: 'review', archive: false },
   { type: 'security_alert', label: 'security alert', archive: false },
   { type: 'state_change', label: 'state change', archive: true },
   { type: 'subscribed', label: 'subscribed', archive: true },
