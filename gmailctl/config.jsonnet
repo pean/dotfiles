@@ -26,13 +26,6 @@ local notifications = [
   { type: 'your_activity', label: 'your activity', archive: false },
 ];
 
-local bots = {
-  or: [
-    { from: 'dependabot[bot]' },
-    { from: 'Dreams Bot' },
-  ],
-};
-
 local notificationFilters = [
   {
     filter: {
@@ -56,26 +49,10 @@ local notificationFilters = [
 local rules = [
   {
     filter: {
-      and: [
-        { from: 'dependabot[bot]' },
-      ],
+      from: '[bot]',
     },
     actions: {
-      labels: [
-        'github/dependabot',
-      ],
-    },
-  },
-  {
-    filter: {
-      and: [
-        { from: 'Dreams Bot' },
-      ],
-    },
-    actions: {
-      labels: [
-        'github/dreams bot',
-      ],
+      delete: true,
     },
   },
 ] + notificationFilters;
@@ -84,25 +61,21 @@ local labels = lib.rulesLabels(rules);
 
 local tests = [
   {
-    name: 'dependabot goes to github/dependabot',
+    name: 'bot emails are deleted',
     messages: [
-      { from: 'dependabot[bot]' },
+      { from: 'dependabot[bot] <notifications@github.com>' },
     ],
     actions: {
-      labels: [
-        'github/dependabot',
-      ],
+      delete: true,
     },
   },
   {
-    name: 'dreams bot goes to github/dreams bot',
+    name: 'linear bot emails are deleted',
     messages: [
-      { from: 'Dreams Bot' },
+      { from: 'linear[bot] <notifications@github.com>' },
     ],
     actions: {
-      labels: [
-        'github/dreams bot',
-      ],
+      delete: true,
     },
   },
 ];
