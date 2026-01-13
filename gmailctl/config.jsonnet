@@ -10,21 +10,21 @@ local variables = import 'variables.libsonnet';
 
 // GitHub notifications as cc
 local notifications = [
-  { type: 'assign', label: 'assign', archive: false },
-  { type: 'author', label: 'author', archive: true },
-  { type: 'ci_activity', label: 'ci activity', archive: true },
-  { type: 'comment', label: 'comment', archive: false },
-  { type: 'manual', label: 'manual', archive: false },
-  { type: 'mention', label: 'mention', archive: false },
-  { type: 'push', label: 'push', archive: true },
-  { type: 'review_requested', label: 'review requested', archive: false },
-  { type: 'review', label: 'review', archive: false },
-  { type: 'security_alert', label: 'security alert', archive: false },
-  { type: 'state_change', label: 'state change', archive: true },
-  { type: 'subscribed', label: 'subscribed', archive: true },
-  { type: 'team_mention', label: 'team mention', archive: false },
-  { type: 'your_activity', label: 'your activity', archive: false },
-  { type: 'your_activity', label: 'your activity', archive: false },
+  { type: 'assign', label: 'assign', archive: true, slack: true },
+  { type: 'author', label: 'author', archive: true, slack: false },
+  { type: 'ci_activity', label: 'ci activity', archive: true, slack: false },
+  { type: 'comment', label: 'comment', archive: true, slack: true },
+  { type: 'manual', label: 'manual', archive: true, slack: true },
+  { type: 'mention', label: 'mention', archive: true, slack: true },
+  { type: 'push', label: 'push', archive: true, slack: false },
+  { type: 'review_requested', label: 'review requested', archive: true, slack: true },
+  { type: 'review', label: 'review', archive: true, slack: true },
+  { type: 'security_alert', label: 'security alert', archive: true, slack: true },
+  { type: 'state_change', label: 'state change', archive: true, slack: false },
+  { type: 'subscribed', label: 'subscribed', archive: true, slack: false },
+  { type: 'team_mention', label: 'team mention', archive: true, slack: true },
+  { type: 'your_activity', label: 'your activity', archive: true, slack: true },
+  { type: 'your_activity', label: 'your activity', archive: true, slack: true },
 ];
 
 local notificationFilters = [
@@ -37,7 +37,7 @@ local notificationFilters = [
     },
     actions: {
       archive: notification.archive,
-      forward: if notification.archive == false then variables.slack_email else null,
+      forward: if notification.slack then variables.slack_email else null,
       labels: [
         'github',
         'github/' + notification.label,
