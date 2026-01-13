@@ -13,7 +13,7 @@ local notifications = [
   { type: 'assign', label: 'assign', archive: false },
   { type: 'author', label: 'author', archive: true },
   { type: 'ci_activity', label: 'ci activity', archive: true },
-  { type: 'comment', label: 'comment', archive: true },
+  { type: 'comment', label: 'comment', archive: false },
   { type: 'manual', label: 'manual', archive: false },
   { type: 'mention', label: 'mention', archive: false },
   { type: 'push', label: 'push', archive: true },
