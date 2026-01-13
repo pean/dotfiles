@@ -47,14 +47,16 @@ local notificationFilters = [
   for notification in notifications
 ];
 
-local rules = [
+// Bot filters - using from: query to match display names in From header
+local botFilters = [
   {
     filter: {
       and: [
         { from: 'notifications@github.com' },
         {
           or: [
-            { query: 'from:(*[bot])' },
+            { query: 'from:(dependabot)' },
+            { query: 'from:(linear)' },
             { query: 'from:("Dreams Bot")' },
           ],
         },
@@ -64,7 +66,9 @@ local rules = [
       delete: true,
     },
   },
-] + notificationFilters;
+];
+
+local rules = botFilters + notificationFilters;
 
 local labels = lib.rulesLabels(rules);
 
