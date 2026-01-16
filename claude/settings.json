@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "deny": [
+      "Read(**/.env)",
+      "Read(**/.env.*)",
+      "Read(**/.env.local)",
+      "Read(**/.env.development)",
+      "Read(**/.env.production)",
+      "Read(**/.env.test)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)",
+      "Read(**/*.p12)",
+      "Read(**/*.pfx)",
+      "Read(**/*secret*)",
+      "Read(**/*credential*)",
+      "Read(**/*.secrets)",
+      "Read(**/.secrets/**)",
+      "Read(**/.aws/credentials)",
+      "Read(**/.ssh/id_*)",
+      "Read(**/.netrc)",
+      "Read(**/.npmrc)",
+      "Read(**/.pypirc)",
+      "Read(**/*token*)",
+      "Read(**/*.keystore)",
+      "Read(**/*.jks)",
+      "Read(**/secrets.yml)",
+      "Read(**/secrets.yaml)",
+      "Read(**/secrets.json)",
+      "Read(**/credentials.json)",
+      "Read(**/master.key)",
+      "Read(**/config/credentials.yml.enc)",
+      "Bash(rm -rf *)",
+      "Bash(rm -fr *)",
+      "Bash(rm * -rf)",
+      "Bash(rm * -fr)",
+      "Edit(**/.env*)",
+      "Edit(**/*secret*)",
+      "Edit(**/*credential*)",
+      "Edit(**/*token*)",
+      "Edit(**/*.pem)",
+      "Edit(**/*.key)",
+      "Write(**/.env*)",
+      "Write(**/*secret*)",
+      "Write(**/*credential*)",
+      "Write(**/*token*)",
+      "Write(**/*.pem)",
+      "Write(**/*.key)"
+    ]
+  },
+  "alwaysThinkingEnabled": true,
+  "feedbackSurveyState": {
+    "lastShownTime": 1754085546488
+  },
+  "enabledPlugins": {
+    "rust-analyzer-lsp@claude-plugins-official": true
+  }
+}
