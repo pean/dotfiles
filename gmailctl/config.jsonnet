@@ -33,6 +33,15 @@ local notificationFilters = [
       and: [
         { from: 'notifications@github.com' },
         { cc: notification.type + '@noreply.github.com' },
+        {
+          not: {
+            or: [
+              { query: 'from:(dependabot)' },
+              { query: 'from:(linear)' },
+              { query: 'from:("Dreams Bot")' },
+            ],
+          },
+        },
       ],
     },
     actions: {
@@ -68,7 +77,20 @@ local botFilters = [
   },
 ];
 
-local rules = botFilters + notificationFilters;
+local rules = botFilters + notificationFilters + [
+  {
+    filter: {
+      and: [
+        { from: 'no_reply@email.apple.com' },
+        { subject: 'TestFlight' },
+      ],
+    },
+    actions: {
+      archive: true,
+      labels: ['testflight'],
+    },
+  },
+];
 
 local labels = lib.rulesLabels(rules);
 
