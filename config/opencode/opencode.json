@@ -3,7 +3,14 @@
   "mcp": {
     "director": {
       "type": "remote",
-      "url": "http://localhost:3673/dev/sse"
+      "url": "http://localhost:3673/dev/sse",
+      "enabled": false
+    },
+    "linear": {
+      "type": "remote",
+      "url": "https://mcp.linear.app/sse",
+      "enabled": true,
+      "oauth": {}
     }
   },
   "permission": {
@@ -80,5 +87,12 @@
       "/Users/peter/.dotfiles/*": "allow"
     },
     "doom_loop": "deny"
+  },
+  "agent": {
+    "plan": {
+      "tools": {
+        "linear_*": true
+      }
+    }
   }
 }
