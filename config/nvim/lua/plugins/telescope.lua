@@ -48,6 +48,9 @@ return {
         },
         git_status = {
           initial_mode = "normal",
+          layout_config = {
+            preview_height = 0.75,  -- Give 75% of space to diff preview
+          },
         },
         find_files = {
           disable_devicons = true,
@@ -66,6 +69,7 @@ return {
       vim.keymap.set("n", "<leader>fb", builtin.buffers)
       vim.keymap.set("n", "<leader>fh", builtin.help_tags)
       vim.keymap.set("n", "<leader>fs", builtin.git_status)
+      vim.keymap.set("n", "<leader>gc", builtin.git_status)  -- Git changed files
       vim.keymap.set("n", "<leader>fr", builtin.lsp_references)
       vim.keymap.set("n", "<leader>fd", builtin.lsp_definitions)
       -- vim.keymap.set("n", "<leader>ft", builtin.tag)
