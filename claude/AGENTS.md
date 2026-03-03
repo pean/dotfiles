@@ -16,6 +16,10 @@ If there is no CLAUDE.md in the directory you are looking for it, look for AGENT
 - When referring to other pulls requests in pr description, try to add the PR url in a list item
 - do not leave empty rows behind when removing code
 - use conventional commit messages and pull request titles
+- Do not use name or username in branch names
+- When creating branches, use the format `type/description` (e.g., `feature/login`, `bugfix/payment`, `chore/update-deps`)
+- If there is linear or jira reference, put reference in branch name (e.g., `feature/login-LIN-123/`, `bugfix/payment-JIRA-456`)
+- Use worktree pattern when starting up new work
 
 ## Git Worktrees Pattern
 
