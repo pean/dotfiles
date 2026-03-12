@@ -1,2 +1,10 @@
+# RCM-managed private files (use scripts/import-private-configs.fish to import)
+# These files are managed by RCM but not committed to git
+# List them without leading dot (RCM adds the dot when symlinking)
+# --- BEGIN RCM MANAGED ---
+claude.json
 config/nvim/lua/config/code-stats.lua
 gmailctl/variables.libsonnet
+# --- END RCM MANAGED ---
+
+# Other private files
