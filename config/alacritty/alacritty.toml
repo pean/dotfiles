@@ -21,7 +21,7 @@ style = "Light"  # weight=200 equivalent
 
 [font.bold]
 family = "Monaspace Krypton NF"
-style = "Bold"
+style = "SemiBold"  # Less bold than Bold
 
 [font.italic]
 family = "Monaspace Krypton NF"
@@ -29,7 +29,7 @@ style = "Light Italic"
 
 [font.bold_italic]
 family = "Monaspace Krypton NF"
-style = "Bold Italic"
+style = "SemiBold Italic"  # Less bold than Bold Italic
 
 [font.offset]
 x = 0
