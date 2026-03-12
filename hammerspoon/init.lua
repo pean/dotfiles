@@ -12,8 +12,7 @@
 --   Cmd + Shift + ;         Show letters on all windows, press to focus
 --
 -- WINDOW POSITIONING - FULL/MAXIMIZE
---   Cmd + Shift + M         Maximize window (fill screen, not fullscreen)
---   Cmd + Shift + F         Maximize window (overrides macOS fullscreen)
+--   Cmd + Shift + F         Maximize window (fill screen, not fullscreen)
 --
 -- MOVE BETWEEN MONITORS
 --   Cmd + Shift + H         Move window to left monitor
@@ -74,14 +73,6 @@ end)
 -- ============================================================================
 -- WINDOW POSITIONING - FILL SCREEN (NOT FULLSCREEN)
 -- ============================================================================
--- Maximize window to fill screen without going fullscreen (solves Issue #2)
-hs.hotkey.bind({"cmd", "shift"}, "M", function()
-    local win = getFocusedWindow()
-    if win then
-        win:maximize()
-    end
-end)
-
 -- Override macOS Cmd+Shift+F to maximize instead of fullscreen
 hs.hotkey.bind({"cmd", "shift"}, "F", function()
     local win = getFocusedWindow()
