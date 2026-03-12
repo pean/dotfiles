@@ -30,6 +30,9 @@ return {
       "williamboman/mason-lspconfig.nvim"
     },
     config = function()
+      -- Performance: Disable verbose LSP logging
+      vim.lsp.set_log_level(vim.log.levels.WARN)
+
       -- Configure LSP servers using the modern vim.lsp.config API
 
       -- TypeScript/JavaScript
@@ -136,41 +139,6 @@ return {
 
       -- Enable all configured servers
       vim.lsp.enable({ 'ts_ls', 'ruby_lsp', 'lua_ls', 'rust_analyzer', 'cssls', 'html', 'jsonls', 'yamlls' })
-
-      -- Ensure Ruby LSP attaches to Ruby files (workaround for potential config issues)
-      vim.api.nvim_create_autocmd('FileType', {
-        pattern = 'ruby',
-        callback = function()
-          vim.lsp.start({
-            name = 'ruby_lsp',
-            cmd = { vim.fn.expand("~/.dotfiles/scripts/ruby-lsp-wrapper.sh") },
-            root_dir = vim.fs.root(vim.api.nvim_buf_get_name(0), { 'Gemfile', '.git', '.ruby-version', '.mise.toml' }),
-            settings = {
-              rubyLsp = {
-                formatter = 'rubocop',
-                enabledFeatures = {
-                  'documentHighlights',
-                  'documentSymbols',
-                  'foldingRanges',
-                  'selectionRanges',
-                  'semanticHighlighting',
-                  'formatting',
-                  'codeActions'
-                },
-                addonSettings = {
-                  ["Ruby LSP Rails"] = {
-                    enablePendingMigrationsPrompt = false
-                  }
-                },
-                rubyVersionManager = {
-                  identifier = "mise"
-                },
-                experimentalFeaturesEnabled = false
-              }
-            }
-          })
-        end,
-      })
 
       -- Custom go-to-definition that avoids quickfix for single/duplicate results
       local function goto_definition()
