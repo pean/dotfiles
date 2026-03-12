@@ -6,6 +6,10 @@ vim.keymap.set("n", "<leader>bd", ":%bd!<CR>")
 
 vim.opt.clipboard = "unnamed" -- interact with system clipboard
 
+-- Performance settings
+vim.opt.updatetime = 300 -- faster diagnostics and swap writes
+vim.opt.timeoutlen = 500 -- faster leader key sequences
+
 -- https://blog.glyph.im/2025/08/the-best-line-length.html
 -- Visual guide at 88 columns but no automatic wrapping
 vim.opt.colorcolumn = { 88 }
