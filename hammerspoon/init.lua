@@ -6,8 +6,7 @@
 -- ============================================================================
 --
 -- TERMINAL
---   Cmd + Alt + Enter       Open new Alacritty on current space
---   Cmd + N (in Alacritty)  New Alacritty window on current space
+--   Cmd + Alt + N           Open new Alacritty on current space
 --
 -- WINDOW HINTS (VIM-STYLE WINDOW JUMPING)
 --   Cmd + Shift + ;         Show letters on all windows, press to focus
@@ -67,36 +66,10 @@ end
 -- ============================================================================
 -- TERMINAL LAUNCHER
 -- ============================================================================
--- Open new Alacritty on current space (solves Issue #1)
-hs.hotkey.bind({"cmd", "alt"}, "return", function()
+-- Open new Alacritty on current space
+hs.hotkey.bind({"cmd", "alt"}, "N", function()
     hs.execute("open -n /Applications/Alacritty.app")
 end)
-
--- Alternative: Uncomment to use Kitty instead
--- hs.hotkey.bind({"cmd", "alt"}, "return", function()
---     hs.execute("open -n /Applications/kitty.app")
--- end)
-
--- Override Cmd+N in Alacritty to always open on current space
--- Use application-specific binding that doesn't interfere with other apps
-local alacrittyHotkey = nil
-
-hs.application.watcher.new(function(appName, eventType, app)
-    if eventType == hs.application.watcher.activated then
-        if appName == "Alacritty" then
-            -- Bind Cmd+N only when Alacritty is active
-            alacrittyHotkey = hs.hotkey.bind({"cmd"}, "N", function()
-                hs.execute("open -n /Applications/Alacritty.app")
-            end)
-        else
-            -- Unbind when switching to other apps
-            if alacrittyHotkey then
-                alacrittyHotkey:delete()
-                alacrittyHotkey = nil
-            end
-        end
-    end
-end):start()
 
 -- ============================================================================
 -- WINDOW POSITIONING - FILL SCREEN (NOT FULLSCREEN)
