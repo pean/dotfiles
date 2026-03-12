@@ -8,10 +8,10 @@ syntax on
 " Leader key
 let mapleader = ","
 
-" Key mappings
-nnoremap <leader>n :noh<CR>
-nnoremap <leader>cn :cnext<CR>
-nnoremap <leader>bd :%bd!<CR>
+" Key mappings (duplicates removed - defined in init.lua for Neovim)
+" nnoremap <leader>n :noh<CR>
+" nnoremap <leader>cn :cnext<CR>
+" nnoremap <leader>bd :%bd!<CR>
 
 " Clipboard integration
 set clipboard=unnamed
