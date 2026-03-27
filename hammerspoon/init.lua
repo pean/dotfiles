@@ -9,30 +9,28 @@
 --   Cmd + Alt + N           Open new Alacritty on current space
 --
 -- WINDOW HINTS (VIM-STYLE WINDOW JUMPING)
---   Cmd + Shift + ;         Show letters on all windows, press to focus
+--   Ctrl + Alt + ;          Show letters on all windows, press to focus
 --
 -- WINDOW POSITIONING - FULL/MAXIMIZE
---   Cmd + Shift + F         Maximize window (fill screen, not fullscreen)
+--   Ctrl + Alt + F          Maximize window (fill screen, not fullscreen)
+--   Cmd + Shift + F         Same as above (overrides macOS fullscreen)
 --
 -- MOVE BETWEEN MONITORS
---   Cmd + Shift + H         Move window to left monitor
---   Cmd + Shift + L         Move window to right monitor
---   Cmd + Shift + N         Move window to next monitor (cycles)
+--   Ctrl + Alt + H          Move window to left monitor
+--   Ctrl + Alt + L          Move window to right monitor
+--   Ctrl + Alt + N          Move window to next monitor (cycles)
+--
+-- MOVE BETWEEN WORKSPACES
+--   Ctrl + Alt + 1-0        Move window to workspace 1-10
 --
 -- WINDOW POSITIONING - HALVES
---   Cmd + Shift + ←         Left half
---   Cmd + Shift + →         Right half
---   Cmd + Shift + ↑         Top half
---   Cmd + Shift + ↓         Bottom half
---
--- WINDOW POSITIONING - QUARTERS
---   Ctrl + Cmd + U          Top-left quarter
---   Ctrl + Cmd + I          Top-right quarter
---   Ctrl + Cmd + J          Bottom-left quarter
---   Ctrl + Cmd + K          Bottom-right quarter
+--   Ctrl + Alt + ←          Left half
+--   Ctrl + Alt + →          Right half
+--   Ctrl + Alt + ↑          Top half
+--   Ctrl + Alt + ↓          Bottom half
 --
 -- CENTER & RESIZE
---   Cmd + Shift + C         Center window (maintains size)
+--   Ctrl + Alt + C          Center window (maintains size)
 --   Ctrl + Cmd + C          Center window at 75% width/height
 --   Ctrl + Cmd + =          Grow window (50px larger)
 --   Ctrl + Cmd + -          Shrink window (50px smaller)
@@ -65,15 +63,63 @@ end
 -- ============================================================================
 -- TERMINAL LAUNCHER
 -- ============================================================================
--- Open new Alacritty on current space
+-- Workaround: Find existing Alacritty window, go there, create new window, bring back
+local spaces = require("hs.spaces")
+
 hs.hotkey.bind({"cmd", "alt"}, "N", function()
-    hs.execute("open -n /Applications/Alacritty.app")
+    local alacritty = hs.application.find("Alacritty")
+
+    if not alacritty then
+        -- No Alacritty running - just launch it
+        hs.application.launchOrFocus("Alacritty")
+        return
+    end
+
+    -- Get current space
+    local currentSpace = spaces.focusedSpace()
+
+    -- Get any Alacritty window
+    local alacrittyWindow = alacritty:mainWindow()
+
+    if not alacrittyWindow then
+        -- Alacritty running but no windows - launch new instance
+        hs.application.launchOrFocus("Alacritty")
+        return
+    end
+
+    -- Go to the space with Alacritty window
+    local alacrittySpace = spaces.windowSpaces(alacrittyWindow)[1]
+    spaces.gotoSpace(alacrittySpace)
+
+    -- Wait a moment, then send Cmd+N to create new window
+    hs.timer.doAfter(0.1, function()
+        alacritty:activate()
+        hs.eventtap.keyStroke({"cmd"}, "N")
+
+        -- Wait for new window, then move it back
+        hs.timer.doAfter(0.3, function()
+            local newWindow = alacritty:focusedWindow()
+            if newWindow then
+                spaces.moveWindowToSpace(newWindow, currentSpace)
+                spaces.gotoSpace(currentSpace)
+                newWindow:focus()
+            end
+        end)
+    end)
 end)
 
 -- ============================================================================
 -- WINDOW POSITIONING - FILL SCREEN (NOT FULLSCREEN)
 -- ============================================================================
--- Override macOS Cmd+Shift+F to maximize instead of fullscreen
+-- Maximize window to fill screen
+hs.hotkey.bind({"ctrl", "alt"}, "F", function()
+    local win = getFocusedWindow()
+    if win then
+        win:maximize()
+    end
+end)
+
+-- Also keep Cmd+Shift+F to override macOS fullscreen
 hs.hotkey.bind({"cmd", "shift"}, "F", function()
     local win = getFocusedWindow()
     if win then
@@ -84,8 +130,8 @@ end)
 -- ============================================================================
 -- MOVE WINDOWS BETWEEN MONITORS
 -- ============================================================================
--- Move window to left monitor (solves Issue #3)
-hs.hotkey.bind({"cmd", "shift"}, "H", function()
+-- Move window to left monitor
+hs.hotkey.bind({"ctrl", "alt"}, "H", function()
     local win = getFocusedWindow()
     if win then
         win:moveOneScreenWest(false, true)
@@ -93,7 +139,7 @@ hs.hotkey.bind({"cmd", "shift"}, "H", function()
 end)
 
 -- Move window to right monitor
-hs.hotkey.bind({"cmd", "shift"}, "L", function()
+hs.hotkey.bind({"ctrl", "alt"}, "L", function()
     local win = getFocusedWindow()
     if win then
         win:moveOneScreenEast(false, true)
@@ -101,7 +147,7 @@ hs.hotkey.bind({"cmd", "shift"}, "L", function()
 end)
 
 -- Move window to next monitor (cycles through all monitors)
-hs.hotkey.bind({"cmd", "shift"}, "N", function()
+hs.hotkey.bind({"ctrl", "alt"}, "N", function()
     local win = getFocusedWindow()
     if win then
         win:moveToScreen(win:screen():next())
@@ -109,10 +155,72 @@ hs.hotkey.bind({"cmd", "shift"}, "N", function()
 end)
 
 -- ============================================================================
+-- MOVE WINDOWS BETWEEN WORKSPACES
+-- ============================================================================
+-- Move window to specific workspace (1-10)
+local function moveWindowToWorkspace(workspaceNum)
+    local win = getFocusedWindow()
+    if not win then
+        hs.alert.show("No focused window")
+        return
+    end
+
+    -- Get all spaces for all screens
+    local allSpaces = spaces.allSpaces()
+
+    -- Get spaces for the main screen (where Mission Control shows workspace numbers)
+    local mainScreen = hs.screen.primaryScreen()
+    local screenUUID = mainScreen:getUUID()
+    local screenSpaces = allSpaces[screenUUID]
+
+    -- Debug logging
+    print("=== Move to workspace " .. workspaceNum .. " ===")
+    print("Screen UUID: " .. screenUUID)
+    print("Total spaces found: " .. (screenSpaces and #screenSpaces or 0))
+    print("Current space: " .. spaces.focusedSpace())
+
+    if screenSpaces then
+        for i, spaceID in ipairs(screenSpaces) do
+            print("  Space " .. i .. ": " .. spaceID)
+        end
+    end
+
+    if not screenSpaces then
+        hs.alert.show("Could not get spaces")
+        return
+    end
+
+    if #screenSpaces < workspaceNum then
+        hs.alert.show("Workspace " .. workspaceNum .. " does not exist (only " .. #screenSpaces .. " spaces)")
+        return
+    end
+
+    local targetSpace = screenSpaces[workspaceNum]
+    print("Moving window " .. win:id() .. " to space " .. targetSpace)
+
+    spaces.moveWindowToSpace(win, targetSpace)
+
+    print("Move complete")
+    hs.alert.show("Moved to workspace " .. workspaceNum)
+end
+
+-- Bind Ctrl + Alt + 1-9 and 0 (for workspace 10)
+for i = 1, 9 do
+    hs.hotkey.bind({"ctrl", "alt"}, tostring(i), function()
+        moveWindowToWorkspace(i)
+    end)
+end
+
+-- Handle 0 as workspace 10
+hs.hotkey.bind({"ctrl", "alt"}, "0", function()
+    moveWindowToWorkspace(10)
+end)
+
+-- ============================================================================
 -- WINDOW POSITIONING - HALVES
 -- ============================================================================
 -- Left half
-hs.hotkey.bind({"cmd", "shift"}, "Left", function()
+hs.hotkey.bind({"ctrl", "alt"}, "Left", function()
     local win = getFocusedWindow()
     if win then
         local f = win:frame()
@@ -128,7 +236,7 @@ hs.hotkey.bind({"cmd", "shift"}, "Left", function()
 end)
 
 -- Right half
-hs.hotkey.bind({"cmd", "shift"}, "Right", function()
+hs.hotkey.bind({"ctrl", "alt"}, "Right", function()
     local win = getFocusedWindow()
     if win then
         local f = win:frame()
@@ -144,7 +252,7 @@ hs.hotkey.bind({"cmd", "shift"}, "Right", function()
 end)
 
 -- Top half
-hs.hotkey.bind({"cmd", "shift"}, "Up", function()
+hs.hotkey.bind({"ctrl", "alt"}, "Up", function()
     local win = getFocusedWindow()
     if win then
         local f = win:frame()
@@ -160,7 +268,7 @@ hs.hotkey.bind({"cmd", "shift"}, "Up", function()
 end)
 
 -- Bottom half
-hs.hotkey.bind({"cmd", "shift"}, "Down", function()
+hs.hotkey.bind({"ctrl", "alt"}, "Down", function()
     local win = getFocusedWindow()
     if win then
         local f = win:frame()
@@ -176,77 +284,10 @@ hs.hotkey.bind({"cmd", "shift"}, "Down", function()
 end)
 
 -- ============================================================================
--- WINDOW POSITIONING - QUARTERS
--- ============================================================================
--- Top-left quarter
-hs.hotkey.bind({"ctrl", "cmd"}, "U", function()
-    local win = getFocusedWindow()
-    if win then
-        local f = win:frame()
-        local screen = win:screen()
-        local max = screen:frame()
-
-        f.x = max.x
-        f.y = max.y
-        f.w = max.w / 2
-        f.h = max.h / 2
-        win:setFrame(f)
-    end
-end)
-
--- Top-right quarter
-hs.hotkey.bind({"ctrl", "cmd"}, "I", function()
-    local win = getFocusedWindow()
-    if win then
-        local f = win:frame()
-        local screen = win:screen()
-        local max = screen:frame()
-
-        f.x = max.x + (max.w / 2)
-        f.y = max.y
-        f.w = max.w / 2
-        f.h = max.h / 2
-        win:setFrame(f)
-    end
-end)
-
--- Bottom-left quarter
-hs.hotkey.bind({"ctrl", "cmd"}, "J", function()
-    local win = getFocusedWindow()
-    if win then
-        local f = win:frame()
-        local screen = win:screen()
-        local max = screen:frame()
-
-        f.x = max.x
-        f.y = max.y + (max.h / 2)
-        f.w = max.w / 2
-        f.h = max.h / 2
-        win:setFrame(f)
-    end
-end)
-
--- Bottom-right quarter
-hs.hotkey.bind({"ctrl", "cmd"}, "K", function()
-    local win = getFocusedWindow()
-    if win then
-        local f = win:frame()
-        local screen = win:screen()
-        local max = screen:frame()
-
-        f.x = max.x + (max.w / 2)
-        f.y = max.y + (max.h / 2)
-        f.w = max.w / 2
-        f.h = max.h / 2
-        win:setFrame(f)
-    end
-end)
-
--- ============================================================================
 -- CENTER WINDOW
 -- ============================================================================
 -- Center window on screen (maintains size)
-hs.hotkey.bind({"cmd", "shift"}, "C", function()
+hs.hotkey.bind({"ctrl", "alt"}, "C", function()
     local win = getFocusedWindow()
     if win then
         win:centerOnScreen()
@@ -313,6 +354,6 @@ hs.hints.showTitleThresh = 0   -- Never show window titles, just letters
 hs.hints.hintChars = {"A", "S", "D", "F", "J", "K", "L", "Q", "W", "E", "R", "U", "I", "O", "P"}  -- Home row + top row
 
 -- Show window hints - press letter to focus that window
-hs.hotkey.bind({"cmd", "shift"}, ";", function()
+hs.hotkey.bind({"ctrl", "alt"}, ";", function()
     hs.hints.windowHints()
 end)
