@@ -9,6 +9,7 @@ set fish_greeting
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 set -g fish_user_paths "/Users/peter/src/getdreams/dreams-cli/target/release" $fish_user_paths
+fish_add_path ~/go/bin
 set -g fish_user_path "$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools" $fish_user_paths
 
 starship init fish | source
