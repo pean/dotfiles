@@ -25,23 +25,7 @@ if status is-interactive
   set -e GEM_HOME
 end
 
-# Twig config
-# Base directories to search for repositories
-set -gx TWINE_BASE_DIRS ~/src/getdreams ~/src/pean
-
-# Tmuxinator layout to use (if tmuxinator is installed)
-set -gx TWINE_TMUXINATOR_LAYOUT dev
-
-# Session name prefix (e.g., "work-" for "work-repo/branch")
-set -gx TWINE_SESSION_PREFIX ""
-
-# Control tmuxinator usage: auto (default), true, or false
-set -gx TWINE_USE_TMUXINATOR auto
-
-# Load Twine plugin from local directory (for testing)
-set -l twine_dir ~/src/pean/twine
-if test -d $twine_dir
-    set -p fish_function_path $twine_dir/functions
-    set fish_complete_path $twine_dir/completions $fish_complete_path
-    source $twine_dir/conf.d/twine.fish
-end
+# Twine aliases
+alias tw='twine worktree'
+alias ts='twine session'
+alias tk='twine kill'
