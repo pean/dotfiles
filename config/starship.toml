@@ -1,13 +1,8 @@
-# Colors are from dracula theme, but modified a litle
-# https://github.com/dracula/starship/blob/master/starship.toml
-
 right_format = """$cmd_duration $time"""
-palette = "nord"
 
 [time]
 disabled = false
 format = "[$time]($style)"
-style = "overlay1"
 time_format = "%-m-%-d%k%M"
 [ruby]
 disabled = true
@@ -25,13 +20,11 @@ disabled = true
 disabled = true
 
 [git_branch]
-# style = "bold #ff79c6"
 symbol = " "
 format = "[$symbol$branch]($style) "
 
 [git_status]
 stashed = ""
-style = "bold green"
 format = '([$all_status $ahead_behind]($style))'
 
 [git_metrics]
@@ -39,34 +32,18 @@ disabled = true
 
 [aws]
 disabled = true
-# style = "bold #ffb86c"
 
 [shell]
 disabled = true
 
 [cmd_duration]
 format = "[$duration]($style)"
-style = "overlay2"
 min_time = 0
 show_milliseconds = true
 show_notifications = false
 
 [docker_context]
 disabled = true
-
-[character]
-# error_symbol = "[➜](bold #ff5555)"
-# success_symbol = "[➜](bold #50fa7b)"
-
-[directory]
-# style = "bold #50fa7b"
-
-[hostname]
-# style = "bold #bd93f9"
-
-[username]
-format = "[$user]($style) on "
-# style_user = "bold #8be9fd"
 
 [package]
 disabled = true

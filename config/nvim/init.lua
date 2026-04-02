@@ -42,6 +42,17 @@ vim.api.nvim_set_hl(0, "ColorColumn", { link = "StatusLine" })
 
 vim.opt.termguicolors = true
 
+-- Read theme preference from state file (default: mocha/dark)
+local theme_file = vim.fn.expand("~/.config/theme")
+local theme_mode = "dark"
+if vim.fn.filereadable(theme_file) == 1 then
+  local content = vim.fn.readfile(theme_file)
+  if content[1] == "latte" then
+    theme_mode = "light"
+  end
+end
+vim.o.background = theme_mode
+
 -- Enable filetype detection and plugins for proper indentation
 vim.cmd("filetype plugin indent on")
 
@@ -49,13 +60,3 @@ require("config.code-stats")
 require("config.cursorline")
 
 require("config.lazy")
-
-vim.cmd.colorscheme("nord")
-
--- Match tmux Nord border colors
--- Inactive borders: nord3 (#4C566A)
--- Active borders: nord15 (#B48EAD)
-vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#4C566A" })
-vim.api.nvim_set_hl(0, "VertSplit", { fg = "#4C566A" })
--- For floating windows
-vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#B48EAD" })
