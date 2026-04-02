@@ -346,7 +346,7 @@ end)
 -- ============================================================================
 -- WINDOW HINTS - VIM-STYLE WINDOW JUMPING
 -- ============================================================================
--- Configure window hints appearance (Nord theme colors)
+-- Configure window hints appearance
 hs.hints.style = "vimperator"  -- Show letters in a box overlay
 hs.hints.fontSize = 24         -- Large, easy to read
 hs.hints.fontName = "Monaspace Krypton NF"

@@ -3,18 +3,7 @@ return {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     init = function ()
-      -- Custom Nord theme with dimmed inactive colors
-      local nord_theme = require('lualine.themes.nord')
-
-      -- Dim all inactive colors by using darker Nord colors
-      nord_theme.inactive = {
-        a = { fg = '#4C566A', bg = '#3B4252', gui = 'none' },
-        b = { fg = '#D8DEE9', bg = '#3B4252', gui = 'none' },
-        c = { fg = '#4C566A', bg = '#3B4252', gui = 'none' },
-        x = { fg = '#4C566A', bg = '#3B4252', gui = 'none' },
-        y = { fg = '#4C566A', bg = '#3B4252', gui = 'none' },
-        z = { fg = '#4C566A', bg = '#3B4252', gui = 'none' },
-      }
+      local palette = dofile(vim.fn.stdpath("config") .. "/lua/palette.lua")
 
       -- Git worktree component with caching (10s cache to avoid subprocess overhead)
       local worktree_cache = { result = '', cwd = '', timestamp = 0 }
@@ -105,7 +94,7 @@ return {
 
       require('lualine').setup({
         options = {
-          theme = nord_theme,
+          theme = "catppuccin",
           component_separators = "",
           section_separators = "",
         },
@@ -120,7 +109,10 @@ return {
           lualine_c = {
             {
               git_worktree,
-              color = { fg = '#B48EAD' }, -- Nord15 purple for worktree
+              color = function()
+                local p = vim.o.background == "light" and palette.latte or palette.mocha
+                return { fg = p.mauve }
+              end,
             },
           },
           lualine_x = {"diff"},

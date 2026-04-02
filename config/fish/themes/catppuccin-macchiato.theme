@@ -1,0 +1,30 @@
+# Catppuccin Macchiato for Fish (generated from theme-palette.conf)
+fish_color_normal cad3f5
+fish_color_autosuggestion 6e738d
+fish_color_cancel --reverse
+fish_color_command 8aadf4
+fish_color_comment 8087a2 --italics
+fish_color_cwd 7dc4e4
+fish_color_cwd_root ed8796
+fish_color_end 8bd5ca
+fish_color_error ed8796
+fish_color_escape f5bde6
+fish_color_history_current cad3f5 --bold
+fish_color_host a6da95
+fish_color_host_remote eed49f
+fish_color_keyword c6a0f6
+fish_color_operator 91d7e3
+fish_color_option 8bd5ca
+fish_color_param cad3f5
+fish_color_quote a6da95
+fish_color_redirection f5bde6 --bold
+fish_color_search_match --background=494d64 --bold
+fish_color_selection cad3f5 --background=494d64 --bold
+fish_color_status ed8796
+fish_color_user a6da95
+fish_color_valid_path --underline
+fish_pager_color_completion cad3f5
+fish_pager_color_description eed49f --italics
+fish_pager_color_prefix normal --bold --underline
+fish_pager_color_progress 24273a --background=c6a0f6 --bold
+fish_pager_color_selected_background --background=494d64
