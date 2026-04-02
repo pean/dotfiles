@@ -244,11 +244,7 @@ return {
         severity_sort = true,
       })
 
-      -- Define diagnostic sign highlights
-      vim.api.nvim_set_hl(0, 'DiagnosticSignError', { fg = '#f38ba8' })
-      vim.api.nvim_set_hl(0, 'DiagnosticSignWarn', { fg = '#fab387' })
-      vim.api.nvim_set_hl(0, 'DiagnosticSignHint', { fg = '#89dceb' })
-      vim.api.nvim_set_hl(0, 'DiagnosticSignInfo', { fg = '#89b4fa' })
+      -- Diagnostic sign highlights now set in theme.lua on_highlights
     end
   },
 

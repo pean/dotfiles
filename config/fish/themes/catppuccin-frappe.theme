@@ -1,0 +1,30 @@
+# Catppuccin Frappe for Fish (generated from theme-palette.conf)
+fish_color_normal c6d0f5
+fish_color_autosuggestion 737994
+fish_color_cancel --reverse
+fish_color_command 8caaee
+fish_color_comment 838ba7 --italics
+fish_color_cwd 85c1dc
+fish_color_cwd_root e78284
+fish_color_end 81c8be
+fish_color_error e78284
+fish_color_escape f4b8e4
+fish_color_history_current c6d0f5 --bold
+fish_color_host a6d189
+fish_color_host_remote e5c890
+fish_color_keyword ca9ee6
+fish_color_operator 99d1db
+fish_color_option 81c8be
+fish_color_param c6d0f5
+fish_color_quote a6d189
+fish_color_redirection f4b8e4 --bold
+fish_color_search_match --background=51576d --bold
+fish_color_selection c6d0f5 --background=51576d --bold
+fish_color_status e78284
+fish_color_user a6d189
+fish_color_valid_path --underline
+fish_pager_color_completion c6d0f5
+fish_pager_color_description e5c890 --italics
+fish_pager_color_prefix normal --bold --underline
+fish_pager_color_progress 303446 --background=ca9ee6 --bold
+fish_pager_color_selected_background --background=51576d
