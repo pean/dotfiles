@@ -39,14 +39,18 @@ local function catppuccin_setup()
     -- Custom highlights on top of catppuccin defaults
     custom_highlights = function(colors)
       return {
-        WinSeparator = { fg = colors.surface1 },
-        VertSplit    = { fg = colors.surface1 },
-        ColorColumn  = { link = "StatusLine" },
+        WinSeparator       = { fg = colors.surface1 },
+        VertSplit          = { fg = colors.surface1 },
+        ColorColumn        = { link = "StatusLine" },
         -- Use catppuccin diff colors
-        DiffAdd      = { bg = colors.surface0 },
-        DiffDelete   = { bg = colors.surface0 },
-        DiffChange   = { bg = colors.surface0 },
-        DiffText     = { bg = colors.surface1 },
+        DiffAdd            = { bg = colors.surface0 },
+        DiffDelete         = { bg = colors.surface0 },
+        DiffChange         = { bg = colors.surface0 },
+        DiffText           = { bg = colors.surface1 },
+        -- GitGutter signs
+        GitGutterAdd       = { fg = colors.green },
+        GitGutterChange    = { fg = colors.yellow },
+        GitGutterDelete    = { fg = colors.red },
       }
     end,
   })
