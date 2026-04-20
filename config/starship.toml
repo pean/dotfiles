@@ -15,17 +15,17 @@ ignore_bare_repo = true
 [git_status]
 format = '([$all_status$ahead_behind]($style) )'
 style = "bold red"
-conflicted = "="    # 
-ahead = "󰶣"         # 
-behind = "󰶡"        # 
-diverged = "⇕"      # 
-up_to_date = ""
-untracked = "?"     # 
-stashed = ""       # 
-modified = "!"      # 
-staged = "+"        # 
-renamed = "»"       # 󰑕
-deleted = "✘"       # 
+conflicted = "◆"
+ahead = "▲"
+behind = "▼"
+diverged = "◀"
+up_to_date = "✓"
+untracked = "○"
+stashed = "" # ●
+modified = "◌"
+staged = "◉"
+renamed = "▷"
+deleted = "◍"
 
 [git_metrics]
 disabled = false
