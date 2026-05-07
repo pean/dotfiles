@@ -86,6 +86,9 @@ function theme-toggle --description "Switch Catppuccin flavor: mocha, macchiato,
     fish_config theme choose "catppuccin-$target" 2>/dev/null
     or _theme_apply_fish_$target
 
+    # --- Starship ---
+    _theme_apply_starship $target
+
     # --- Ghostty (macOS appearance toggle) ---
     if test "$skip_macos" = "0"
         if test "$is_light" = "1"
@@ -96,6 +99,20 @@ function theme-toggle --description "Switch Catppuccin flavor: mocha, macchiato,
     end
 
     echo "Switched to $target"
+end
+
+function _theme_apply_starship
+    set -l flavor $argv[1]
+    set -l dotfiles ~/.dotfiles
+    set -l active ~/.cache/starship-active.toml
+    set -l tmp (mktemp)
+    mkdir -p ~/.cache
+    printf 'palette = "catppuccin_%s"\n\n' $flavor > $tmp
+    cat $dotfiles/config/starship.toml >> $tmp
+    printf '\n' >> $tmp
+    cat $dotfiles/starship-palette-$flavor.toml >> $tmp
+    mv $tmp $active
+    set -Ux STARSHIP_CONFIG $active
 end
 
 function _theme_apply_fish_mocha

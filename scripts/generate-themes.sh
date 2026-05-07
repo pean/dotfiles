@@ -178,6 +178,49 @@ EOF
   echo "  fish/themes/catppuccin-$flavor.theme"
 }
 
+# --- Starship palette ---
+generate_starship() {
+  local flavor=$1
+  declare -n c=$flavor
+  local label file
+  label=$(flavor_label "$flavor")
+  file="$DOTFILES/starship-palette-$flavor.toml"
+
+  cat > "$file" <<EOF
+# Catppuccin $label palette for starship (generated from theme-palette.conf)
+[palettes.catppuccin_$flavor]
+rosewater = "#${c[rosewater]}"
+flamingo  = "#${c[flamingo]}"
+pink      = "#${c[pink]}"
+mauve     = "#${c[mauve]}"
+red       = "#${c[red]}"
+maroon    = "#${c[maroon]}"
+peach     = "#${c[peach]}"
+yellow    = "#${c[yellow]}"
+green     = "#${c[green]}"
+teal      = "#${c[teal]}"
+sky       = "#${c[sky]}"
+sapphire  = "#${c[sapphire]}"
+blue      = "#${c[blue]}"
+lavender  = "#${c[lavender]}"
+text      = "#${c[text]}"
+subtext1  = "#${c[subtext1]}"
+subtext0  = "#${c[subtext0]}"
+overlay2  = "#${c[overlay2]}"
+overlay1  = "#${c[overlay1]}"
+overlay0  = "#${c[overlay0]}"
+surface2  = "#${c[surface2]}"
+surface1  = "#${c[surface1]}"
+surface0  = "#${c[surface0]}"
+base      = "#${c[base]}"
+mantle    = "#${c[mantle]}"
+crust     = "#${c[crust]}"
+purple    = "#${c[mauve]}"
+cyan      = "#${c[sky]}"
+EOF
+  echo "  starship-palette-$flavor.toml"
+}
+
 # --- Neovim palette (lua table with all 4 flavors) ---
 generate_nvim_palette() {
   local file="$DOTFILES/config/nvim/lua/palette.lua"
@@ -238,8 +281,21 @@ for flavor in mocha macchiato frappe latte; do
   generate_ghostty "$flavor"
   generate_tmux "$flavor"
   generate_fish "$flavor"
+  generate_starship "$flavor"
 done
 generate_nvim_palette
+
+# Generate initial active starship config based on current theme state
+current_flavor=$(cat ~/.config/theme 2>/dev/null || echo "mocha")
+mkdir -p ~/.cache
+{
+  printf 'palette = "catppuccin_%s"\n\n' "$current_flavor"
+  cat "$DOTFILES/config/starship.toml"
+  printf '\n'
+  cat "$DOTFILES/starship-palette-$current_flavor.toml"
+} > ~/.cache/starship-active.toml
+fish -c 'set -Ux STARSHIP_CONFIG ~/.cache/starship-active.toml' 2>/dev/null || true
+echo "  starship-active.toml (active: $current_flavor)"
 
 echo ""
 echo "Done. Restart apps or run theme-toggle to apply."
