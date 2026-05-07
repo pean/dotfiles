@@ -1,5 +1,7 @@
 format = """$username$hostname${custom.git_repo}${custom.worktree}$directory$git_branch$git_commit$git_state$git_metrics$git_status$aws$direnv$env_var$mise$sudo$line_break$jobs$battery$status$os$container$shell$character"""
 
+command_timeout = 5000
+
 # right_format = """$cmd_duration $time"""
 
 [time]
@@ -10,7 +12,6 @@ time_format = "%-m-%-d%k%M"
 [git_branch]
 symbol = " "
 format = "[$symbol$branch]($style) "
-ignore_bare_repo = true
 
 [git_status]
 format = '([$all_status$ahead_behind]($style) )'
@@ -21,7 +22,7 @@ behind = "▼"
 diverged = "◀"
 up_to_date = "✓"
 untracked = "○"
-stashed = "" # ●
+stashed = "●"
 modified = "◌"
 staged = "◉"
 renamed = "▷"
