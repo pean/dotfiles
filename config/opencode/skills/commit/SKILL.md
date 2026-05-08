@@ -1,0 +1,1 @@
+../../../../claude-dreams/skills/commit/SKILL.md
