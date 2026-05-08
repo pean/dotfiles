@@ -43,7 +43,7 @@ return {
         end
 
         -- Check if it's actually a worktree (common_dir will be absolute path)
-        if not common_dir:match('%.git/worktrees') and common_dir == '.git' then
+        if not common_dir:match('%.git/worktrees') then
           worktree_cache.result = '[M]'
           worktree_cache.cwd = cwd
           worktree_cache.timestamp = now
