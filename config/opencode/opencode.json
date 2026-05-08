@@ -1,17 +1,48 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "mcp": {
-    "director": {
-      "type": "remote",
-      "url": "http://localhost:3673/dev/sse",
-      "enabled": false
-    },
     "linear": {
       "type": "remote",
       "url": "https://mcp.linear.app/sse",
       "enabled": true,
       "oauth": {}
-    }
+    },
+    "getdreams-internal": {
+      "type": "remote",
+      "url": "https://internal.mcp.getdreams.com/mcp"
+    },
+    "getdreams-dev": {
+      "type": "remote",
+      "url": "https://dev.mcp.getdreams.com/mcp"
+    },
+    "getdreams-coms": {
+      "type": "remote",
+      "url": "https://coms.mcp.getdreams.com/mcp"
+    },
+    "getdreams-local": {
+      "type": "remote",
+      "url": "http://localhost:8787/mcp"
+    },
+    "Figma": {
+      "type": "remote",
+      "url": "https://mcp.figma.com/mcp",
+      "oauth": {}
+    },
+    "LaunchDarkly": {
+      "type": "remote",
+      "url": "https://mcp.launchdarkly.com/mcp/fm",
+      "oauth": {}
+    },
+    "Sentry": {
+      "type": "remote",
+      "url": "https://mcp.sentry.dev/mcp",
+      "oauth": {}
+    },
+    "WebFlow": {
+      "type": "remote",
+      "url": "https://mcp.webflow.com/mcp",
+      "oauth": {}
+    },
   },
   "permission": {
     "read": {
