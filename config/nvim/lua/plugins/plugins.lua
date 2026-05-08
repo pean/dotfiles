@@ -1,6 +1,6 @@
 return {
   -- Copilot
-  { "github/copilot.vim" },
+  -- { "github/copilot.vim" },
 
   -- Code stats
   -- Create `~/.config/nvim/secrets.lua` with `vim.g.codestats_api_key = "your-api-key"`
