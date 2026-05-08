@@ -102,11 +102,11 @@
     ]
   },
   "enabledPlugins": {
-    "rust-analyzer-lsp@claude-plugins-official": true
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "ruby-lsp@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true,
-  "feedbackSurveyState": {
-    "lastShownTime": 1754085546488
-  },
-  "model": "sonnet"
+  "theme": "dark-daltonized",
+  "editorMode": "vim",
+  "autoCompactEnabled": true
 }
