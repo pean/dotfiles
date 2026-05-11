@@ -106,7 +106,7 @@
     "ruby-lsp@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true,
-  "theme": "dark-daltonized",
+  "theme": "auto",
   "editorMode": "vim",
   "autoCompactEnabled": true,
   "mcp": {
