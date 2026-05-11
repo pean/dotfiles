@@ -1,7 +1,7 @@
 #!/opt/homebrew/bin/fish
 
 # upgrade nvim plugins
-nvim --headless "+Lazy! sync " +qa
+nvim --headless -c "lua vim.pack.update(nil, {force=true})" +qa
 nvim --headless "+MasonUpdate" +qa
 nvim --headless "+TSUpdate" +qa
 
