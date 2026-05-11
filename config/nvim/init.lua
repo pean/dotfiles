@@ -1,8 +1,8 @@
 vim.g.mapleader = ","
 
-vim.keymap.set("n", "<leader>n", ":noh<CR>")
-vim.keymap.set("n", "<leader>cn", ":cnext<CR>")
-vim.keymap.set("n", "<leader>bd", ":%bd!<CR>")
+vim.keymap.set("n", "<leader>n", vim.cmd.nohlsearch)
+vim.keymap.set("n", "<leader>cn", vim.cmd.cnext)
+vim.keymap.set("n", "<leader>bd", function() vim.cmd("%bd!") end)
 
 vim.opt.clipboard = "unnamed" -- interact with system clipboard
 
@@ -53,10 +53,12 @@ if vim.fn.filereadable(theme_file) == 1 then
 end
 vim.o.background = theme_mode
 
--- Enable filetype detection and plugins for proper indentation
-vim.cmd("filetype plugin indent on")
-
 require("config.code-stats")
 require("config.cursorline")
 
-require("config.lazy")
+require("plugins.theme")
+require("plugins.lualine")
+require("plugins.treesitter")
+require("plugins.telescope")
+require("plugins.lsp")
+require("plugins.plugins")
