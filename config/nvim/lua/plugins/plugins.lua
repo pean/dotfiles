@@ -95,13 +95,13 @@ return {
 
 
   -- vim-fugitive
-  { "tpope/vim-fugitive" },
-
-  -- rhubarb.vim - for GBrowse through fugitive
-  {
-    "tpope/vim-rhubarb",
-    dependencies = { "tpope/vim-fugitive" },
-  },
+  -- { "tpope/vim-fugitive" },
+  --
+  -- -- rhubarb.vim - for GBrowse through fugitive
+  -- {
+  --   "tpope/vim-rhubarb",
+  --   dependencies = { "tpope/vim-fugitive" },
+  -- },
 
 
   -- color preview
@@ -111,14 +111,14 @@ return {
       enable_tailwind = true,
     }
   },
-  {
-    "NightsPaladin/sops.nvim",
-    config = function()
-      require("sops").setup({
-        -- Configuration options
-      })
-    end,
-  },
+  -- {
+  --   "NightsPaladin/sops.nvim",
+  --   config = function()
+  --     require("sops").setup({
+  --       -- Configuration options
+  --     })
+  --   end,
+  -- },
   {
     'numToStr/Comment.nvim',
     opts = {
