@@ -1,4 +1,5 @@
 vim.pack.add({
+  'https://github.com/github/copilot.vim',
   'https://gitlab.com/code-stats/code-stats-vim.git',
   'https://github.com/lewis6991/gitsigns.nvim',
   'https://github.com/christoomey/vim-tmux-navigator',
