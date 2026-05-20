@@ -105,8 +105,9 @@
     "rust-analyzer-lsp@claude-plugins-official": true,
     "ruby-lsp@claude-plugins-official": true
   },
-  "alwaysThinkingEnabled": true,
+  "alwaysThinkingEnabled": false,
   "theme": "dark-daltonized",
   "editorMode": "vim",
-  "autoCompactEnabled": true
+  "autoCompactEnabled": true,
+  "skipAutoPermissionPrompt": true
 }
