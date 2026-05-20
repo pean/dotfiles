@@ -4,7 +4,7 @@
 set -euo pipefail
 
 DOTFILES="$(cd "$(dirname "$0")/.." && pwd)"
-PALETTE="$DOTFILES/theme-palette.conf"
+PALETTE="$DOTFILES/themes/theme-palette.conf"
 
 if [[ ! -f "$PALETTE" ]]; then
   echo "Error: $PALETTE not found" >&2
@@ -105,7 +105,7 @@ generate_tmux() {
   declare -n c=$flavor
   local label file
   label=$(flavor_label "$flavor")
-  file="$DOTFILES/tmux-$flavor.conf"
+  file="$DOTFILES/themes/tmux-$flavor.conf"
 
   local win_fmt win_cur_fmt status_style status_right
   win_fmt="#[fg=#${c[overlay1]},bg=#${c[surface0]}] #I #[fg=#${c[text]},bg=#${c[surface0]}] #W "
@@ -184,7 +184,7 @@ generate_starship() {
   declare -n c=$flavor
   local label file
   label=$(flavor_label "$flavor")
-  file="$DOTFILES/starship-palette-$flavor.toml"
+  file="$DOTFILES/themes/starship-palette-$flavor.toml"
 
   cat > "$file" <<EOF
 # Catppuccin $label palette for starship (generated from theme-palette.conf)
@@ -292,7 +292,7 @@ mkdir -p ~/.cache
   printf 'palette = "catppuccin_%s"\n\n' "$current_flavor"
   cat "$DOTFILES/config/starship.toml"
   printf '\n'
-  cat "$DOTFILES/starship-palette-$current_flavor.toml"
+  cat "$DOTFILES/themes/starship-palette-$current_flavor.toml"
 } > ~/.cache/starship-active.toml
 fish -c 'set -Ux STARSHIP_CONFIG ~/.cache/starship-active.toml' 2>/dev/null || true
 echo "  starship-active.toml (active: $current_flavor)"
