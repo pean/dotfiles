@@ -1,2 +1,2 @@
 EXCLUDES="README.md add.sh scripts tags themes"
-UNDOTTED="src AGENTS.md Library"
+UNDOTTED="src CLAUDE.md AGENTS.md Library"
