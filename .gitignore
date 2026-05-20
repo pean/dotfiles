@@ -8,3 +8,7 @@ gmailctl/variables.libsonnet
 # --- END RCM MANAGED ---
 
 # Other private files
+
+# Override global gitignore to track these in this repo
+!CLAUDE.md
+!AGENTS.md
