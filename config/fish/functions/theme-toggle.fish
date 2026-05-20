@@ -63,7 +63,7 @@ function theme-toggle --description "Switch Catppuccin flavor: mocha, macchiato,
     set -l is_light (test "$target" = "latte"; and echo 1; or echo 0)
 
     # --- tmux (symlink swap) ---
-    ln -sf $dotfiles/tmux-$target.conf ~/.tmux-theme.conf
+    ln -sf $dotfiles/themes/tmux-$target.conf ~/.tmux-theme.conf
     if set -q TMUX
         tmux source-file ~/.tmux.conf 2>/dev/null
     end
@@ -110,7 +110,7 @@ function _theme_apply_starship
     printf 'palette = "catppuccin_%s"\n\n' $flavor > $tmp
     cat $dotfiles/config/starship.toml >> $tmp
     printf '\n' >> $tmp
-    cat $dotfiles/starship-palette-$flavor.toml >> $tmp
+    cat $dotfiles/themes/starship-palette-$flavor.toml >> $tmp
     mv $tmp $active
     set -Ux STARSHIP_CONFIG $active
 end
