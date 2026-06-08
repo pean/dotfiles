@@ -28,7 +28,8 @@ If working across multiple repos, say so:
 ## Rules
 
 - Never commit directly to `main`, `master`, or `develop`
-- Never credit yourself in commits or PRs
+- Never add `Co-Authored-By` trailers to commits (for any tool, model, or agent)
+- Never add AI-generated footers (e.g. "🤖 Generated with Claude Code") to PR descriptions
 - Conventional Commits format for both commit messages and PR titles
 - Each commit must be isolated and standalone: it should make sense on its own,
   pass CI on its own, and not bundle unrelated changes

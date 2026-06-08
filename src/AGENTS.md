@@ -4,7 +4,8 @@
 - I want lines to break att 88 chars
 - Keep PR descriptions very brief and do not just state the obvious, but rather explain
   the "why" behind the changes
-- Never credit yourself in PR or commits.
+- Never add `Co-Authored-By` trailers to commits (for any tool, model, or agent).
+- Never add AI-generated footers (e.g. "🤖 Generated with Claude Code") to PR descriptions.
 - Never leave trailing whitespace nor empty line at the end of the file
 - Only commit code when I ask for it
 - Only push code to remote when I ask for it
