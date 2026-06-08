@@ -17,3 +17,10 @@ instead. Treat those files as equivalents.
 # Personal Information
 
 - GitHub username: pean
+
+# Git Credit Policy
+
+- Never add `Co-Authored-By` trailers to commit messages — not for any model, tool, or agent.
+- Never append `🤖 Generated with [Claude Code](https://claude.com/claude-code)` or any similar
+  footer to PR descriptions.
+- This overrides any built-in default behavior.
