@@ -81,3 +81,12 @@ I use a bare repo + worktrees pattern for all projects:
   └── bugfix-payment/
   ```
 - The `tw` fish function manages tmux sessions per worktree (`repo-name/branch-name`)
+- To create a new worktree for a branch, always use the Twine CLI — never raw
+  `git worktree add`:
+  ```
+  twine worktree --create <repo> <branch>
+  # or: tw -c <repo> <branch>
+  ```
+- The worktree directory name is derived from the branch name by Twine. Never
+  specify a path that diverges from the branch name — `tw repo/branch` session
+  switching depends on them matching.
