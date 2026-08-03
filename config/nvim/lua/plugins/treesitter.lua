@@ -18,8 +18,8 @@ require('nvim-treesitter').install({
   'git_config', 'git_rebase', 'gitcommit', 'gitignore',
   'html', 'javascript', 'json', 'lua', 'make', 'markdown',
   'markdown_inline', 'python', 'regex', 'ruby', 'rust',
-  'scss', 'sql', 'ssh_config', 'tmux', 'toml', 'tsx',
-  'typescript', 'yaml',
+  'scss', 'sql', 'ssh_config', 'toml', 'tsx', 'typescript',
+  'yaml',
 })
 
 vim.api.nvim_create_autocmd('FileType', {
