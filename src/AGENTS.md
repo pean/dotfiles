@@ -90,3 +90,52 @@ I use a bare repo + worktrees pattern for all projects:
 - The worktree directory name is derived from the branch name by Twine. Never
   specify a path that diverges from the branch name — `tw repo/branch` session
   switching depends on them matching.
+
+## Stacked Pull Requests
+
+A stack is a chain of branches/PRs where each one is based on the layer below it,
+letting a large change be reviewed and merged as independent, ordered pieces
+instead of one big PR. Manage stacks with the `gh stack` CLI (`github/gh-stack`
+extension) — never construct stacked branches/PRs by hand.
+
+Core commands:
+- `gh stack init <branch>` — start a stack (or adopt existing branches) off the
+  default branch
+- `gh stack add -Am "<msg>" <branch>` — add a layer on top with a commit
+- `gh stack submit` — push all branches, create/update PRs, link them as a stack
+- `gh stack sync` — fetch, cascade-rebase, push, and resync PR state; run this
+  before resuming work on a stack or before merging
+- `gh stack rebase` — cascading rebase only, without the push/sync (`--continue`/
+  `--abort` for conflicts)
+- `gh stack modify` — reorder/drop/fold/insert/rename layers via an interactive TUI
+- `gh stack merge` — atomic merge up to a chosen layer, respecting merge queues
+- Navigation: `gh stack top` / `bottom` / `up` / `down` / `switch` / `trunk` /
+  `view`
+
+### Worktree mapping: one worktree per stack
+
+Use a single Twine worktree for the whole stack, not one per layer:
+
+- `twine worktree --create <repo> <bottom-branch>`, then `gh stack init` from
+  inside it.
+- Default to the **top-of-stack checkout** for all work. Each layer branch is
+  built on top of the one below it — normal git history, not an independent
+  diff — so the top branch's working tree already contains every layer's
+  changes combined. `gh stack add` leaves you on the new top layer
+  automatically; run builds, tests, and the app against this checkout.
+- To fix or review one specific lower layer: `gh stack down`/`switch` to it,
+  commit the change, then `gh stack sync` (or `rebase`) to cascade it upward,
+  then `gh stack top` to return to the default working checkout. Treat this as
+  a targeted detour — `up`/`down`/`switch` are not general-purpose navigation,
+  the top checkout is where work normally happens.
+- Never create a separate Twine worktree per layer. That fragments gh-stack's
+  local branch tracking across checkouts, so `sync`/`rebase` run in one
+  worktree won't be reflected in the others.
+- This is the one deliberate exception to "the worktree directory name matches
+  the branch name": a stack's worktree is keyed off the bottom branch (or a
+  stack-level name), and layer branches are checked out inside it via
+  `gh stack`, not via separate `twine worktree` calls.
+
+All the usual conventions still apply — branch naming (`type/description`),
+conventional commit/PR titles, draft PRs assigned to `pean`, no
+Co-Authored-By/AI footers. A stack is just multiple PRs instead of one.
