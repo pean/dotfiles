@@ -100,17 +100,65 @@ extension) — never construct stacked branches/PRs by hand.
 
 Core commands:
 - `gh stack init <branch>` — start a stack (or adopt existing branches) off the
-  default branch
-- `gh stack add -Am "<msg>" <branch>` — add a layer on top with a commit
-- `gh stack submit` — push all branches, create/update PRs, link them as a stack
+  default branch. Pass multiple branch names to create every layer at once
+  (`gh stack init layer1 layer2 layer3`) when the shape is already known —
+  useful for planning a split upfront rather than growing it as you go.
+- `gh stack add -Am "<msg>" <branch>` — add a **new** layer on top with a
+  commit. Only for creating a layer that doesn't exist yet. If the branch was
+  already created (e.g. via a multi-branch `gh stack init`), just `git add
+  <files>` the layer's own files and `git commit` normally — `gh stack add`
+  refuses with "can only add branches to the top of the stack" otherwise.
+- `gh stack submit` — push all branches, create/update PRs, link them as a
+  stack. Non-interactively (or with `--auto`), PRs default to draft with an
+  auto-generated title from the branch name — fix the title, body, and
+  assignee per-PR afterward with `gh pr edit <n>`.
 - `gh stack sync` — fetch, cascade-rebase, push, and resync PR state; run this
-  before resuming work on a stack or before merging
+  before resuming work on a stack or before merging. **Also run it after
+  amending any commit on a lower layer** — checking out or switching to an
+  upper layer does NOT automatically rebase it onto a lower layer's new SHA;
+  the upper layer's working tree silently still reflects the old, pre-amend
+  content until you sync.
 - `gh stack rebase` — cascading rebase only, without the push/sync (`--continue`/
   `--abort` for conflicts)
 - `gh stack modify` — reorder/drop/fold/insert/rename layers via an interactive TUI
 - `gh stack merge` — atomic merge up to a chosen layer, respecting merge queues
 - Navigation: `gh stack top` / `bottom` / `up` / `down` / `switch` / `trunk` /
   `view`
+
+### Before running `gh stack init`
+
+- **Fetch and check local default-branch staleness first**: `gh stack init`
+  bases new branches off the *local* ref for the default branch, which can
+  silently lag `origin` (e.g. after other worktrees/sessions merged PRs).
+  Building a stack on a stale base produces conflicts in generated files
+  (`db/schema.rb`, lockfiles) that look like real merge conflicts but are
+  actually just "wrong base" — the fix is `gh stack sync` or `gh stack
+  rebase` against the freshly-fetched `origin/<default>`, not hand-resolving
+  the conflict. Cheaper to `git fetch origin <default-branch>` and compare
+  before creating the stack at all.
+- **The working tree must be clean.** `gh stack init` runs real `git
+  checkout`s per branch it creates; uncommitted changes abort it partway
+  through, leaving some branches created and others not. `git stash push -u`
+  first, create the stack, `git checkout <bottom-branch>`, then `git stash
+  pop` and distribute the changes across layers.
+
+### Distributing existing uncommitted work across layers
+
+When splitting one pile of uncommitted changes into a pre-planned stack
+(rather than writing each layer's code fresh): stage and commit each layer's
+exact file list in order (bottom to top), running `gh stack sync` before
+each `git checkout` to a not-yet-visited upper layer so it picks up the
+lower layer's latest SHA — otherwise it still points at the stack's original
+empty base and the amend/rebase dance has to happen twice.
+
+If a shared file (e.g. a helper module) needs a method removed as part of
+the split, don't remove it in the layer that adds its replacement — remove
+it in the layer where its *last remaining caller* is migrated. Otherwise an
+earlier layer is broken standalone (its own views still call the old
+method) even though the combined branch works, which defeats the point of
+independently-reviewable layers. Verify this by checking out and testing
+each layer **from a fully clean working tree** — leftover uncommitted files
+from a later layer can mask a lower layer that's actually broken on its own.
 
 ### Worktree mapping: one worktree per stack
 
