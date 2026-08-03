@@ -92,7 +92,22 @@ If all changes belong to one concern: one commit.
 If changes span multiple concerns: plan a sequence of commits, ordered so each
 builds cleanly on the previous one.
 
-Present the plan to the user before committing if more than one commit will be made:
+If the concerns are large or independent enough to warrant separate review, CI,
+or merge timing — not just separate commits — offer stacking as an alternative
+to multi-commit/single-PR instead of deciding silently:
+```
+These changes span 2 independent concerns. I could:
+a) Make 2 commits on this branch, one PR
+b) Stack them as 2 PRs (gh stack) — separate review/merge per concern
+Which do you prefer?
+```
+Default to (a) when concerns are small or tightly related, or when the user
+hasn't indicated they want separate review — only surface (b), don't switch to
+it unprompted. If the user picks stacking, follow the `gh stack` workflow in
+`src/AGENTS.md` (`init`/`add`/`submit`) instead of the commit/PR steps below.
+
+Otherwise, present the commit plan to the user before committing if more than
+one commit will be made:
 ```
 I'll make 2 commits:
 1. fix(auth): correct token expiry check
