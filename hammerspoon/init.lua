@@ -173,18 +173,6 @@ local function moveWindowToWorkspace(workspaceNum)
     local screenUUID = mainScreen:getUUID()
     local screenSpaces = allSpaces[screenUUID]
 
-    -- Debug logging
-    print("=== Move to workspace " .. workspaceNum .. " ===")
-    print("Screen UUID: " .. screenUUID)
-    print("Total spaces found: " .. (screenSpaces and #screenSpaces or 0))
-    print("Current space: " .. spaces.focusedSpace())
-
-    if screenSpaces then
-        for i, spaceID in ipairs(screenSpaces) do
-            print("  Space " .. i .. ": " .. spaceID)
-        end
-    end
-
     if not screenSpaces then
         hs.alert.show("Could not get spaces")
         return
@@ -196,11 +184,9 @@ local function moveWindowToWorkspace(workspaceNum)
     end
 
     local targetSpace = screenSpaces[workspaceNum]
-    print("Moving window " .. win:id() .. " to space " .. targetSpace)
 
     spaces.moveWindowToSpace(win, targetSpace)
 
-    print("Move complete")
     hs.alert.show("Moved to workspace " .. workspaceNum)
 end
 
