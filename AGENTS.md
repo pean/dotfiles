@@ -8,6 +8,13 @@ instead. Treat those files as equivalents.
 - Match response length to task complexity; don't pad short answers or truncate complex
   ones
 
+# Response Style
+
+- Less is more — skip preamble and elaboration; get straight to the point unless I ask
+  for more detail or explanation
+- Use clear, plain English: preserve accuracy, nuance, necessary technical terms, and my
+  requested level of detail — cut filler, not substance
+
 # About Me
 
 - Developer working primarily in Ruby and TypeScript
