@@ -10,7 +10,7 @@ require("mason").setup()
 
 require("mason-lspconfig").setup({
   ensure_installed = {
-    "ts_ls",         -- TypeScript/JavaScript
+    "vtsls",         -- TypeScript/JavaScript
     "ruby_lsp",      -- Ruby
     "cssls",         -- CSS
     "html",          -- HTML
@@ -27,11 +27,14 @@ vim.lsp.log.set_level(vim.log.levels.WARN)
 -- Configure LSP servers using the modern vim.lsp.config API
 
 -- TypeScript/JavaScript
-vim.lsp.config('ts_ls', {
-  cmd = { 'typescript-language-server', '--stdio' },
+vim.lsp.config('vtsls', {
+  cmd = { 'vtsls', '--stdio' },
   filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
   root_markers = { 'package.json', 'tsconfig.json', 'jsconfig.json', '.git' }
 })
+
+-- Superseded by vtsls; nvim-lspconfig auto-registers it, so disable explicitly
+vim.lsp.config('ts_ls', { enabled = false })
 
 -- Ruby
 vim.lsp.config('ruby_lsp', {
@@ -122,7 +125,7 @@ vim.lsp.config('yamlls', {
   root_markers = { '.yamllint', '.git' }
 })
 
-vim.lsp.enable({ 'ts_ls', 'ruby_lsp', 'lua_ls', 'rust_analyzer', 'cssls', 'html', 'jsonls', 'yamlls' })
+vim.lsp.enable({ 'vtsls', 'ruby_lsp', 'lua_ls', 'rust_analyzer', 'cssls', 'html', 'jsonls', 'yamlls' })
 
 -- Custom go-to-definition that avoids quickfix for single/duplicate results
 local function goto_definition()
