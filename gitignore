@@ -6,3 +6,5 @@
 .overmind.env
 Procfile.dev
 .bash_history
+
+**/.claude/settings.local.json
