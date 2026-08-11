@@ -3,12 +3,7 @@ backups/
 cache/
 sessions/
 *.jsonl
-.claude.json
 mcp-needs-auth-cache.json
 stats-cache.json
-policy-limits.json
-daemon-auth-status.json
-daemon-auth-cooldown
-daemon.log
 .last-cleanup
 .last-update-result.json
