@@ -118,7 +118,7 @@ vim.lsp.config('jsonls', {
 
 vim.lsp.config('yamlls', {
   cmd = { 'yaml-language-server', '--stdio' },
-  filetypes = { 'yaml', 'yml' },
+  filetypes = { 'yaml' },
   root_markers = { '.yamllint', '.git' }
 })
 
