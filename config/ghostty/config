@@ -23,6 +23,7 @@ font-feature = +cv31
 
 font-size = 12.5
 font-variation = wght=200
+macos-icon = holographic
 macos-titlebar-style = hidden
 theme = dark:catppuccin-mocha,light:catppuccin-latte
 window-decoration = false
