@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "mcp__claude_ai_Linear__get_issue",
+      "mcp__claude_ai_Linear__list_teams",
+      "Bash(bun run typecheck*)"
+    ]
+  },
+  "model": "opus[1m]",
+  "enabledPlugins": {
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "ruby-lsp@claude-plugins-official": true,
+    "swift-lsp@claude-plugins-official": true
+  },
+  "alwaysThinkingEnabled": false,
+  "skipWorkflowUsageWarning": true,
+  "theme": "auto",
+  "editorMode": "vim",
+  "autoCompactEnabled": true,
+  "skipAutoPermissionPrompt": true,
+  "mcp": {
+    "servers": {
+      "getdreams-internal": {
+        "type": "remote",
+        "url": "https://internal.mcp.getdreams.com/mcp"
+      },
+      "getdreams-dev": {
+        "type": "remote",
+        "url": "https://dev.mcp.getdreams.com/mcp"
+      },
+      "getdreams-coms": {
+        "type": "remote",
+        "url": "https://coms.mcp.getdreams.com/mcp"
+      },
+      "getdreams-local": {
+        "type": "remote",
+        "url": "http://localhost:8787/mcp"
+      },
+      "linear": {
+        "type": "remote",
+        "url": "https://mcp.linear.app/sse"
+      },
+      "figma": {
+        "type": "remote",
+        "url": "https://mcp.figma.com/mcp"
+      },
+      "launchdarkly": {
+        "type": "remote",
+        "url": "https://mcp.launchdarkly.com/mcp/fm"
+      },
+      "sentry": {
+        "type": "remote",
+        "url": "https://mcp.sentry.dev/mcp"
+      },
+      "lokalise_pm": {
+        "type": "http",
+        "url": "https://mcp.lokalise.com/mcp/project-management"
+      },
+      "lokalise_dev": {
+        "type": "http",
+        "url": "https://mcp.lokalise.com/mcp/software-development"
+      },
+      "webflow": {
+        "type": "remote",
+        "url": "https://mcp.webflow.com/mcp"
+      }
+    }
+  }
+}

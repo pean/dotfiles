@@ -103,14 +103,18 @@
       "Write(**/.gnupg/**)"
     ]
   },
+  "model": "opus[1m]",
   "enabledPlugins": {
     "rust-analyzer-lsp@claude-plugins-official": true,
-    "ruby-lsp@claude-plugins-official": true
+    "ruby-lsp@claude-plugins-official": true,
+    "swift-lsp@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": false,
+  "skipWorkflowUsageWarning": true,
   "theme": "auto",
   "editorMode": "vim",
   "autoCompactEnabled": true,
+  "skipAutoPermissionPrompt": true,
   "mcp": {
     "servers": {
       "getdreams-internal": {
@@ -145,11 +149,18 @@
         "type": "remote",
         "url": "https://mcp.sentry.dev/mcp"
       },
+      "lokalise_pm": {
+        "type": "http",
+        "url": "https://mcp.lokalise.com/mcp/project-management"
+      },
+      "lokalise_dev": {
+        "type": "http",
+        "url": "https://mcp.lokalise.com/mcp/software-development"
+      },
       "webflow": {
         "type": "remote",
         "url": "https://mcp.webflow.com/mcp"
       }
     }
-  },
-  "skipAutoPermissionPrompt": true
+  }
 }
