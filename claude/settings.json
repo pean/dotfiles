@@ -197,6 +197,7 @@
       "Write(**/.gnupg/**)"
     ]
   },
+  "model": "sonnet",
   "enabledPlugins": {
     "rust-analyzer-lsp@claude-plugins-official": true,
     "ruby-lsp@claude-plugins-official": true
@@ -207,5 +208,5 @@
   "editorMode": "vim",
   "autoCompactEnabled": true,
   "skipAutoPermissionPrompt": true,
-  "model": "sonnet"
+  "agentPushNotifEnabled": true
 }
