@@ -26,6 +26,18 @@ it's the whole point of self-improvement.
   lines without context (an if/else pair read as a duplicated call; a "dropped
   refetch" that had moved to its only caller).
 
+- 2026-09-03: Check what an endpoint actually returns before claiming a tag or
+  cache key is wrong. Two findings on #1516 were rebutted by the author because
+  they were reasoned from names, not endpoints: `Savehacks.list` is
+  `GET v1/savehacks?market_id=` (a market-wide catalog, no user id), so tagging
+  it `products` was correct; and `rejectInvite` never called
+  `refreshDreamsDomain` in the old code either. Read the API module and the
+  pre-change code path first.
+- 2026-09-03: When diffing what an author changed in response to review, compare
+  against their commit alone, not a range that spans a `Merge branch 'main'`
+  commit. Doing the latter on #1516 attributed a dependency bump from main to
+  the author and produced a bogus "unrelated scope" note that Peter caught.
+
 ## Tracked PRs
 
 One entry per PR ever reviewed or seen as a review request.
@@ -33,13 +45,30 @@ One entry per PR ever reviewed or seen as a review request.
 ### getdreams/dreams-web-app#1516 — Feat: centralised cache invalidation
 - Author: glowacki-dev
 - Status: reviewed
-- Last reviewed commit: 5126349fc0cf455cbc68da15ad32799ecd8e0901 (2026-09-03)
-- Last seen commit: 5126349fc0cf455cbc68da15ad32799ecd8e0901 (2026-09-03)
+- Last reviewed commit: e270e0ece7d7d9be375abc9193a508bdaff26663 (2026-09-03)
+- Last seen commit: e270e0ece7d7d9be375abc9193a508bdaff26663 (2026-09-03)
 - Summary: Replaces scattered query-key invalidation with tag-based
   invalidation — query factories declare tags in TanStack `meta`, mutations and
   SSE handlers call `invalidateCaches(tag, userId)`. Fixes SUP-343. ~95 files,
   substance in `utils/cacheInvalidation.ts` (new), `EventProvider` (+19/-130)
   and the deleted `utils/dreamsCache.ts`.
+- Round 2 (2026-09-03): Author replied to 7/9 threads and pushed `e270e0e`
+  ("chore: address review findings"). Fixed: Sentry reporting in
+  `invalidateCaches` (`throwOnError` flipped to `true` so the catch is
+  reachable, with a test), `products` dropped from `useDreams`, `getQueryKey`
+  coupling comment, `typeof tag === "string"` narrowing, `.finally()` comments
+  on both EventProvider sites. Also centralised the Sentry test mock into a new
+  `jest.setup.ts` (consequence of the Sentry fix). CodeQL's three
+  "returnless function" findings resolved. Peter reacted on the threads rather
+  than replying — no further comments posted.
+  REBUTTED (author was right, my findings were wrong): the savehacks tag
+  mismatch and the invite-reject finding — see the 2026-09-03 instruction on
+  checking endpoints. Partially upheld: the home-balance finding, narrowed by
+  the author to one-time purchases and fixed in `SavehackCardDetails` via a
+  `frequency === "once"` branch.
+  The structural point (invalidation moved out of shared helpers to ~50 call
+  sites) was dropped by Peter — with two of its three supporting bugs
+  invalidated, the argument no longer stands up.
 - Notes: Reviewed 2026-09-03, posted review 5099830037 (COMMENTED) with 9
   anchored inline comments + short summary. Context: this builds on the big
   loading/performance work, where the recurring problem is data going stale and
