@@ -12,3 +12,6 @@ gmailctl/variables.libsonnet
 # Override global gitignore to track these in this repo
 !CLAUDE.md
 !AGENTS.md
+
+# PR review state — internal review notes, never commit to this public repo
+claude-dreams/skills/pr-review/pr-review-log.md
