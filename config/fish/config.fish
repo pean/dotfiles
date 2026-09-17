@@ -23,6 +23,12 @@ if status is-interactive
   # https://github.com/Homebrew/homebrew-core/issues/59484
   # https://discourse.brew.sh/t/why-does-tmuxinator-sets-gem-home/7296
   set -e GEM_HOME
+
+  # Re-apply the active Catppuccin flavor's fish colors on every shell
+  # startup, so stale universal fish_color_* vars (e.g. from a past
+  # `fish_config theme choose`) never shadow the current theme.
+  set -l _theme_flavor (cat ~/.config/theme 2>/dev/null; or echo mocha)
+  functions -q "_theme_apply_fish_$_theme_flavor"; and _theme_apply_fish_$_theme_flavor
 end
 
 # Twine aliases
