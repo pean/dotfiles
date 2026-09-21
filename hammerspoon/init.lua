@@ -35,6 +35,9 @@
 --   Ctrl + Cmd + =          Grow window (50px larger)
 --   Ctrl + Cmd + -          Shrink window (50px smaller)
 --
+-- DISABLED NATIVE SHORTCUTS
+--   Cmd + M                 No-op (blocks native window minimize)
+--
 -- ============================================================================
 
 -- Disable animation for faster window movements
@@ -61,52 +64,10 @@ local function getFocusedWindow()
 end
 
 -- ============================================================================
--- TERMINAL LAUNCHER
+-- DISABLE NATIVE MINIMIZE
 -- ============================================================================
--- Workaround: Find existing Alacritty window, go there, create new window, bring back
-local spaces = require("hs.spaces")
-
-hs.hotkey.bind({"cmd", "alt"}, "N", function()
-    local alacritty = hs.application.find("Alacritty")
-
-    if not alacritty then
-        -- No Alacritty running - just launch it
-        hs.application.launchOrFocus("Alacritty")
-        return
-    end
-
-    -- Get current space
-    local currentSpace = spaces.focusedSpace()
-
-    -- Get any Alacritty window
-    local alacrittyWindow = alacritty:mainWindow()
-
-    if not alacrittyWindow then
-        -- Alacritty running but no windows - launch new instance
-        hs.application.launchOrFocus("Alacritty")
-        return
-    end
-
-    -- Go to the space with Alacritty window
-    local alacrittySpace = spaces.windowSpaces(alacrittyWindow)[1]
-    spaces.gotoSpace(alacrittySpace)
-
-    -- Wait a moment, then send Cmd+N to create new window
-    hs.timer.doAfter(0.1, function()
-        alacritty:activate()
-        hs.eventtap.keyStroke({"cmd"}, "N")
-
-        -- Wait for new window, then move it back
-        hs.timer.doAfter(0.3, function()
-            local newWindow = alacritty:focusedWindow()
-            if newWindow then
-                spaces.moveWindowToSpace(newWindow, currentSpace)
-                spaces.gotoSpace(currentSpace)
-                newWindow:focus()
-            end
-        end)
-    end)
-end)
+-- Intercept Cmd+M globally and do nothing, so windows never minimize
+hs.hotkey.bind({"cmd"}, "M", function() end)
 
 -- ============================================================================
 -- WINDOW POSITIONING - FILL SCREEN (NOT FULLSCREEN)
