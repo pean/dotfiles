@@ -43,10 +43,10 @@ key-mapping.preset = 'qwerty'
 
 gaps.inner.horizontal = 8
 gaps.inner.vertical =   8
-gaps.outer.left =       8
-gaps.outer.bottom =     8
-gaps.outer.top =        8
-gaps.outer.right =      8
+gaps.outer.left =       0
+gaps.outer.bottom =     0
+gaps.outer.top =        0
+gaps.outer.right =      0
 
 # Workspaces 1-10 always live on the main monitor. Docked (2 monitors):
 # that's the external display, and the laptop screen gets its own single
