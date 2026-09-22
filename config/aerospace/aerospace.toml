@@ -67,6 +67,11 @@ gaps.outer.right =      8
     L = 'secondary'
 
 [mode.main.binding]
+    # New Ghostty window on the current workspace. `open -na` starts a new
+    # instance instead of activating the app, so it can't trigger macOS's
+    # "jump to the app's existing space" behavior (see git history).
+    cmd-alt-n = 'exec-and-forget open -na Ghostty.app'
+
     alt-slash = 'layout tiles horizontal vertical'
     alt-comma = 'layout accordion horizontal vertical'
 
