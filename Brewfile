@@ -116,6 +116,8 @@ cask "1password"
 cask "1password-cli"
 # View, print, and comment on PDF documents
 cask "adobe-acrobat-reader"
+# i3-like tiling window manager
+cask "aerospace"
 # GPU-accelerated terminal emulator
 cask "alacritty"
 # Application launcher and productivity software
