@@ -83,10 +83,7 @@ gaps.outer.right =      8
     alt-minus = 'resize smart -50'
     alt-equal = 'resize smart +50'
 
-    # Resize focused window to ~50% width on the external monitor (3840pt
-    # wide), then reset back to equal split. Hardcoded to the external
-    # monitor's resolution, so it's most useful there.
-    alt-shift-equal = 'resize width 1920'
+    # Reset all windows in the workspace back to an equal split.
     alt-shift-minus = 'balance-sizes'
 
     # Fullscreen toggle. Replaces Hammerspoon's Ctrl+Alt+F / Cmd+Shift+F maximize.
@@ -127,7 +124,9 @@ gaps.outer.right =      8
     alt-tab = 'workspace-back-and-forth'
     alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
-    alt-shift-semicolon = 'mode service'
+    # Alert on entry since service mode has no on-screen indicator otherwise
+    # - easy to be unsure whether the mode-switch registered.
+    alt-shift-semicolon = ['mode service', 'exec-and-forget osascript -e "display notification \"Press a service-mode key, or Esc to cancel\" with title \"AeroSpace: Service Mode\""']
 
 [mode.service.binding]
     esc = ['reload-config', 'mode main']
