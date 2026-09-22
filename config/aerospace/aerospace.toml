@@ -34,7 +34,7 @@ default-root-container-orientation = 'auto'
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 automatically-unhide-macos-hidden-apps = false
 
-persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "L"]
 
 on-mode-changed = []
 
@@ -47,6 +47,24 @@ gaps.outer.left =       8
 gaps.outer.bottom =     8
 gaps.outer.top =        8
 gaps.outer.right =      8
+
+# Workspaces 1-10 always live on the main monitor. Docked (2 monitors):
+# that's the external display, and the laptop screen gets its own single
+# workspace ("L", below). Undocked (1 monitor): the laptop screen becomes
+# "main" by definition, so 1-10 land there instead and "L" is unreachable
+# (nothing to assign it to) until you dock again.
+[workspace-to-monitor-force-assignment]
+    1 = 'main'
+    2 = 'main'
+    3 = 'main'
+    4 = 'main'
+    5 = 'main'
+    6 = 'main'
+    7 = 'main'
+    8 = 'main'
+    9 = 'main'
+    10 = 'main'
+    L = 'secondary'
 
 [mode.main.binding]
     alt-slash = 'layout tiles horizontal vertical'
@@ -84,6 +102,10 @@ gaps.outer.right =      8
     ctrl-8 = 'workspace 8'
     ctrl-9 = 'workspace 9'
     ctrl-0 = 'workspace 10'
+
+    # Laptop screen's single workspace when docked (see
+    # workspace-to-monitor-force-assignment above).
+    ctrl-l = 'workspace L'
 
     alt-shift-1 = 'move-node-to-workspace 1 --focus-follows-window'
     alt-shift-2 = 'move-node-to-workspace 2 --focus-follows-window'
