@@ -34,9 +34,7 @@ default-root-container-orientation = 'auto'
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 automatically-unhide-macos-hidden-apps = false
 
-persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B",
-                         "C", "D", "E", "F", "G", "I", "M", "N", "O", "P", "Q",
-                         "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
 
 on-mode-changed = []
 
@@ -75,36 +73,17 @@ gaps.outer.right =      8
     alt-shift-left = 'move-node-to-monitor left --focus-follows-window'
     alt-shift-right = 'move-node-to-monitor right --focus-follows-window'
 
-    alt-1 = 'workspace 1'
-    alt-2 = 'workspace 2'
-    alt-3 = 'workspace 3'
-    alt-4 = 'workspace 4'
-    alt-5 = 'workspace 5'
-    alt-6 = 'workspace 6'
-    alt-7 = 'workspace 7'
-    alt-8 = 'workspace 8'
-    alt-9 = 'workspace 9'
-    alt-a = 'workspace A' # In your config, you can drop workspace bindings that you don't need
-    alt-b = 'workspace B'
-    alt-c = 'workspace C'
-    alt-d = 'workspace D'
-    alt-e = 'workspace E'
-    alt-g = 'workspace G'
-    alt-i = 'workspace I'
-    alt-m = 'workspace M'
-    alt-n = 'workspace N'
-    alt-o = 'workspace O'
-    alt-p = 'workspace P'
-    alt-q = 'workspace Q'
-    alt-r = 'workspace R'
-    alt-s = 'workspace S'
-    alt-t = 'workspace T'
-    alt-u = 'workspace U'
-    alt-v = 'workspace V'
-    alt-w = 'workspace W'
-    alt-x = 'workspace X'
-    alt-y = 'workspace Y'
-    alt-z = 'workspace Z'
+    # Switch workspace with Ctrl+1-9,0 (0 = workspace 10).
+    ctrl-1 = 'workspace 1'
+    ctrl-2 = 'workspace 2'
+    ctrl-3 = 'workspace 3'
+    ctrl-4 = 'workspace 4'
+    ctrl-5 = 'workspace 5'
+    ctrl-6 = 'workspace 6'
+    ctrl-7 = 'workspace 7'
+    ctrl-8 = 'workspace 8'
+    ctrl-9 = 'workspace 9'
+    ctrl-0 = 'workspace 10'
 
     alt-shift-1 = 'move-node-to-workspace 1 --focus-follows-window'
     alt-shift-2 = 'move-node-to-workspace 2 --focus-follows-window'
@@ -115,27 +94,7 @@ gaps.outer.right =      8
     alt-shift-7 = 'move-node-to-workspace 7 --focus-follows-window'
     alt-shift-8 = 'move-node-to-workspace 8 --focus-follows-window'
     alt-shift-9 = 'move-node-to-workspace 9 --focus-follows-window'
-    alt-shift-a = 'move-node-to-workspace A --focus-follows-window'
-    alt-shift-b = 'move-node-to-workspace B --focus-follows-window'
-    alt-shift-c = 'move-node-to-workspace C --focus-follows-window'
-    alt-shift-d = 'move-node-to-workspace D --focus-follows-window'
-    alt-shift-e = 'move-node-to-workspace E --focus-follows-window'
-    alt-shift-g = 'move-node-to-workspace G --focus-follows-window'
-    alt-shift-i = 'move-node-to-workspace I --focus-follows-window'
-    alt-shift-m = 'move-node-to-workspace M --focus-follows-window'
-    alt-shift-n = 'move-node-to-workspace N --focus-follows-window'
-    alt-shift-o = 'move-node-to-workspace O --focus-follows-window'
-    alt-shift-p = 'move-node-to-workspace P --focus-follows-window'
-    alt-shift-q = 'move-node-to-workspace Q --focus-follows-window'
-    alt-shift-r = 'move-node-to-workspace R --focus-follows-window'
-    alt-shift-s = 'move-node-to-workspace S --focus-follows-window'
-    alt-shift-t = 'move-node-to-workspace T --focus-follows-window'
-    alt-shift-u = 'move-node-to-workspace U --focus-follows-window'
-    alt-shift-v = 'move-node-to-workspace V --focus-follows-window'
-    alt-shift-w = 'move-node-to-workspace W --focus-follows-window'
-    alt-shift-x = 'move-node-to-workspace X --focus-follows-window'
-    alt-shift-y = 'move-node-to-workspace Y --focus-follows-window'
-    alt-shift-z = 'move-node-to-workspace Z --focus-follows-window'
+    alt-shift-0 = 'move-node-to-workspace 10 --focus-follows-window'
 
     alt-tab = 'workspace-back-and-forth'
     alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
