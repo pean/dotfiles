@@ -83,6 +83,12 @@ gaps.outer.right =      8
     alt-minus = 'resize smart -50'
     alt-equal = 'resize smart +50'
 
+    # Resize focused window to ~50% width on the external monitor (3840pt
+    # wide), then reset back to equal split. Hardcoded to the external
+    # monitor's resolution, so it's most useful there.
+    alt-shift-equal = 'resize width 1920'
+    alt-shift-minus = 'balance-sizes'
+
     # Fullscreen toggle. Replaces Hammerspoon's Ctrl+Alt+F / Cmd+Shift+F maximize.
     alt-f = 'fullscreen'
 
