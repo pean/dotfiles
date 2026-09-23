@@ -50,7 +50,7 @@ focus-follows-mouse.enabled = false
 key-mapping.preset = 'qwerty'
 
 gaps.inner.horizontal = 0
-gaps.inner.vertical =   8
+gaps.inner.vertical =   0
 gaps.outer.left =       0
 gaps.outer.bottom =     0
 gaps.outer.top =        0
@@ -111,6 +111,10 @@ gaps.outer.right =      0
     # Fullscreen toggle. Replaces Hammerspoon's Ctrl+Alt+F / Cmd+Shift+F maximize.
     alt-f = 'fullscreen'
     cmd-shift-f = 'fullscreen'
+
+    # Toggle the focused window between floating and tiled, directly -
+    # no need to go through service mode for this one.
+    alt-shift-f = 'layout floating tiling'
 
     # Move focused window to a monitor in that direction. Not bound by
     # default upstream; replaces Hammerspoon's Ctrl+Alt+H/L/N monitor moves.
