@@ -36,6 +36,14 @@ automatically-unhide-macos-hidden-apps = false
 
 persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
 
+# New windows on workspace 1 (the laptop screen when docked) start floating
+# instead of tiled - normal macOS window behavior there. Only fires at
+# window-creation time: a window later moved onto workspace 1 keeps
+# whatever layout it already had. 2-10 keep tiling as the default.
+on-window-detected = [
+    { if = 'test %{workspace} = 1', run = 'layout floating' },
+]
+
 on-mode-changed = []
 
 focus-follows-mouse.enabled = false
@@ -102,6 +110,7 @@ gaps.outer.right =      0
 
     # Fullscreen toggle. Replaces Hammerspoon's Ctrl+Alt+F / Cmd+Shift+F maximize.
     alt-f = 'fullscreen'
+    cmd-shift-f = 'fullscreen'
 
     # Move focused window to a monitor in that direction. Not bound by
     # default upstream; replaces Hammerspoon's Ctrl+Alt+H/L/N monitor moves.
