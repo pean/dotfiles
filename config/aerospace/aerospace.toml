@@ -41,7 +41,7 @@ on-mode-changed = []
 focus-follows-mouse.enabled = false
 key-mapping.preset = 'qwerty'
 
-gaps.inner.horizontal = 8
+gaps.inner.horizontal = 0
 gaps.inner.vertical =   8
 gaps.outer.left =       0
 gaps.outer.bottom =     0
@@ -67,6 +67,20 @@ gaps.outer.right =      0
     10 = 'main'
 
 [mode.main.binding]
+    # New Orion window (not a new tab, not just re-focusing an existing
+    # window) on the current workspace. Uses Orion's Safari-compatible
+    # AppleScript dictionary rather than `open -a`/menu-click, which both
+    # activate the app and can drag focus to whichever workspace already
+    # has an Orion window. Tested reliable (14/15 trials).
+    cmd-alt-n = 'exec-and-forget osascript -e "tell application \"Orion\" to make new document at end of documents"'
+
+    # Same idea for Ghostty, using AeroSpace's own documented goodie
+    # (https://nikitabobko.github.io/AeroSpace/goodies#open-a-new-window-with-applescript).
+    # Only ~50% reliable in testing - it can still activate Ghostty and
+    # jump you to wherever it already has a window open - but kept anyway
+    # since it's right often enough to be worth the key.
+    cmd-alt-g = 'exec-and-forget osascript -e "tell application \"Ghostty\" to new window"'
+
     alt-slash = 'layout tiles horizontal vertical'
     alt-comma = 'layout accordion horizontal vertical'
 
