@@ -80,7 +80,7 @@ gaps.outer.right =      0
     # AppleScript dictionary rather than `open -a`/menu-click, which both
     # activate the app and can drag focus to whichever workspace already
     # has an Orion window. Tested reliable (14/15 trials).
-    cmd-alt-n = 'exec-and-forget osascript -e "tell application \"Orion\" to make new document at end of documents"'
+    cmd-alt-o = 'exec-and-forget osascript -e "tell application \"Orion\" to make new document at end of documents"'
 
     # Same idea for Ghostty, using AeroSpace's own documented goodie
     # (https://nikitabobko.github.io/AeroSpace/goodies#open-a-new-window-with-applescript).
