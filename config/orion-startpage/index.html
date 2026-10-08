@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>New Tab</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <p class="clock" id="clock"></p>
+
+      <label class="prompt" id="prompt">
+        <input
+          id="q"
+          type="text"
+          placeholder="Search or enter address"
+          autofocus
+          autocomplete="off"
+          autocapitalize="off"
+          spellcheck="false"
+        />
+      </label>
+
+      <p class="hint-line" id="hint"></p>
+
+      <section id="results" hidden></section>
+
+      <div id="home" class="cols">
+        <section class="col-top">
+          <h2 data-icon="flame">Frequently visited</h2>
+          <div id="top"></div>
+        </section>
+        <section class="col-side">
+          <div id="local-section" hidden>
+            <h2 data-icon="terminal"><span id="local-title">Localhost</span></h2>
+            <div id="local"></div>
+          </div>
+          <div id="tabs-section" hidden>
+            <h2 data-icon="tabs">Open tabs</h2>
+            <div id="tabs"></div>
+          </div>
+          <h2 data-icon="bookmark">Bookmarks</h2>
+          <div id="bookmarks"></div>
+          <h2 data-icon="calendar" class="calendar-title">Calendar</h2>
+          <div id="calendar"></div>
+        </section>
+        <details id="urls-section" class="col-urls" hidden>
+          <summary><h2 data-icon="link"><span id="urls-title"></span></h2></summary>
+          <div id="urls"></div>
+        </details>
+      </div>
+    </main>
+
+    <script src="config.js"></script>
+    <script src="config.local.js"></script>
+    <script src="icons.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -15,3 +15,6 @@ gmailctl/variables.libsonnet
 
 # PR review state — internal review notes, never commit to this public repo
 claude-dreams/skills/pr-review/pr-review-log.md
+
+# Private startpage overrides (employer/workspace names)
+config/orion-startpage/config.local.js

@@ -1,0 +1,10 @@
+{
+  "manifest_version": 2,
+  "name": "tty startpage",
+  "version": "0.1.0",
+  "description": "Terminal-style new tab page. Catppuccin, Monaspace Krypton.",
+  "permissions": ["history", "topSites", "tabs", "http://127.0.0.1/*", "http://localhost/*"],
+  "chrome_url_overrides": { "newtab": "index.html" },
+  "browser_action": { "default_title": "Open startpage" },
+  "background": { "scripts": ["background.js"], "persistent": false }
+}

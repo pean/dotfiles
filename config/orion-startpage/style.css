@@ -1,0 +1,563 @@
+/* Catppuccin Mocha */
+:root {
+  --base: #1e1e2e;
+  --surface0: #313244;
+  --surface1: #45475a;
+  --overlay0: #6c7086;
+  --subtext0: #a6adc8;
+  --text: #cdd6f4;
+  --mauve: #cba6f7;
+  --blue: #89b4fa;
+  --lavender: #b4befe;
+  --peach: #fab387;
+  --green: #a6e3a1;
+  --teal: #94e2d5;
+  --red: #f38ba8;
+  --pink: #f5c2e7;
+  --yellow: #f9e2af;
+  --sapphire: #74c7ec;
+}
+
+/* Catppuccin Latte */
+@media (prefers-color-scheme: light) {
+  :root {
+    --base: #eff1f5;
+    --surface0: #ccd0da;
+    --surface1: #bcc0cc;
+    --overlay0: #9ca0b0;
+    --subtext0: #6c6f85;
+    --text: #4c4f69;
+    --mauve: #8839ef;
+    --blue: #1e66f5;
+    --lavender: #7287fd;
+    --peach: #fe640b;
+    --green: #40a02b;
+    --teal: #179299;
+    --red: #d20f39;
+    --pink: #ea76cb;
+    --yellow: #df8e1d;
+    --sapphire: #209fb5;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Keeps `hidden` working on elements that are given a display value below */
+[hidden] {
+  display: none !important;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--base);
+  color: var(--text);
+  font: 14px/1.7 "Monaspace Krypton", "Monaspace Krypton NF", ui-monospace, Menlo, monospace;
+  font-feature-settings: "calt", "liga";
+  padding: clamp(24px, 12vh, 140px) clamp(16px, 4vw, 48px) 48px;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--surface1);
+}
+
+main {
+  width: min(1320px, 100%);
+  margin: 0 auto;
+}
+
+.clock {
+  color: var(--overlay0);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 14px;
+}
+
+.icon {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.prompt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--surface0);
+  transition: border-color 0.15s;
+}
+
+.prompt:focus-within {
+  border-color: var(--mauve);
+}
+
+.prompt .icon {
+  width: 18px;
+  height: 18px;
+  color: var(--overlay0);
+  transition: color 0.15s;
+}
+
+.prompt:focus-within .icon {
+  color: var(--mauve);
+}
+
+#q {
+  flex: 1;
+  min-width: 0;
+  background: none;
+  border: 0;
+  outline: 0;
+  color: var(--text);
+  font: inherit;
+  font-size: 18px;
+  caret-color: var(--mauve);
+}
+
+#q::placeholder {
+  color: var(--overlay0);
+}
+
+.hint-line {
+  margin-bottom: 32px;
+  color: var(--overlay0);
+  font-size: 12px;
+}
+
+.hint-line b {
+  font-weight: 400;
+  color: var(--subtext0);
+}
+
+/* One column on a narrow window, in source order: frequent, localhost and bookmarks,
+   url list. minmax(0, …) so long nowrap rows ellipsize instead of widening the column. */
+.cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 32px clamp(24px, 4vw, 48px);
+}
+
+/* Two columns: the url list goes under the frequent sites */
+@media (min-width: 680px) {
+  .cols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto 1fr;
+  }
+
+  .col-top {
+    grid-area: 1 / 1;
+  }
+
+  .col-urls {
+    grid-area: 2 / 1;
+  }
+
+  .col-side {
+    grid-area: 1 / 2 / span 2;
+  }
+}
+
+h2 {
+  display: flex;
+  align-items: center;
+  gap: 1ch;
+  margin-bottom: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--mauve);
+}
+
+/* Hairline running from the headline to the column edge */
+h2::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--surface0);
+}
+
+summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Fold indicator after the headline */
+summary h2 .icon.fold {
+  color: var(--overlay0);
+  transition: transform 0.15s;
+}
+
+details[open] summary h2 .icon.fold {
+  transform: rotate(90deg);
+}
+
+details:not([open]) summary h2 {
+  margin-bottom: 0;
+}
+
+h3 {
+  margin-top: 12px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--overlay0);
+}
+
+h3:first-child {
+  margin-top: 0;
+}
+
+.row {
+  display: flex;
+  gap: 2ch;
+  padding: 2px 10px;
+  margin: 0 -10px;
+  border-radius: 6px;
+  color: var(--text);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.row-wrap {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.row-wrap .row {
+  flex: 1;
+  min-width: 0;
+  margin-right: 0;
+}
+
+.chip {
+  flex: none;
+  /* Fixed box so links and buttons come out the same height */
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 20px;
+  margin: 0;
+  padding: 0 6px;
+  line-height: 1;
+  border: 1px solid var(--surface0);
+  border-radius: 4px;
+  color: var(--blue);
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.chip .icon {
+  width: 12px;
+  height: 12px;
+  stroke-width: 2;
+}
+
+.chip.linear {
+  border-color: color-mix(in srgb, var(--peach) 40%, transparent);
+  color: var(--peach);
+}
+
+.chip.github {
+  border-color: color-mix(in srgb, var(--green) 40%, transparent);
+  color: var(--green);
+}
+
+/* Server rows: project and port on the first line, service and branch below it */
+.row.two-line {
+  flex-wrap: wrap;
+  row-gap: 0;
+}
+
+/* Keep the title on the icon's line: shrink and cut it with an ellipsis rather than wrap */
+.row.two-line .label {
+  flex: 1;
+  min-width: 0;
+}
+
+.row.two-line .hint {
+  flex-basis: 100%;
+  font-size: 12px;
+}
+
+/* Line the second line up with the label, past the icon */
+.row.two-line .icon ~ .hint {
+  padding-left: 21px;
+}
+
+.row-wrap:has(.two-line) {
+  align-items: flex-start;
+}
+
+.row-wrap:has(.two-line) .chip {
+  margin-top: 4px;
+}
+
+button.chip {
+  appearance: none;
+  background: none;
+  font-family: inherit;
+  font-size: 12px;
+  border-color: color-mix(in srgb, var(--teal) 40%, transparent);
+  color: var(--teal);
+  cursor: pointer;
+  font-variant-numeric: tabular-nums;
+}
+
+button.chip.container {
+  border-color: var(--mauve);
+  color: var(--mauve);
+}
+
+.chip:hover {
+  background: var(--surface0);
+}
+
+/* Icons stay a little dimmed until the row is pointed at or selected */
+.row > .icon {
+  align-self: center;
+  /* 5px to the label instead of the row's 2ch gap */
+  margin-right: calc(5px - 2ch);
+  opacity: 0.7;
+  transition: opacity 0.15s;
+}
+
+.row:hover > .icon,
+.row.sel > .icon {
+  opacity: 1;
+}
+
+.row > .icon.source {
+  width: 14px;
+  height: 14px;
+  margin: 0 0 0 auto;
+  color: var(--overlay0);
+}
+
+.row.action > .icon {
+  color: var(--mauve);
+}
+
+.row .bar-cells {
+  flex: none;
+  color: var(--mauve);
+}
+
+.row .bar-cells .rest {
+  color: var(--surface1);
+}
+
+.row.sub .bar-cells {
+  color: var(--lavender);
+  opacity: 0.6;
+}
+
+/* Indented past the icon of the row above */
+.row.sub .label {
+  color: var(--subtext0);
+  padding-left: calc(21px + 2ch);
+}
+
+/* Rows without a link (compose projects with no web port) are plain text */
+div.row .label {
+  color: var(--text);
+}
+
+.row .label {
+  color: var(--blue);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.row .hint {
+  flex: 1;
+  color: var(--overlay0);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.row .meta {
+  flex: none;
+  margin-left: auto;
+  color: var(--overlay0);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.row:hover,
+.row.sel {
+  background: var(--surface0);
+}
+
+.row.sel .label {
+  color: var(--lavender);
+}
+
+.row.action .label {
+  color: var(--mauve);
+}
+
+.empty {
+  color: var(--overlay0);
+}
+
+#tabs-section {
+  margin-bottom: 32px;
+}
+
+/* Close button on an open-tab row, shown while the row is pointed at or selected */
+.row > .icon.close {
+  width: 14px;
+  height: 14px;
+  margin: 0 0 0 1ch;
+  color: var(--overlay0);
+  opacity: 0;
+  cursor: pointer;
+}
+
+.row:hover > .icon.close,
+.row.sel > .icon.close {
+  opacity: 1;
+}
+
+.row > .icon.close:hover {
+  color: var(--red);
+}
+
+#local-section {
+  margin-bottom: 32px;
+}
+
+.calendar-title {
+  margin-top: 32px;
+}
+
+/* Months side by side; what does not fit is cut off and reached by scrolling sideways */
+#calendar {
+  display: flex;
+  gap: 3ch;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+#calendar::-webkit-scrollbar {
+  display: none;
+}
+
+.month {
+  flex: none;
+  font: inherit;
+  line-height: 1.5;
+  color: var(--subtext0);
+}
+
+.month.current {
+  color: var(--text);
+}
+
+.month .month-title {
+  color: var(--mauve);
+}
+
+.month .weekdays {
+  color: var(--overlay0);
+}
+
+.month .today {
+  font-weight: 400;
+  background: var(--mauve);
+  color: var(--base);
+  border-radius: 3px;
+}
+
+/* Compose servers hang off the services title: a line down the left with a tick per node */
+.tree {
+  margin-left: 6px;
+}
+
+.tree > .node {
+  position: relative;
+  padding-left: 18px;
+}
+
+.tree > .node::before,
+.tree > .node::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  border: 0 solid var(--surface1);
+}
+
+.tree > .node::before {
+  top: 0;
+  bottom: 0;
+  border-left-width: 1px;
+}
+
+/* Tick at the middle of the node's first line (the line is 24px high) */
+.tree > .node::after {
+  top: 12px;
+  width: 12px;
+  border-top-width: 1px;
+}
+
+/* The last node's line stops at its tick */
+.tree > .node:last-child::before {
+  bottom: auto;
+  height: 12px;
+}
+
+/* The compose stack closes the list, set off from the servers above by a faint rule */
+.stack:not(:first-child) {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid color-mix(in srgb, var(--surface0) 70%, transparent);
+}
+
+/* Background services: project title, then one chip per service, green when up */
+.row-wrap.services {
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 0 0 16px;
+}
+
+/* First in the section: tuck it up under the headline's 12px margin */
+.stack:first-child .row-wrap.services {
+  margin-top: -6px;
+}
+
+
+.chip.service.up {
+  border-color: color-mix(in srgb, var(--green) 40%, transparent);
+  color: var(--green);
+}
+
+.chip.service.down {
+  border-color: color-mix(in srgb, var(--red) 40%, transparent);
+  color: var(--red);
+}
+
+.row-wrap.services .services-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 auto 0 0;
+  font-size: inherit;
+  font-weight: 400;
+  color: var(--text);
+}
