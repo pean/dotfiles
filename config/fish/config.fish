@@ -6,6 +6,13 @@ set -x EDITOR $VISUAL
 
 set fish_greeting
 
+# macOS defaults to 256 open files. The tmux server inherits this and needs
+# one fd per pane, so raise it before anything starts a server.
+set -l _nofile (ulimit -n)
+if string match -qr '^\d+$' -- $_nofile; and test $_nofile -lt 10240
+  ulimit -n 10240
+end
+
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 set -g fish_user_paths "/Users/peter/src/getdreams/dreams-cli/target/release" $fish_user_paths
