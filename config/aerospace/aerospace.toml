@@ -42,6 +42,9 @@ persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
 # whatever layout it already had. 2-10 keep tiling as the default.
 on-window-detected = [
     { if = 'test %{workspace} = 1', run = 'layout floating' },
+    { if = { app-id = 'com.apple.mail' }, run = 'move-node-to-workspace 1' },
+    { if = { app-id = 'com.tinyspeck.slackmacgap', window-title-regex-substring = 'tech-deployments' }, run = 'move-node-to-workspace 4' },
+    { if = { app-id = 'com.tinyspeck.slackmacgap' }, run = 'move-node-to-workspace 1' },
 ]
 
 on-mode-changed = []
@@ -107,6 +110,9 @@ gaps.outer.right =      0
 
     # Reset all windows in the workspace back to an equal split.
     alt-shift-minus = 'balance-sizes'
+
+    # Full reset: flatten nested containers, then equalize sizes.
+    alt-shift-r = ['flatten-workspace-tree', 'balance-sizes']
 
     # Fullscreen toggle. Replaces Hammerspoon's Ctrl+Alt+F / Cmd+Shift+F maximize.
     alt-f = 'fullscreen'
