@@ -107,7 +107,7 @@
   },
   "alwaysThinkingEnabled": false,
   "tui": "fullscreen",
-  "theme": "dark-daltonized",
+  "theme": "custom:catppuccin",
   "editorMode": "vim",
   "autoCompactEnabled": true,
   "skipAutoPermissionPrompt": true,

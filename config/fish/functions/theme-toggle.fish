@@ -86,6 +86,12 @@ function theme-toggle --description "Switch Catppuccin flavor: mocha, macchiato,
     fish_config theme choose "catppuccin-$target" 2>/dev/null
     or _theme_apply_fish_$target
 
+    # --- Claude Code (both configs; settings use "custom:catppuccin") ---
+    for dir in ~/.claude ~/.claude-dreams
+        mkdir -p $dir/themes
+        cp $dotfiles/themes/claude-$target.json $dir/themes/catppuccin.json
+    end
+
     # --- Starship ---
     _theme_apply_starship $target
 

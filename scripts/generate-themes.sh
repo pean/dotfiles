@@ -221,6 +221,103 @@ EOF
   echo "  starship-palette-$flavor.toml"
 }
 
+# --- Claude Code custom theme ---
+# One JSON per flavor in themes/. theme-toggle copies the active one to
+# <config dir>/themes/catppuccin.json, so settings.json can stay on
+# "custom:catppuccin" and the theme changes live without touching git.
+generate_claude() {
+  local flavor=$1
+  declare -n c=$flavor
+  local label file base
+  label=$(flavor_label "$flavor")
+  file="$DOTFILES/themes/claude-$flavor.json"
+  base=dark
+  [[ "$flavor" == "latte" ]] && base=light
+
+  # mix <hex_a> <hex_b> <pct_of_b>: blend two colors, prints "#rrggbb"
+  mix() {
+    local a=$1 b=$2 p=$3 i out="#"
+    for i in 0 2 4; do
+      out+=$(printf '%02x' $(( (0x${a:i:2} * (100 - p) + 0x${b:i:2} * p) / 100 )))
+    done
+    echo "$out"
+  }
+  # shimmer <hex>: lighter variant for the spinner gradient
+  shimmer() { mix "$1" "${c[text]}" 30; }
+
+  cat > "$file" <<EOF
+{
+  "name": "Catppuccin $label",
+  "base": "$base",
+  "overrides": {
+    "claude": "#${c[mauve]}",
+    "claudeShimmer": "$(shimmer "${c[mauve]}")",
+    "text": "#${c[text]}",
+    "inverseText": "#${c[base]}",
+    "inactive": "#${c[overlay0]}",
+    "inactiveShimmer": "$(shimmer "${c[overlay0]}")",
+    "subtle": "#${c[surface2]}",
+    "suggestion": "#${c[lavender]}",
+    "permission": "#${c[blue]}",
+    "permissionShimmer": "$(shimmer "${c[blue]}")",
+    "remember": "#${c[sapphire]}",
+    "success": "#${c[green]}",
+    "error": "#${c[red]}",
+    "warning": "#${c[yellow]}",
+    "warningShimmer": "$(shimmer "${c[yellow]}")",
+    "merged": "#${c[mauve]}",
+    "promptBorder": "#${c[surface2]}",
+    "promptBorderShimmer": "$(shimmer "${c[surface2]}")",
+    "planMode": "#${c[teal]}",
+    "autoAccept": "#${c[mauve]}",
+    "bashBorder": "#${c[pink]}",
+    "ide": "#${c[blue]}",
+    "fastMode": "#${c[peach]}",
+    "fastModeShimmer": "$(shimmer "${c[peach]}")",
+    "effortUltra": "#${c[flamingo]}",
+    "diffAdded": "$(mix "${c[base]}" "${c[green]}" 25)",
+    "diffRemoved": "$(mix "${c[base]}" "${c[red]}" 25)",
+    "diffAddedDimmed": "$(mix "${c[base]}" "${c[green]}" 12)",
+    "diffRemovedDimmed": "$(mix "${c[base]}" "${c[red]}" 12)",
+    "diffAddedWord": "$(mix "${c[base]}" "${c[green]}" 45)",
+    "diffRemovedWord": "$(mix "${c[base]}" "${c[red]}" 45)",
+    "userMessageBackground": "#${c[surface0]}",
+    "userMessageBackgroundHover": "#${c[surface1]}",
+    "bashMessageBackgroundColor": "#${c[mantle]}",
+    "memoryBackgroundColor": "#${c[surface0]}",
+    "selectionBg": "#${c[surface2]}",
+    "rate_limit_fill": "#${c[mauve]}",
+    "rate_limit_empty": "#${c[surface1]}",
+    "briefLabelYou": "#${c[blue]}",
+    "briefLabelClaude": "#${c[mauve]}",
+    "red_FOR_SUBAGENTS_ONLY": "#${c[red]}",
+    "blue_FOR_SUBAGENTS_ONLY": "#${c[blue]}",
+    "green_FOR_SUBAGENTS_ONLY": "#${c[green]}",
+    "yellow_FOR_SUBAGENTS_ONLY": "#${c[yellow]}",
+    "purple_FOR_SUBAGENTS_ONLY": "#${c[mauve]}",
+    "orange_FOR_SUBAGENTS_ONLY": "#${c[peach]}",
+    "pink_FOR_SUBAGENTS_ONLY": "#${c[pink]}",
+    "cyan_FOR_SUBAGENTS_ONLY": "#${c[sky]}",
+    "rainbow_red": "#${c[red]}",
+    "rainbow_orange": "#${c[peach]}",
+    "rainbow_yellow": "#${c[yellow]}",
+    "rainbow_green": "#${c[green]}",
+    "rainbow_blue": "#${c[blue]}",
+    "rainbow_indigo": "#${c[lavender]}",
+    "rainbow_violet": "#${c[mauve]}",
+    "rainbow_red_shimmer": "$(shimmer "${c[red]}")",
+    "rainbow_orange_shimmer": "$(shimmer "${c[peach]}")",
+    "rainbow_yellow_shimmer": "$(shimmer "${c[yellow]}")",
+    "rainbow_green_shimmer": "$(shimmer "${c[green]}")",
+    "rainbow_blue_shimmer": "$(shimmer "${c[blue]}")",
+    "rainbow_indigo_shimmer": "$(shimmer "${c[lavender]}")",
+    "rainbow_violet_shimmer": "$(shimmer "${c[mauve]}")"
+  }
+}
+EOF
+  echo "  claude-$flavor.json"
+}
+
 # --- Neovim palette (lua table with all 4 flavors) ---
 generate_nvim_palette() {
   local file="$DOTFILES/config/nvim/lua/palette.lua"
@@ -282,6 +379,7 @@ for flavor in mocha macchiato frappe latte; do
   generate_tmux "$flavor"
   generate_fish "$flavor"
   generate_starship "$flavor"
+  generate_claude "$flavor"
 done
 generate_nvim_palette
 

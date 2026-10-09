@@ -15,7 +15,7 @@
   },
   "alwaysThinkingEnabled": false,
   "skipWorkflowUsageWarning": true,
-  "theme": "auto",
+  "theme": "custom:catppuccin",
   "editorMode": "vim",
   "autoCompactEnabled": true,
   "skipAutoPermissionPrompt": true,
