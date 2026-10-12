@@ -119,6 +119,9 @@ generate_tmux() {
 set -g pane-border-style "fg=#${c[surface0]}"
 set -g pane-active-border-style "fg=#${c[lavender]}"
 
+set -g popup-style "bg=#${c[base]},fg=#${c[text]}"
+set -g popup-border-style "fg=#${c[lavender]}"
+
 set -g window-status-format "${win_fmt}"
 set -g window-status-current-format "${win_cur_fmt}"
 set -g window-status-separator ""
@@ -130,7 +133,7 @@ set -g status-left ""
 set -g status-right '${status_right}'
 set -g status-right-length 100
 
-set -g @tmux-fzf-options '-p -w 62% -h 38% --color=bg+:#${c[surface1]},bg:#${c[base]},spinner:#${c[mauve]},hl:#${c[lavender]},fg:#${c[text]},header:#${c[lavender]},info:#${c[mauve]},pointer:#${c[mauve]},marker:#${c[mauve]},fg+:#${c[text]},prompt:#${c[mauve]},hl+:#${c[lavender]} --bind=ctrl-x:execute-silent(echo {} | sed "s/:.*$//" | xargs tmux kill-session -t)+reload(tmux list-sessions)'
+set -g @tmux-fzf-options '-p -w 90% -h 50% --color=bg+:#${c[surface1]},bg:#${c[base]},spinner:#${c[mauve]},hl:#${c[lavender]},fg:#${c[text]},header:#${c[lavender]},info:#${c[mauve]},pointer:#${c[mauve]},marker:#${c[mauve]},fg+:#${c[text]},prompt:#${c[mauve]},hl+:#${c[lavender]} --bind="ctrl-x:execute-silent(echo {} | cut -c11- | xargs tmux kill-session -t)+reload(/Users/peter/.dotfiles/scripts/tmux-fzf-sessions.sh)"'
 EOF
   echo "  tmux-$flavor.conf"
 }
