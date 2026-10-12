@@ -39,13 +39,20 @@ REPO_CACHE = {}
 # [repo, branch] => { pr:, at: }. A found pull request is kept for an hour, a missing
 # one for two minutes so a newly opened pull request shows up soon.
 PR_CACHE = {}
+# [repo, branch] => true while a `gh` lookup for it is running.
+PR_INFLIGHT = {}
 PR_CACHE_LOCK = Mutex.new
 PR_CACHE_SECONDS = { found: 3600, missing: 120 }.freeze
 # cwd => { details:, at: }. The git lookups cost a few process spawns per server, and a
 # branch rarely changes between two page loads.
 PROJECT_CACHE = {}
 PROJECT_CACHE_LOCK = Mutex.new
-PROJECT_CACHE_SECONDS = 5
+PROJECT_CACHE_SECONDS = 30
+# pid => working directory. A process rarely changes directory, so ask `lsof` once.
+CWD_CACHE = {}
+CWD_CACHE_LOCK = Mutex.new
+# How long a probe that got no answer (a slow dev server) is trusted before asking again.
+SILENT_CACHE_SECONDS = 10
 IGNORED_COMMANDS = ["ControlCenter", "rapportd", "sharingd", "Google Drive", "Spotify"].freeze
 EXTENSION_ORIGIN = %r{\A[a-z-]+-extension://}.freeze
 ALLOWED_HOSTS = ["127.0.0.1:#{PORT}", "localhost:#{PORT}"].freeze
@@ -71,18 +78,24 @@ def listeners
 end
 
 def working_directories(pids)
-  return {} if pids.empty?
+  known = CWD_CACHE_LOCK.synchronize do
+    # Forget processes that are gone, so a reused pid is not given their directory.
+    CWD_CACHE.keep_if { |pid, _| pids.include?(pid) }
+    CWD_CACHE.dup
+  end
+  missing = pids - known.keys
+  return known if missing.empty?
 
-  dirs = {}
   pid = nil
-  `#{LSOF} -a -d cwd -p #{pids.join(",")} -F pn 2>/dev/null`.each_line do |line|
+  `#{LSOF} -a -d cwd -p #{missing.join(",")} -F pn 2>/dev/null`.each_line do |line|
     value = line[1..-1].chomp
     case line[0]
     when "p" then pid = value.to_i
-    when "n" then dirs[pid] = value
+    when "n" then known[pid] = value
     end
   end
-  dirs
+  CWD_CACHE_LOCK.synchronize { CWD_CACHE.merge!(known) }
+  known
 end
 
 # true/false once the server has answered, nil when it stayed silent (a slow dev
@@ -111,14 +124,18 @@ ensure
 end
 
 # A "yes" holds for as long as the process keeps the port. A "no" is only kept briefly:
-# a forwarded container port refuses until the container behind it is up.
+# a forwarded container port refuses until the container behind it is up. A silent
+# server is listed meanwhile, and asked again after a shorter wait.
 def http?(listener)
   key = [listener[:pid], listener[:port]]
   cached = HTTP_CACHE_LOCK.synchronize { HTTP_CACHE[key] }
-  return cached[:answer] if cached && (cached[:answer] || Time.now - cached[:at] < NEGATIVE_CACHE_SECONDS)
+  if cached
+    ttl = { true => nil, false => NEGATIVE_CACHE_SECONDS }.fetch(cached[:answer], SILENT_CACHE_SECONDS)
+    return cached[:answer] != false if ttl.nil? || Time.now - cached[:at] < ttl
+  end
 
   answer = probe_http(listener[:port])
-  HTTP_CACHE_LOCK.synchronize { HTTP_CACHE[key] = { answer: answer, at: Time.now } } unless answer.nil?
+  HTTP_CACHE_LOCK.synchronize { HTTP_CACHE[key] = { answer: answer, at: Time.now } }
   answer != false
 end
 
@@ -198,22 +215,22 @@ def git_details(cwd)
   }
 end
 
-# The newest pull request for a branch as { "number", "url", "state" }, or nil. The
-# first lookup waits for gh; after that the cached answer is returned at once and
-# refreshed in the background when it has expired.
+# The newest pull request for a branch as { "number", "url", "state" }, or nil. Never
+# waits for gh: the cached answer is returned at once (nil before the first lookup has
+# finished) and looked up in the background when missing or expired.
 def pull_request(repo, branch)
   return nil unless GH && repo && branch && !%w[main master].include?(branch)
 
   key = [repo, branch]
-  cached = PR_CACHE_LOCK.synchronize do
+  PR_CACHE_LOCK.synchronize do
     entry = PR_CACHE[key]
-    if entry && !entry[:refreshing] && Time.now - entry[:at] > PR_CACHE_SECONDS[entry[:pr] ? :found : :missing]
-      entry[:refreshing] = true
+    expired = entry.nil? || Time.now - entry[:at] > PR_CACHE_SECONDS[entry[:pr] ? :found : :missing]
+    if expired && !PR_INFLIGHT[key]
+      PR_INFLIGHT[key] = true
       Thread.new { fetch_pull_request(key) }
     end
-    entry
+    entry && entry[:pr]
   end
-  cached ? cached[:pr] : fetch_pull_request(key)
 end
 
 def fetch_pull_request(key)
@@ -222,7 +239,8 @@ def fetch_pull_request(key)
                "--json", "number,url,state")
   pr = output && JSON.parse(output).first
   PR_CACHE_LOCK.synchronize { PR_CACHE[key] = { pr: pr, at: Time.now } }
-  pr
+ensure
+  PR_CACHE_LOCK.synchronize { PR_INFLIGHT.delete(key) }
 end
 
 # The link list in URLS_FILE, grouped by its headings:

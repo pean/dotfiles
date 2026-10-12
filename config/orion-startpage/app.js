@@ -146,7 +146,8 @@ async function fetchHistory() {
     slim[0]?.lastVisitTime,
   );
   try {
-    localStorage.setItem(HISTORY_KEY, JSON.stringify(slim));
+    const json = JSON.stringify(slim);
+    if (localStorage.getItem(HISTORY_KEY) !== json) localStorage.setItem(HISTORY_KEY, json);
   } catch {}
   return ranked(slim);
 }
@@ -315,7 +316,8 @@ async function renderTop() {
   if (sites.length) renderSites(container, sites);
   else container.append(el("p", "empty", "no history yet"));
   localHistory = local;
-  renderLocal();
+  // History arrived after the helper may have: redraw so ports and paths from it show up.
+  if (localData !== undefined) drawLocal(localData);
 }
 
 // --- helper -----------------------------------------------------------------
@@ -446,6 +448,9 @@ async function loadUrls() {
 
 let localHistory = [];
 let running = [];
+// Last answer drawn (cached or fresh); undefined until there is one, null when the
+// helper cannot be reached.
+let localData;
 
 // Listening servers and the compose stack, from the launchd helper (helper/ports.rb).
 // Null when the helper cannot be reached. The last answer is kept in localStorage, so a
@@ -512,6 +517,8 @@ function statusChip(name, state) {
 
 async function renderLocal() {
   const fresh = await overview();
+  // Nothing to redraw when the answer matches what is on screen.
+  if (localData !== undefined && JSON.stringify(localData) === JSON.stringify(fresh)) return;
   try {
     if (fresh) localStorage.setItem(LOCAL_KEY, JSON.stringify(fresh));
   } catch {}
@@ -519,6 +526,7 @@ async function renderLocal() {
 }
 
 function drawLocal(data) {
+  localData = data;
   const servers = data?.servers;
   const stack = data?.stack;
   const projects = stack?.projects ?? {};
@@ -935,9 +943,13 @@ document.addEventListener("keydown", (event) => {
 
 renderChrome();
 renderBookmarks();
-renderCalendar();
+drawCachedLocal();
+// Each section loads on its own; none waits for another.
 renderTabs();
 renderTop();
-drawCachedLocal();
+renderLocal();
 loadRepos();
 loadUrls();
+// The calendar is below the fold, so it waits until the browser has nothing else to do.
+if (window.requestIdleCallback) window.requestIdleCallback(renderCalendar);
+else setTimeout(renderCalendar, 0);
