@@ -399,17 +399,54 @@ const URLS_KEY = "urls-v1";
 const URLS_OPEN_KEY = "urls-open";
 let urlLinks = [];
 
+// Address without scheme and Dreams' own domains, so two environments fit side by side.
+const shortUrl = (url) =>
+  url
+    .replace(/^https?:\/\//, "")
+    .replace(/\.(getdreams\.(co|com)|dream-tools\.io)(?=[/:]|$)/, "")
+    .replace(/\/$/, "");
+
 function renderUrls(groups) {
   urlLinks = groups.flatMap(({ group, links }) =>
-    links.map(({ label, url, note }) => ({ label, url, hint: [group, note].filter(Boolean).join(" · ") })),
+    links.map(({ label, url, note, env }) => ({ label, url, hint: [group, env, note].filter(Boolean).join(" · ") })),
   );
   const container = $("urls");
   container.replaceChildren();
+  // Table columns (Staging, Production) become columns here; links without one span them.
+  const envs = [...new Set(groups.flatMap(({ links }) => links.map(({ env }) => env).filter(Boolean)))];
+  container.style.setProperty("--env-cols", Math.max(envs.length, 1));
+  const cell = ({ url }) => {
+    const a = row({ label: shortUrl(url), url });
+    a.title = url;
+    return a;
+  };
+  if (envs.length) {
+    const head = el("div", "urlrow colhead");
+    head.append(el("span"), ...envs.map((env) => el("span", null, env)));
+    container.append(head);
+  }
   for (const { group, links } of groups) {
     container.append(el("h3", null, group));
-    for (const { label, url, note } of links) {
-      // Named links show where they go; bare urls are already their own label.
-      container.append(row({ label, url, hint: note ?? (label.includes(".") ? "" : hostOf(url)), icon: true }));
+    const byLabel = new Map();
+    for (const link of links) {
+      if (!byLabel.has(link.label)) byLabel.set(link.label, []);
+      byLabel.get(link.label).push(link);
+    }
+    for (const [label, items] of byLabel) {
+      const line = el("div", "urlrow");
+      line.append(el("span", "name", label));
+      for (const env of envs) {
+        const link = items.find((item) => item.env === env);
+        if (link) line.append(cell(link));
+        else if (items.some((item) => item.env)) line.append(el("span"));
+      }
+      for (const link of items.filter((item) => !item.env)) {
+        const a = cell({ url: link.url });
+        a.classList.add("span");
+        if (link.note) a.append(el("span", "hint", link.note));
+        line.append(a);
+      }
+      container.append(line);
     }
   }
   $("urls-section").hidden = !groups.length;

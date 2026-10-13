@@ -244,14 +244,34 @@ ensure
 end
 
 # The link list in URLS_FILE, grouped by its headings:
-#   [{ "group": "Staging · Public", "links": [{ "label": "Web App", "url": "https://…", "note": null }] }]
-# Items are `- [Label](url): note` or a bare `- url`.
+#   [{ "group": "APIs", "links": [{ "label": "Web App", "url": "https://…", "note": null, "env": "Staging" }] }]
+# Items are `- [Label](url): note` or a bare `- url` (no `env`), or table rows: the first
+# cell is the label and each other cell with a url is a link, `env` being its column header.
 def urls
   groups = []
   path = []
-  File.foreach(URLS_FILE) do |line|
+  columns = nil
+  File.foreach(URLS_FILE, encoding: "UTF-8") do |line|
     if (heading = line.match(/\A(\#{2,})\s+(.+?)\s*\z/))
       path = path.first(heading[1].length - 2) << heading[2]
+      columns = nil
+    elsif line.start_with?("|")
+      cells = line.strip.delete_prefix("|").delete_suffix("|").split("|").map(&:strip)
+      if columns.nil?
+        columns = cells
+      elsif cells.none? { |cell| cell.match?(/\A:?-+:?\z/) }
+        title = path.join(" · ")
+        groups << { group: title, links: [] } unless groups.last && groups.last[:group] == title
+        cells.drop(1).each_with_index do |cell, index|
+          url = cell[/\((https?:\S+?)\)/, 1] || cell[%r{https?://\S+}]
+          next unless url
+
+          # A lone `URL` column has no environment; `Staging`/`Production` do.
+          env = columns[index + 1]
+          env = nil if env.nil? || env.casecmp?("url")
+          groups.last[:links] << { label: cells.first, url: url, note: nil, env: env }
+        end
+      end
     elsif (item = line.match(/\A\s*[-*]\s+(?:\[(.+?)\]\((\S+?)\)(?::\s*(.+?))?|(https?:\S+))\s*\z/))
       url = item[2] || item[4]
       label = item[1] || url.sub(%r{\Ahttps?://}, "").chomp("/")

@@ -232,6 +232,42 @@ h3:first-child {
   white-space: nowrap;
 }
 
+/* Links section as a table: name column, then one narrow column per environment */
+.urlrow {
+  display: grid;
+  grid-template-columns: 22ch repeat(var(--env-cols), minmax(0, 1fr));
+  gap: 0 2ch;
+  align-items: baseline;
+}
+
+.urlrow .name,
+.urlrow .row {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.urlrow .row {
+  margin: 0;
+  padding: 2px 10px;
+  color: var(--subtext0);
+}
+
+.urlrow .row.span {
+  grid-column: 2 / -1;
+}
+
+.urlrow .name {
+  padding: 2px 0;
+}
+
+/* Size the text, not the grid, so the columns line up with the rows below */
+.urlrow.colhead span {
+  padding: 0 10px;
+  font-size: 12px;
+  color: var(--overlay0);
+}
+
 .row-wrap {
   display: flex;
   align-items: center;
