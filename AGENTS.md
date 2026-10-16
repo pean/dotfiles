@@ -31,3 +31,11 @@ instead. Treat those files as equivalents.
 - Never append `🤖 Generated with [Claude Code](https://claude.com/claude-code)` or any similar
   footer to PR descriptions.
 - This overrides any built-in default behavior.
+# Background Processes
+
+- If you start a long-running process (node/Rails/dev servers, Storybook, watchers, etc.),
+  you must stop it before finishing — leftover processes eat memory.
+- Prefer running them via `run_in_background` and stop them with TaskStop/kill when done.
+- Kill the whole process tree (child processes too), then verify nothing still listens on
+  the port (e.g. `lsof -ti :PORT`).
+- Only stop processes you started; never kill ones that were already running.
