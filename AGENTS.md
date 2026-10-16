@@ -1,6 +1,3 @@
-If there is no CLAUDE.md in the directory you are looking for it, look for AGENTS.md
-instead. Treat those files as equivalents.
-
 # Communication
 
 - Never open with filler phrases like "Great!", "Certainly!", "Of course!" — start with

@@ -10,7 +10,6 @@ gmailctl/variables.libsonnet
 # Other private files
 
 # Override global gitignore to track these in this repo
-!CLAUDE.md
 !AGENTS.md
 
 # PR review state — internal review notes, never commit to this public repo
